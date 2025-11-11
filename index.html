@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sua Consultora de Imagem - Hagda Matos</title>
+    <title>Sua Consultora de Imagem - [Nome da Sua Esposa]</title>
     
     <!-- Google Fonts - Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,20 +22,20 @@
                         sans: ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        'fundo': '#F8F9F4', // Um cinza muito claro, quase branco
-                        'texto-principal': '#BBB6B2', // Um cinza bem escuro
-                        'texto-secundario': '#A6ABB1', // Um cinza claro
+                        'fundo': '#F9FAFB', // Um cinza muito claro, quase branco
+                        'texto-principal': '#1F2937', // Um cinza bem escuro
+                        'texto-secundario': '#4B5563', // Um cinza médio
                         
                         // Paleta Pastel
                         'primaria': {
-                            light: '#485883', // zul claro
-                            DEFAULT: '#2D3752', // Azul base da identidade visual
-                            dark: '#121621'   // zul escuro (para botões/links)
+                            light: '#E9D5FF', // Roxo pastel claro
+                            DEFAULT: '#C084FC', // Roxo pastel médio
+                            dark: '#9333EA'   // Roxo pastel escuro (para botões/links)
                         },
                         'secundaria': {
-                            light: '#ede1e2', // Rosa claro
-                            DEFAULT: '#93C5FD', // Rosa base da identidade visual
-                            dark: '#b58182'   // Rosa escuro
+                            light: '#DBEAFE', // Azul pastel claro
+                            DEFAULT: '#93C5FD', // Azul pastel médio
+                            dark: '#3B82F6'   // Azul pastel escuro
                         }
                     }
                 }
@@ -60,7 +60,7 @@
     <header class="bg-white/70 backdrop-blur-md shadow-sm sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold text-primaria-dark">
-                Hagda Matos
+                [Nome da Sua Esposa]
             </a>
             <div class="hidden md:flex space-x-6">
                 <a href="#inicio" class="text-texto-secundario hover:text-primaria-dark transition-colors">Início</a>
@@ -143,43 +143,27 @@
 
     <!-- 
       SEÇÃO SERVIÇOS
-      - Liste os principais serviços.
-      - Você pode duplicar os blocos <div class="bg-white..."> para quantos serviços quiser.
+      - Alterado para direcionar para as páginas de serviços específicos.
     -->
     <section id="servicos" class="bg-white py-24">
         <div class="container mx-auto px-6">
             <h2 class="text-center text-4xl font-bold text-texto-principal mb-6">Serviços</h2>
             <p class="text-center text-xl text-texto-secundario max-w-2xl mx-auto mb-16">
-                Cada serviço é pensado de forma única para atender suas necessidades específicas.
+                Descubra a solução ideal para suas necessidades, seja para você ou para o seu negócio.
             </p>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Serviço 1: Coloração Pessoal -->
-                <div class="bg-white p-8 rounded-lg shadow-xl border border-primaria-light transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="https://placehold.co/80x80/E9D5FF/9333EA?text=Icone+1" alt="Ícone" class="rounded-full mb-6">
-                    <h3 class="text-2xl font-bold text-primaria-dark mb-4">Coloração Pessoal</h3>
-                    <p class="text-texto-secundario leading-relaxed">
-                        Descubra a paleta de cores que harmoniza com sua beleza natural e ilumina seu rosto.
-                    </p>
-                </div>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-8 mt-16">
+                <!-- Botão 1: Para Você (PF) -->
+                <a href="servicos-pf.html" class="bg-primaria-dark text-white text-lg font-bold py-6 px-12 rounded-lg shadow-lg hover:bg-opacity-90 transition-all transform hover:scale-105 inline-block w-full md:w-96 text-center">
+                    <span class="text-3xl block font-bold">Para Você</span>
+                    <span class="text-base font-normal text-gray-300">Análise de Coloração, Estilo e mais.</span>
+                </a>
                 
-                <!-- Serviço 2: Análise de Estilo -->
-                <div class="bg-white p-8 rounded-lg shadow-xl border border-primaria-light transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="https://placehold.co/80x80/E9D5FF/9333EA?text=Icone+2" alt="Ícone" class="rounded-full mb-6">
-                    <h3 class="text-2xl font-bold text-primaria-dark mb-4">Análise de Estilo</h3>
-                    <p class="text-texto-secundario leading-relaxed">
-                        Vamos identificar seu estilo pessoal e traduzi-lo em looks que comunicam sua personalidade.
-                    </p>
-                </div>
-                
-                <!-- Serviço 3: Detox de Guarda-Roupa -->
-                <div class="bg-white p-8 rounded-lg shadow-xl border border-primaria-light transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="https://placehold.co/80x80/E9D5FF/9333EA?text=Icone+3" alt="Ícone" class="rounded-full mb-6">
-                    <h3 class="text-2xl font-bold text-primaria-dark mb-4">Detox de Guarda-Roupa</h3>
-                    <p class="text-texto-secundario leading-relaxed">
-                        Organizamos seu armário de forma inteligente, mantendo apenas o que te valoriza e faz sentido.
-                    </p>
-                </div>
+                <!-- Botão 2: Para Sua Empresa (PJ) -->
+                <a href="servicos-pj.html" class="bg-secundaria-dark text-white text-lg font-bold py-6 px-12 rounded-lg shadow-lg hover:bg-opacity-90 transition-all transform hover:scale-105 inline-block w-full md:w-96 text-center">
+                    <span class="text-3xl block font-bold">Para sua Empresa</span>
+                    <span class="text-base font-normal text-gray-300">Treinamentos, Oficinas e Workshops.</span>
+                </a>
             </div>
         </div>
     </section>
@@ -225,15 +209,15 @@
             <p class="text-xl text-texto-secundario max-w-2xl mx-auto mb-10">
                 Vamos conversar! Clique no botão abaixo para agendar uma conversa inicial sem compromisso.
             </p>
-            <a href="https://wa.me/message/EDKBGKGQPYKED1" 
+            <a href="https://wa.me/5500000000000" 
                target="_blank" 
                rel="noopener noreferrer"
                class="bg-primaria-dark text-white text-lg font-bold py-4 px-10 rounded-full hover:bg-opacity-90 transition-all transform hover:scale-105 inline-block">
                 Falar pelo WhatsApp
             </a>
-            <!--<p class="text-sm text-texto-secundario mt-4">
+            <p class="text-sm text-texto-secundario mt-4">
                 (Substitua o link acima pelo seu link do WhatsApp Business)
-            </p> -->
+            </p>
         </div>
     </section>
 
@@ -244,12 +228,12 @@
     <footer class="bg-gray-900 text-gray-400 py-16">
         <div class="container mx-auto px-6 text-center">
             <div class="flex justify-center space-x-6 mb-6">
-                <a href="https://www.instagram.com/hagdamatos?igsh=MXFzbmNvZTBiY2dkbQ==" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Instagram</a>
-               <!-- <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Pinterest</a>
-                <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">LinkedIn</a>-->
+                <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Instagram</a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Pinterest</a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">LinkedIn</a>
             </div>
-            <p>&copy; 2025 Hagda Matos. Todos os direitos reservados.</p>
-            <p class="text-sm mt-2">Feito com &hearts; por Danilo Matos</p>
+            <p>&copy; 2024 [Nome da Sua Esposa]. Todos os direitos reservados.</p>
+            <p class="text-sm mt-2">Feito com &hearts; por [Seu Nome]</p>
         </div>
     </footer>
 
