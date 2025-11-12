@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- O Título da página foi atualizado -->
+    <title>Serviços para Empresas - Hagda Matos</title>
+    
+    <!-- Google Fonts - Alterado para Playfair Display (títulos) e Poppins (corpo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Configuração da Paleta de Cores (COPIADO DO INDEX.HTML) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        // 'sans' será Poppins (para o corpo)
+                        sans: ['Poppins', 'sans-serif'],
+                        // 'serif' será Playfair Display (para os títulos)
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        'fundo': '#F8F9F4', // Um cinza muito claro, quase branco
+                        'texto-principal': '#BBB6B2', // Um cinza bem escuro
+                        'texto-secundario': '#A6ABB1', // Um cinza claro
+
+                        // Paleta Pastel
+                        'primaria': {
+                            light: '#485883', // zul claro
+                            DEFAULT: '#2D3752', // Azul base da identidade visual
+                            dark: '#121621'   // zul escuro (para botões/links)
+                        },
+                        'secundaria': {
+                            light: '#ede1e2', // Rosa claro
+                            DEFAULT: '#93C5FD', // Rosa base da identidade visual
+                            dark: '#b58182'   // Rosa escuro
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-fundo font-sans antialiased text-texto-principal"> <!-- font-sans agora é Poppins -->
+
+    <!--
+      HEADER SIMPLIFICADO
+      - Link para voltar ao Início (index.html)
+    -->
+    <header class="bg-white/70 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Adicionando font-serif para o logo/nome -->
+            <a href="index.html" class="text-2xl font-bold text-primaria-dark font-serif">
+                Hagda Matos
+            </a>
+            <a href="index.html#contato" class="bg-primaria-dark text-white py-2 px-5 rounded-full hover:bg-opacity-90 transition-all">
+                Agendar Consultoria
+            </a>
+        </nav>
+    </header>
+
+    <!--
+      CONTEÚDO - SERVIÇOS PARA EMPRESAS (PJ)
+    -->
+    <main class="bg-white py-24">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto">
+                <a href="index.html" class="text-lg text-primaria-dark hover:underline">&larr; Voltar para o Início</a>
+                <!-- Adicionando font-serif para o título principal -->
+                <h1 class="text-4xl md:text-5xl font-bold text-texto-principal mt-4 mb-6 font-serif">
+                    Serviços para sua Empresa
+                </h1>
+                <p class="text-xl text-texto-secundario mb-16">
+                    Soluções corporativas desenhadas para alinhar a imagem da sua equipe à cultura e aos valores da sua marca, transformando a percepção de clientes.
+                </p>
+            </div>
+
+            <!-- Lista de Serviços PJ (Exemplos) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Serviço 1: Treinamento de Equipe -->
+                <div class="bg-white p-8 rounded-lg shadow-xl border border-primaria-light transform hover:-translate-y-2 transition-transform duration-300">
+                    <img src="https://placehold.co/80x80/485883/F8F9F4?text=Equipe" alt="Ícone" class="rounded-full mb-6">
+                    <!-- Adicionando font-serif para os títulos dos cards -->
+                    <h3 class="text-2xl font-bold text-primaria-dark mb-4 font-serif">Treinamento de Equipe</h3>
+                    <p class="text-texto-secundario leading-relaxed">
+                        Capacite seu time para entender a importância da imagem profissional como ferramenta de comunicação e credibilidade.
+                    </p>
+                </div>
+
+                <!-- Serviço 2: Oficinas e Workshops -->
+                <div class="bg-white p-8 rounded-lg shadow-xl border border-primaria-light transform hover:-translate-y-2 transition-transform duration-300">
+                    <img src="https://placehold.co/80x80/485883/F8F9F4?text=Workshop" alt="Ícone" class="rounded-full mb-6">
+                    <!-- Adicionando font-serif para os títulos dos cards -->
+                    <h3 class="text-2xl font-bold text-primaria-dark mb-4 font-serif">Oficinas e Workshops</h3>
+                    <p class="text-texto-secundario leading-relaxed">
+                        Eventos dinâmicos e práticos sobre temas como etiqueta corporativa, estilo no ambiente de trabalho e uso estratégico das cores.
+                    </p>
+                </div>
+
+                <!-- Serviço 3: Dress Code Corporativo -->
+                <div class="bg-white p-8 rounded-lg shadow-xl border border-primaria-light transform hover:-translate-y-2 transition-transform duration-300">
+                    <img src="https://placehold.co/80x80/485883/F8F9F4?text=Dress+Code" alt="Ícone" class="rounded-full mb-6">
+                    <!-- Adicionando font-serif para os títulos dos cards -->
+                    <h3 class="text-2xl font-bold text-primaria-dark mb-4 font-serif">Dress Code Corporativo</h3>
+                    <p class="text-texto-secundario leading-relaxed">
+                        Desenvolvimento e implementação de um guia de vestimenta claro e moderno, alinhado à cultura e aos valores da sua empresa.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 
+      FOOTER (COPIADO DO INDEX.HTML)
+    -->
+    <footer class="bg-gray-900 text-gray-400 py-16">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="https://www.instagram.com/hagdamatos?igsh=MXFzbmNvZTBiY2dkbQ==" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Instagram</a>
+               <!-- <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Pinterest</a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">LinkedIn</a>-->
+            </div>
+            <p>&copy; 2025 Hagda Matos. Todos os direitos reservados.</p>
+            <p class="text-sm mt-2">Feito com &hearts; por Danilo Matos</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -3,48 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sua Consultora de Imagem - [Nome da Sua Esposa]</title>
+    <title>Sua Consultora de Imagem - HAgda Matos</title>
     
-    <!-- Google Fonts - Inter -->
+    <!-- Google Fonts - Alterado para Playfair Display (títulos) e Poppins (corpo) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Configuração da Paleta de Cores (Azul e Roxo Pastel) -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        // 'sans' será Poppins (para o corpo)
+                        sans: ['Poppins', 'sans-serif'],
+                        // 'serif' será Playfair Display (para os títulos)
+                        serif: ['Playfair Display', 'serif'],
                     },
                     colors: {
-                        'fundo': '#F9FAFB', // Um cinza muito claro, quase branco
-                        'texto-principal': '#1F2937', // Um cinza bem escuro
-                        'texto-secundario': '#4B5563', // Um cinza médio
-                        
+                        'fundo': '#F8F9F4', // Branco
+                        'texto-principal': '#BBB6B2', // Cinza escuro
+                        'texto-secundario': '#A6ABB1', // Cinza
+
                         // Paleta Pastel
                         'primaria': {
-                            light: '#E9D5FF', // Roxo pastel claro
-                            DEFAULT: '#C084FC', // Roxo pastel médio
-                            dark: '#9333EA'   // Roxo pastel escuro (para botões/links)
+                            light: '#485883', // Azul claro
+                            DEFAULT: '#2D3752', // Azul base da identidade visual
+                            dark: '#121621'   // Azul escuro (para botões/links)
                         },
                         'secundaria': {
-                            light: '#DBEAFE', // Azul pastel claro
-                            DEFAULT: '#93C5FD', // Azul pastel médio
-                            dark: '#3B82F6'   // Azul pastel escuro
+                            light: '#ede1e2', // Rosa claro
+                            DEFAULT: '#93C5FD', // Rosa base da identidade visual
+                            dark: '#b58182'   // Rosa escuro
                         }
                     }
                 }
             }
         }
     </script>
-    
+
     <style>
-        /* Um pequeno ajuste para rolagem suave */
         html {
             scroll-behavior: smooth;
         }
@@ -52,15 +54,12 @@
 </head>
 <body class="bg-fundo font-sans antialiased text-texto-principal">
 
-    <!-- 
-      HEADER / NAVEGAÇÃO 
-      - Troque "[Nome]" pelo nome ou logo.
-      - Os links (href) levam para as seções abaixo (ex: #sobre, #servicos).
-    -->
+    <!--      HEADER / NAVEGAÇÃO    -->
     <header class="bg-white/70 backdrop-blur-md shadow-sm sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-primaria-dark">
-                [Nome da Sua Esposa]
+            <!-- Adicionando font-serif para o logo/nome -->
+            <a href="#" class="text-2xl font-bold text-primaria-dark font-serif">
+                Hagda Matos
             </a>
             <div class="hidden md:flex space-x-6">
                 <a href="#inicio" class="text-texto-secundario hover:text-primaria-dark transition-colors">Início</a>
@@ -80,16 +79,13 @@
         </nav>
     </header>
 
-    <!-- 
-      SEÇÃO INÍCIO (HERO)
-      - Esta é a primeira coisa que o visitante vê.
-      - Troque a imagem de placeholder.
-      - Ajuste o título e o subtítulo.
-    -->
+    <!--      SEÇÃO INÍCIO (HERO)    -->
+
     <section id="inicio" class="container mx-auto px-6 pt-20 pb-16 md:py-32 flex flex-col md:flex-row items-center gap-12">
         <!-- Textos e CTA -->
         <div class="md:w-1/2 w-full text-center md:text-left">
-            <h1 class="text-4xl md:text-6xl font-bold text-texto-principal leading-tight mb-6">
+            <!-- Adicionando font-serif para o título principal -->
+            <h1 class="text-4xl md:text-6xl font-bold text-texto-principal leading-tight mb-6 font-serif">
                 Descubra o poder da sua imagem.
             </h1>
             <p class="text-lg md:text-xl text-texto-secundario mb-10">
@@ -101,31 +97,29 @@
         </div>
         <!-- Imagem -->
         <div class="md:w-1/2 w-full">
-            <img src="https://placehold.co/600x500/E9D5FF/9333EA?text=Foto+Incr%C3%ADvel+Aqui" 
-                 alt="[Descrição da foto principal da sua esposa]"
+            <img src="Fotos/Hero_1.png"
+                 alt="Foto de uma mulher que está se sentindo confiante com o seu estilo"
                  class="rounded-lg shadow-2xl w-full h-auto object-cover"
                  onerror="this.src='https://placehold.co/600x500/E9D5FF/9333EA?text=Erro+ao+carregar+imagem'">
         </div>
     </section>
 
-    <!-- 
-      SEÇÃO SOBRE
-      - Fale sobre ela, a missão e a filosofia de trabalho.
-      - Troque a foto de placeholder por uma foto de retrato.
-    -->
+    <!--      SEÇÃO SOBRE    -->
+
     <section id="sobre" class="bg-secundaria-light py-24">
         <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
             <!-- Imagem Sobre -->
             <div class="md:w-1/3 w-full">
-                <img src="https://placehold.co/400x500/DBEAFE/3B82F6?text=Foto+de+Retrato" 
-                     alt="[Descrição da foto de retrato]"
+                <img src="Fotos/Gui_1.jpg"
+                     alt="Hagda Matos pronta para te atender"
                      class="rounded-lg shadow-xl w-full h-auto object-cover"
                      onerror="this.src='https://placehold.co/400x500/DBEAFE/3B82F6?text=Erro+ao+carregar+imagem'">
             </div>
             <!-- Texto Sobre -->
             <div class="md:w-2/3 w-full">
-                <span class="text-primaria-dark font-bold uppercase">Prazer, [Nome dela]</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-texto-principal mt-3 mb-6">
+                <span class="text-primaria-dark font-bold uppercase">Prazer, Hagda Matos</span>
+                <!-- Adicionando font-serif para o subtítulo -->
+                <h2 class="text-3xl md:text-4xl font-bold text-texto-principal mt-3 mb-6 font-serif">
                     Minha missão é fazer você se (re)conhecer.
                 </h2>
                 <p class="text-lg text-texto-secundario leading-relaxed mb-4">
@@ -141,42 +135,41 @@
         </div>
     </section>
 
-    <!-- 
-      SEÇÃO SERVIÇOS
-      - Alterado para direcionar para as páginas de serviços específicos.
-    -->
+    <!--      SEÇÃO SERVIÇOS    -->
+
     <section id="servicos" class="bg-white py-24">
         <div class="container mx-auto px-6">
-            <h2 class="text-center text-4xl font-bold text-texto-principal mb-6">Serviços</h2>
+            <!-- Adicionando font-serif para o título da seção -->
+            <h2 class="text-center text-4xl font-bold text-texto-principal mb-6 font-serif">Serviços</h2>
             <p class="text-center text-xl text-texto-secundario max-w-2xl mx-auto mb-16">
                 Descubra a solução ideal para suas necessidades, seja para você ou para o seu negócio.
             </p>
-            
+
             <div class="flex flex-col md:flex-row justify-center items-center gap-8 mt-16">
                 <!-- Botão 1: Para Você (PF) -->
                 <a href="servicos-pf.html" class="bg-primaria-dark text-white text-lg font-bold py-6 px-12 rounded-lg shadow-lg hover:bg-opacity-90 transition-all transform hover:scale-105 inline-block w-full md:w-96 text-center">
-                    <span class="text-3xl block font-bold">Para Você</span>
+                    <!-- Adicionando font-serif para os botões -->
+                    <span class="text-3xl block font-bold font-serif">Para Você</span>
                     <span class="text-base font-normal text-gray-300">Análise de Coloração, Estilo e mais.</span>
                 </a>
-                
+
                 <!-- Botão 2: Para Sua Empresa (PJ) -->
                 <a href="servicos-pj.html" class="bg-secundaria-dark text-white text-lg font-bold py-6 px-12 rounded-lg shadow-lg hover:bg-opacity-90 transition-all transform hover:scale-105 inline-block w-full md:w-96 text-center">
-                    <span class="text-3xl block font-bold">Para sua Empresa</span>
-                    <span class="text-base font-normal text-gray-300">Treinamentos, Oficinas e Workshops.</span>
+                    <!-- Adicionando font-serif para os botões -->
+                    <span class="text-3xl block font-bold font-serif">Para sua Empresa</span>
+                    <span class="text-base font-normal text-gray-300">Dress Code, Treinamentos e mais.</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- 
-      SEÇÃO DEPOIMENTOS
-      - Prova social é muito importante.
-      - Cole depoimentos reais de clientes.
-    -->
+    <!--      SEÇÃO DEPOIMENTOS    -->
+
     <section id="depoimentos" class="bg-secundaria-light py-24">
         <div class="container mx-auto px-6">
-            <h2 class="text-center text-4xl font-bold text-texto-principal mb-16">O que minhas clientes dizem</h2>
-            
+            <!-- Adicionando font-serif para o título da seção -->
+            <h2 class="text-center text-4xl font-bold text-texto-principal mb-16 font-serif">O que minhas clientes dizem</h2>
+
             <div class="flex flex-col md:flex-row gap-8 max-w-5xl mx-auto">
                 <!-- Depoimento 1 -->
                 <div class="bg-white p-8 rounded-lg shadow-xl flex-1">
@@ -185,7 +178,7 @@
                     </p>
                     <span class="font-bold text-texto-principal">[Nome da Cliente 1]</span>
                 </div>
-                
+
                 <!-- Depoimento 2 -->
                 <div class="bg-white p-8 rounded-lg shadow-xl flex-1">
                     <p class="text-lg italic text-texto-secundario mb-6 border-l-4 border-secundaria-DEFAULT pl-4">
@@ -197,27 +190,24 @@
         </div>
     </section>
 
-    <!-- 
+    <!--
       SEÇÃO CTA FINAL (CHAMADA PARA AÇÃO)
-      - O último convite para o visitante entrar em contato.
     -->
     <section id="contato" class="bg-white py-24">
         <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold text-texto-principal mb-6">
+            <!-- Adicionando font-serif para o título da seção -->
+            <h2 class="text-4xl font-bold text-texto-principal mb-6 font-serif">
                 Pronta para transformar sua imagem?
             </h2>
             <p class="text-xl text-texto-secundario max-w-2xl mx-auto mb-10">
                 Vamos conversar! Clique no botão abaixo para agendar uma conversa inicial sem compromisso.
             </p>
-            <a href="https://wa.me/5500000000000" 
+            <a href="https://wa.me/message/EDKBGKGQPYKED1"
                target="_blank" 
                rel="noopener noreferrer"
                class="bg-primaria-dark text-white text-lg font-bold py-4 px-10 rounded-full hover:bg-opacity-90 transition-all transform hover:scale-105 inline-block">
-                Falar pelo WhatsApp
+                WhatsApp
             </a>
-            <p class="text-sm text-texto-secundario mt-4">
-                (Substitua o link acima pelo seu link do WhatsApp Business)
-            </p>
         </div>
     </section>
 
@@ -232,8 +222,8 @@
                 <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Pinterest</a>
                 <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">LinkedIn</a>
             </div>
-            <p>&copy; 2024 [Nome da Sua Esposa]. Todos os direitos reservados.</p>
-            <p class="text-sm mt-2">Feito com &hearts; por [Seu Nome]</p>
+            <p>&copy; 2025 Hagda Matos. Todos os direitos reservados.</p>
+            <p class="text-sm mt-2">Feito com &hearts; por Danilo Matos</p>
         </div>
     </footer>
 
