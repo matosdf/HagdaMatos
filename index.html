@@ -13,33 +13,33 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Configuração da Paleta de Cores (Azul e Roxo Pastel) -->
-    <script>
+<script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        // 'sans' será Poppins (para o corpo)
                         sans: ['Poppins', 'sans-serif'],
-                        // 'serif' será Playfair Display (para os títulos)
                         serif: ['Playfair Display', 'serif'],
                     },
                     colors: {
-                        'fundo': '#F8F9F4', // Branco
-                        'texto-principal': '#BBB6B2', // Cinza escuro
-                        'texto-secundario': '#A6ABB1', // Cinza
+                        // --- Cores Base (Sua Paleta) ---
+                        'azul-escuro': '#2D3752',
+                        'cinza-claro': '#A6ABB1',
+                        'rosa': '#D1B1B2',
+                        'preto-fundo': '#323234',
+                        'cinza-escuro': '#BBB6B2',
+                        'branco-off': '#F8F9F4',
 
-                        // Paleta Pastel
-                        'primaria': {
-                            light: '#485883', // Azul claro
-                            DEFAULT: '#2D3752', // Azul base da identidade visual
-                            dark: '#121621'   // Azul escuro (para botões/links)
-                        },
-                        'secundaria': {
-                            light: '#ede1e2', // Rosa claro
-                            DEFAULT: '#93C5FD', // Rosa base da identidade visual
-                            dark: '#b58182'   // Rosa escuro
-                        }
+                        // --- Mapeamento Semântico (Para usar no site) ---
+                        'fundo': '#F8F9F4',            // Cor principal do fundo
+                        'fundo-secao': '#D1B1B2',      // Cor de fundo para seções
+
+                        'texto-titulo': '#323234',     // Cor para títulos
+                        'texto-corpo': '#BBB6B2',       // Cor para parágrafos
+                        'texto-suave': '#BBB6B2',      // Cor para textos secundários
+
+                        'acento': '#2D3752',          // Cor de destaque/botões
+                        'acento-texto': '#F8F9F4'       // Cor do texto em cima do acento
                     }
                 }
             }
@@ -52,175 +52,208 @@
         }
     </style>
 </head>
-<body class="bg-fundo font-sans antialiased text-texto-principal">
 
-    <!--      HEADER / NAVEGAÇÃO    -->
-    <header class="bg-white/70 backdrop-blur-md shadow-sm sticky top-0 z-50">
+<body class="bg-fundo font-sans antialiased text-texto-corpo">
+
+    <header class="bg-preto-fundo/90 backdrop-blur-md shadow-lg sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- Adicionando font-serif para o logo/nome -->
-            <a href="#" class="text-2xl font-bold text-primaria-dark font-serif">
+            <a href="#" class="text-2xl font-bold text-branco-off font-serif">
                 Hagda Matos
             </a>
-            <div class="hidden md:flex space-x-6">
-                <a href="#inicio" class="text-texto-secundario hover:text-primaria-dark transition-colors">Início</a>
-                <a href="#sobre" class="text-texto-secundario hover:text-primaria-dark transition-colors">Sobre</a>
-                <a href="#servicos" class="text-texto-secundario hover:text-primaria-dark transition-colors">Serviços</a>
-                <a href="#depoimentos" class="text-texto-secundario hover:text-primaria-dark transition-colors">Depoimentos</a>
-                <a href="#contato" class="bg-primaria-dark text-white py-2 px-5 rounded-full hover:bg-opacity-90 transition-all">
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="#inicio" class="text-texto-suave hover:text-branco-off transition-colors">Início</a>
+                <a href="#sobre" class="text-texto-suave hover:text-branco-off transition-colors">Sobre</a>
+                <a href="#servicos" class="text-texto-suave hover:text-branco-off transition-colors">Serviços</a>
+                <a href="#depoimentos" class="text-texto-suave hover:text-branco-off transition-colors">Depoimentos</a>
+                <a href="#contato" class="bg-acento text-acento-texto font-bold py-2 px-5 rounded-full hover:bg-opacity-90 transition-all">
                     Agendar Consultoria
                 </a>
             </div>
-            <!-- Menu Mobile (opcional, pode ser implementado depois) -->
             <div class="md:hidden">
-                <a href="#contato" class="bg-primaria-dark text-white py-2 px-5 rounded-full hover:bg-opacity-90 transition-all text-sm">
+                <a href="#contato" class="bg-acento text-acento-texto font-bold py-2 px-5 rounded-full hover:bg-opacity-90 transition-all text-sm">
                     Agendar
                 </a>
             </div>
         </nav>
     </header>
 
-    <!--      SEÇÃO INÍCIO (HERO)    -->
-
     <section id="inicio" class="container mx-auto px-6 pt-20 pb-16 md:py-32 flex flex-col md:flex-row items-center gap-12">
-        <!-- Textos e CTA -->
         <div class="md:w-1/2 w-full text-center md:text-left">
-            <!-- Adicionando font-serif para o título principal -->
-            <h1 class="text-4xl md:text-6xl font-bold text-texto-principal leading-tight mb-6 font-serif">
+            <h1 class="text-4xl md:text-6xl font-bold text-texto-titulo leading-tight mb-6 font-serif">
                 Descubra o poder da sua imagem.
             </h1>
-            <p class="text-lg md:text-xl text-texto-secundario mb-10">
+            <p class="text-lg md:text-xl text-acento mb-10">
                 Uma consultoria de imagem que revela sua melhor versão, alinhando estilo, essência e objetivos.
             </p>
-            <a href="#contato" class="bg-primaria-dark text-white text-lg font-bold py-4 px-10 rounded-full hover:bg-opacity-90 transition-all transform hover:scale-105 inline-block">
+            <a href="#contato" class="bg-acento text-acento-texto text-lg font-bold py-4 px-10 rounded-full hover:bg-opacity-90 transition-all transform hover:scale-105 inline-block">
                 Comece sua Jornada
             </a>
         </div>
-        <!-- Imagem -->
         <div class="md:w-1/2 w-full">
-            <img src="Fotos/Hero_1.png"
+            <img src="Fotos/hagda-32.jpg"
                  alt="Foto de uma mulher que está se sentindo confiante com o seu estilo"
                  class="rounded-lg shadow-2xl w-full h-auto object-cover"
-                 onerror="this.src='https://placehold.co/600x500/E9D5FF/9333EA?text=Erro+ao+carregar+imagem'">
+                 onerror="this.src='https://placehold.co/600x500/D1B1B2/323234?text=Erro+ao+carregar+imagem'">
         </div>
     </section>
 
-    <!--      SEÇÃO SOBRE    -->
-
-    <section id="sobre" class="bg-secundaria-light py-24">
+    <section id="sobre" class="bg-fundo-secao py-24">
         <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
-            <!-- Imagem Sobre -->
             <div class="md:w-1/3 w-full">
                 <img src="Fotos/Gui_1.jpg"
                      alt="Hagda Matos pronta para te atender"
                      class="rounded-lg shadow-xl w-full h-auto object-cover"
-                     onerror="this.src='https://placehold.co/400x500/DBEAFE/3B82F6?text=Erro+ao+carregar+imagem'">
+                     onerror="this.src='https://placehold.co/400x500/2D3752/F8F9F4?text=Erro+ao+carregar+imagem'">
             </div>
-            <!-- Texto Sobre -->
             <div class="md:w-2/3 w-full">
-                <span class="text-primaria-dark font-bold uppercase">Prazer, Hagda Matos</span>
-                <!-- Adicionando font-serif para o subtítulo -->
-                <h2 class="text-3xl md:text-4xl font-bold text-texto-principal mt-3 mb-6 font-serif">
+                <span class="text-acento font-bold uppercase">Prazer, Hagda Matos</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-acento mt-3 mb-6 font-serif">
                     Minha missão é fazer você se (re)conhecer.
                 </h2>
-                <p class="text-lg text-texto-secundario leading-relaxed mb-4">
+                <p class="text-lg text-texto-titulo leading-relaxed mb-4">
                     Acredito que a imagem pessoal é uma ferramenta poderosa de comunicação. Mais do que roupas, é sobre expressar quem você é com confiança e autenticidade.
                 </p>
-                <p class="text-lg text-texto-secundario leading-relaxed mb-6">
+                <p class="text-lg text-texto-titulo leading-relaxed mb-6">
                     Minha abordagem vai além das tendências. Eu busco entender sua essência, seu estilo de vida e seus objetivos para criar uma identidade visual que seja verdadeiramente sua. Vamos juntas trilhar esse caminho de autoconhecimento?
                 </p>
-                <a href="#servicos" class="text-primaria-dark font-bold text-lg hover:underline">
+                <a href="#servicos" class="text-acento font-bold text-lg hover:underline">
                     Conheça meus serviços &rarr;
                 </a>
             </div>
         </div>
     </section>
 
-    <!--      SEÇÃO SERVIÇOS    -->
-
-    <section id="servicos" class="bg-white py-24">
+    <section id="servicos" class="bg-fundo py-24">
         <div class="container mx-auto px-6">
-            <!-- Adicionando font-serif para o título da seção -->
-            <h2 class="text-center text-4xl font-bold text-texto-principal mb-6 font-serif">Serviços</h2>
-            <p class="text-center text-xl text-texto-secundario max-w-2xl mx-auto mb-16">
+            <h2 class="text-center text-4xl font-bold text-texto-titulo mb-6 font-serif">Serviços</h2>
+            <p class="text-center text-xl text-acento max-w-2xl mx-auto mb-16">
                 Descubra a solução ideal para suas necessidades, seja para você ou para o seu negócio.
             </p>
 
             <div class="flex flex-col md:flex-row justify-center items-center gap-8 mt-16">
-                <!-- Botão 1: Para Você (PF) -->
-                <a href="servicos-pf.html" class="bg-primaria-dark text-white text-lg font-bold py-6 px-12 rounded-lg shadow-lg hover:bg-opacity-90 transition-all transform hover:scale-105 inline-block w-full md:w-96 text-center">
-                    <!-- Adicionando font-serif para os botões -->
+                <a href="servicos-pf.html" class="bg-acento text-acento-texto text-lg font-bold py-6 px-12 rounded-lg shadow-lg hover:bg-opacity-90 transition-all transform hover:scale-105 inline-block w-full md:w-96 text-center">
                     <span class="text-3xl block font-bold font-serif">Para Você</span>
-                    <span class="text-base font-normal text-gray-300">Análise de Coloração, Estilo e mais.</span>
+                    <span class="text-base font-normal text-texto-corpo/70">Análise de Coloração, Estilo e mais.</span>
                 </a>
 
-                <!-- Botão 2: Para Sua Empresa (PJ) -->
-                <a href="servicos-pj.html" class="bg-secundaria-dark text-white text-lg font-bold py-6 px-12 rounded-lg shadow-lg hover:bg-opacity-90 transition-all transform hover:scale-105 inline-block w-full md:w-96 text-center">
-                    <!-- Adicionando font-serif para os botões -->
+                <a href="servicos-pj.html" class="bg-cinza-escuro text-acento-texto text-lg font-bold py-6 px-12 rounded-lg shadow-lg hover:bg-opacity-90 transition-all transform hover:scale-105 inline-block w-full md:w-96 text-center">
                     <span class="text-3xl block font-bold font-serif">Para sua Empresa</span>
-                    <span class="text-base font-normal text-gray-300">Dress Code, Treinamentos e mais.</span>
+                    <span class="text-base font-normal text-preto-fundo/70">Dress Code, Treinamentos e mais.</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <!--      SEÇÃO DEPOIMENTOS    -->
-
-    <section id="depoimentos" class="bg-secundaria-light py-24">
-        <div class="container mx-auto px-6">
-            <!-- Adicionando font-serif para o título da seção -->
-            <h2 class="text-center text-4xl font-bold text-texto-principal mb-16 font-serif">O que minhas clientes dizem</h2>
-
-            <div class="flex flex-col md:flex-row gap-8 max-w-5xl mx-auto">
-                <!-- Depoimento 1 -->
-                <div class="bg-white p-8 rounded-lg shadow-xl flex-1">
-                    <p class="text-lg italic text-texto-secundario mb-6 border-l-4 border-secundaria-DEFAULT pl-4">
-                        "A consultoria foi um divisor de águas! Eu não imaginava o quanto minha imagem poderia mudar minha autoconfiança. Foi um investimento em mim mesma."
-                    </p>
-                    <span class="font-bold text-texto-principal">[Nome da Cliente 1]</span>
-                </div>
-
-                <!-- Depoimento 2 -->
-                <div class="bg-white p-8 rounded-lg shadow-xl flex-1">
-                    <p class="text-lg italic text-texto-secundario mb-6 border-l-4 border-secundaria-DEFAULT pl-4">
-                        "Eu tinha um armário cheio e nada para vestir. A [Nome da sua esposa] me ensinou a comprar com consciência e a multiplicar meus looks. Recomendo demais!"
-                    </p>
-                    <span class="font-bold text-texto-principal">[Nome da Cliente 2]</span>
-                </div>
-            </div>
+    <section id="depoimentos" class="bg-fundo-secao py-12 md:py-20">
+      <div class="container mx-auto px-4">
+        <div class="mb-12 text-center">
+          <h2 class="text-3xl font-bold text-texto-titulo sm:text-4xl">
+            O que minhas clientes dizem
+          </h2>
         </div>
+
+        <div class="
+          flex
+          space-x-4
+          overflow-x-auto
+          pb-4
+          snap-x
+          snap-mandatory
+          scrollbar-thin
+          scrollbar-thumb-cinza-claro scrollbar-track-fundo-secao ">
+
+          <div class="
+            flex-none w-80
+            snap-center
+            bg-fundo           rounded-xl shadow-lg p-6
+            flex flex-col justify-between
+          ">
+            <div>
+              <p class="text-base italic text-acento">
+                "A consultoria de imagem com a Hagda foi uma virada de chave... Tinha muitas roupas, mas usava poucas... me ajudou a alcançar melhor imagem pessoal e profissional."
+              </p>
+            </div>
+            <div class="mt-4 border-t border-fundo-secao pt-4"> <h4 class="text-base font-semibold text-texto-titulo">Marília Guedes</h4>
+              <p class="text-sm text-texto-suave">Cirurgiã Dentista</p>
+            </div>
+          </div>
+
+          <div class="
+            flex-none w-80
+            snap-center
+            bg-fundo rounded-xl shadow-lg p-6
+            flex flex-col justify-between
+          ">
+            <div>
+              <p class="text-base italic text-acento">
+                "Eu fiz minha análise com a @hagdamatos... Muito obrigada Hagda pelo seu impecável atendimento! Você é maravilhosa no que faz... Agora sei comprar roupas que me valorizam"
+              </p>
+            </div>
+            <div class="mt-4 border-t border-fundo-secao pt-4">
+              <h4 class="text-base font-semibold text-texto-titulo">Emanuele Freixo</h4>
+            </div>
+          </div>
+
+          <div class="
+            flex-none w-80
+            snap-center
+            bg-fundo rounded-xl shadow-lg p-6
+            flex flex-col justify-between
+          ">
+            <div>
+              <p class="text-base italic text-acento">
+                "Ela é maravilhosa em tudooo! Um atendimento impecável, com muita atenção e cuidado. Hagda, obrigada pelo seu lindo trabalho e pela sua delicadeza no atendimento..."
+              </p>
+            </div>
+            <div class="mt-4 border-t border-fundo-secao pt-4">
+              <h4 class="text-base font-semibold text-texto-titulo">Nayra Pires</h4>
+            </div>
+          </div>
+
+          <div class="
+            flex-none w-80
+            snap-center
+            bg-fundo rounded-xl shadow-lg p-6
+            flex flex-col justify-between
+          ">
+            <div>
+              <p class="text-base italic text-acento">
+                "UM SONHO REALIZADO... Resgata a sua autoestima e autoconfiança. • Harmoniza o visual. • Otimiza o armário e reduz as compras por impulso. •Valoriza os seus pontos fortes..."
+              </p>
+            </div>
+            <div class="mt-4 border-t border-fundo-secao pt-4">
+              <h4 class="text-base font-semibold text-texto-titulo">Priscila Pereira</h4>
+              <p class="text-sm text-texto-suave">Designer de Sobrancelha</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </section>
 
-    <!--
-      SEÇÃO CTA FINAL (CHAMADA PARA AÇÃO)
-    -->
-    <section id="contato" class="bg-white py-24">
+    <section id="contato" class="bg-fundo py-24">
         <div class="container mx-auto px-6 text-center">
-            <!-- Adicionando font-serif para o título da seção -->
-            <h2 class="text-4xl font-bold text-texto-principal mb-6 font-serif">
+            <h2 class="text-4xl font-bold text-texto-titulo mb-6 font-serif">
                 Pronta para transformar sua imagem?
             </h2>
-            <p class="text-xl text-texto-secundario max-w-2xl mx-auto mb-10">
+            <p class="text-xl text-acento max-w-2xl mx-auto mb-10">
                 Vamos conversar! Clique no botão abaixo para agendar uma conversa inicial sem compromisso.
             </p>
             <a href="https://wa.me/message/EDKBGKGQPYKED1"
-               target="_blank" 
+               target="_blank"
                rel="noopener noreferrer"
-               class="bg-primaria-dark text-white text-lg font-bold py-4 px-10 rounded-full hover:bg-opacity-90 transition-all transform hover:scale-105 inline-block">
+               class="bg-acento text-acento-texto text-lg font-bold py-4 px-10 rounded-full hover:bg-opacity-90 transition-all transform hover:scale-105 inline-block">
                 WhatsApp
             </a>
         </div>
     </section>
 
-    <!-- 
-      FOOTER (RODAPÉ)
-      - Links para redes sociais e informações de copyright.
-    -->
-    <footer class="bg-gray-900 text-gray-400 py-16">
+    <footer class="bg-fundo-secao text-texto-suave py-16">
         <div class="container mx-auto px-6 text-center">
             <div class="flex justify-center space-x-6 mb-6">
-                <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Instagram</a>
-                <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Pinterest</a>
-                <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">LinkedIn</a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-branco-off transition-colors">Instagram</a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-branco-off transition-colors">Pinterest</a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-branco-off transition-colors">LinkedIn</a>
             </div>
             <p>&copy; 2025 Hagda Matos. Todos os direitos reservados.</p>
             <p class="text-sm mt-2">Feito com &hearts; por Danilo Matos</p>
