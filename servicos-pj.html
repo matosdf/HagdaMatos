@@ -3,44 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- O Título da página foi atualizado -->
     <title>Serviços para Empresas - Hagda Matos</title>
-    
-    <!-- Google Fonts - Alterado para Playfair Display (títulos) e Poppins (corpo) -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Configuração da Paleta de Cores (COPIADO DO INDEX.HTML) -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        // 'sans' será Poppins (para o corpo)
                         sans: ['Poppins', 'sans-serif'],
-                        // 'serif' será Playfair Display (para os títulos)
-                        serif: ['Playfair Display', 'serif'],
+                        serif: ['Playfair+Display', 'serif'],
                     },
                     colors: {
-                        'fundo': '#F8F9F4', // Um cinza muito claro, quase branco
-                        'texto-principal': '#BBB6B2', // Um cinza bem escuro
-                        'texto-secundario': '#A6ABB1', // Um cinza claro
+                        // --- Cores Base (Sua Paleta) ---
+                        'azul-escuro': '#2D3752',
+                        'cinza-claro': '#A6ABB1',
+                        'rosa': '#D1B1B2',
+                        'preto-fundo': '#323234',
+                        'cinza-escuro': '#BBB6B2',
+                        'branco-off': '#F8F9F4',
 
-                        // Paleta Pastel
-                        'primaria': {
-                            light: '#485883', // zul claro
-                            DEFAULT: '#2D3752', // Azul base da identidade visual
-                            dark: '#121621'   // zul escuro (para botões/links)
-                        },
-                        'secundaria': {
-                            light: '#ede1e2', // Rosa claro
-                            DEFAULT: '#93C5FD', // Rosa base da identidade visual
-                            dark: '#b58182'   // Rosa escuro
-                        }
+                        // --- Mapeamento Semântico (Para usar no site) ---
+                        'fundo': '#F8F9F4',            // Cor principal do fundo
+                        'fundo-secao': '#D1B1B2',      // Cor de fundo para seções
+
+                        'texto-titulo': '#323234',     // Cor para títulos
+                        'texto-corpo': '#BBB6B2',       // Cor para parágrafos (AGORA É #BBB6B2)
+                        'texto-suave': '#BBB6B2',      // Cor para textos secundários
+
+                        'acento': '#2D3752',          // Cor de destaque/botões
+                        'acento-texto': '#F8F9F4'       // Cor do texto em cima do acento
                     }
                 }
             }
@@ -51,84 +48,111 @@
         html { scroll-behavior: smooth; }
     </style>
 </head>
-<body class="bg-fundo font-sans antialiased text-texto-principal"> <!-- font-sans agora é Poppins -->
+<body class="bg-fundo font-sans antialiased text-texto-corpo">
 
-    <!--
-      HEADER SIMPLIFICADO
-      - Link para voltar ao Início (index.html)
-    -->
-    <header class="bg-white/70 backdrop-blur-md shadow-sm sticky top-0 z-50">
+    <header class="bg-preto-fundo/90 backdrop-blur-md shadow-lg sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- Adicionando font-serif para o logo/nome -->
-            <a href="index.html" class="text-2xl font-bold text-primaria-dark font-serif">
+            <a href="index.html" class="text-2xl font-bold text-branco-off font-serif">
                 Hagda Matos
             </a>
-            <a href="index.html#contato" class="bg-primaria-dark text-white py-2 px-5 rounded-full hover:bg-opacity-90 transition-all">
+            <a href="index.html#contato" class="bg-acento text-acento-texto font-bold py-2 px-5 rounded-full hover:bg-opacity-90 transition-all">
                 Agendar Consultoria
             </a>
         </nav>
     </header>
 
-    <!--
-      CONTEÚDO - SERVIÇOS PARA EMPRESAS (PJ)
-    -->
-    <main class="bg-white py-24">
+    <main class="bg-fundo py-24">
         <div class="container mx-auto px-6">
+            <!-- Cabeçalho da Página -->
             <div class="text-center max-w-3xl mx-auto">
-                <a href="index.html" class="text-lg text-primaria-dark hover:underline">&larr; Voltar para o Início</a>
-                <!-- Adicionando font-serif para o título principal -->
-                <h1 class="text-4xl md:text-5xl font-bold text-texto-principal mt-4 mb-6 font-serif">
+                <a href="index.html" class="text-lg text-acento hover:underline">&larr; Voltar para o Início</a>
+                <h1 class="text-4xl md:text-5xl font-bold text-texto-titulo mt-4 mb-6 font-serif">
                     Serviços para sua Empresa
                 </h1>
-                <p class="text-xl text-texto-secundario mb-16">
-                    Soluções corporativas desenhadas para alinhar a imagem da sua equipe à cultura e aos valores da sua marca, transformando a percepção de clientes.
+                <p class="text-xl text-acento mb-16">
+                    No mercado atual, a excelência de um produto ou serviço não é mais suficiente. A experiência que sua marca proporciona e a imagem profissional de sua equipe são os verdadeiros diferenciais competitivos. Minha consultoria corporativa é desenhada para alcançar resultados concretos por meio da estratégia visual.
+
+Trabalho no desenvolvimento e alinhamento do Dress Code e da Etiqueta Profissional, na capacitação de equipes e na criação de experiências memoráveis para o cliente final. O objetivo é garantir que cada ponto de contato da sua empresa transmita autoridade, confiança e gere a conexão imediata que impulsiona o seu negócio e a reputação da sua marca."
+
                 </p>
+                <h2 class="text-3xl font-bold text-texto-titulo mb-12 font-serif">Subcategorias da Consultoria Corporativa</h2>
             </div>
 
-            <!-- Lista de Serviços PJ (Exemplos) -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Serviço 1: Treinamento de Equipe -->
-                <div class="bg-white p-8 rounded-lg shadow-xl border border-primaria-light transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="https://placehold.co/80x80/485883/F8F9F4?text=Equipe" alt="Ícone" class="rounded-full mb-6">
-                    <!-- Adicionando font-serif para os títulos dos cards -->
-                    <h3 class="text-2xl font-bold text-primaria-dark mb-4 font-serif">Treinamento de Equipe</h3>
-                    <p class="text-texto-secundario leading-relaxed">
-                        Capacite seu time para entender a importância da imagem profissional como ferramenta de comunicação e credibilidade.
-                    </p>
-                </div>
+            <!-- Container 1: Desenvolvimento de Equipe -->
+            <section class="mb-20">
+                <h2 class="text-3xl font-bold text-acento text-center mb-10 font-serif">Desenvolvimento de Equipe (Capacitação Interna)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
 
-                <!-- Serviço 2: Oficinas e Workshops -->
-                <div class="bg-white p-8 rounded-lg shadow-xl border border-primaria-light transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="https://placehold.co/80x80/485883/F8F9F4?text=Workshop" alt="Ícone" class="rounded-full mb-6">
-                    <!-- Adicionando font-serif para os títulos dos cards -->
-                    <h3 class="text-2xl font-bold text-primaria-dark mb-4 font-serif">Oficinas e Workshops</h3>
-                    <p class="text-texto-secundario leading-relaxed">
-                        Eventos dinâmicos e práticos sobre temas como etiqueta corporativa, estilo no ambiente de trabalho e uso estratégico das cores.
-                    </p>
-                </div>
+                    <!-- Card 1.1: Dress Code e Etiqueta Profissional -->
+                    <div class="bg-white p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+                        <img src="https://placehold.co/80x80/2D3752/F8F9F4?text=Equipe" alt="Ícone Dress Code" class="rounded-full mb-6 w-20 h-20 self-start">
+                        <h3 class="text-2xl font-bold text-texto-titulo mb-4 font-serif">1. Dress Code e Etiqueta Profissional</h3>
 
-                <!-- Serviço 3: Dress Code Corporativo -->
-                <div class="bg-white p-8 rounded-lg shadow-xl border border-primaria-light transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="https://placehold.co/80x80/485883/F8F9F4?text=Dress+Code" alt="Ícone" class="rounded-full mb-6">
-                    <!-- Adicionando font-serif para os títulos dos cards -->
-                    <h3 class="text-2xl font-bold text-primaria-dark mb-4 font-serif">Dress Code Corporativo</h3>
-                    <p class="text-texto-secundario leading-relaxed">
-                        Desenvolvimento e implementação de um guia de vestimenta claro e moderno, alinhado à cultura e aos valores da sua empresa.
-                    </p>
+                        <p class="text-acento leading-relaxed mb-3">
+                            <strong class="text-texto-titulo">O que é:</strong> Definição clara e estratégica de códigos de vestimenta e das normas de etiqueta adequadas ao seu setor e cultura organizacional.
+                        </p>
+                        <p class="text-acento leading-relaxed">
+                            <strong class="text-texto-titulo">Benefício:</strong> Alinhamento imediato da imagem de todos os colaboradores, garantindo que a equipe transmita a mesma mensagem de profissionalismo, autoridade e confiança da marca.
+                        </p>
+                    </div>
+
+                    <!-- Card 1.2: Palestras -->
+                    <div class="bg-white p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+                        <img src="https://placehold.co/80x80/2D3752/F8F9F4?text=Palestra" alt="Ícone Palestras" class="rounded-full mb-6 w-20 h-20 self-start">
+                        <h3 class="text-2xl font-bold text-texto-titulo mb-4 font-serif">2. Palestras</h3>
+
+                        <p class="text-acento leading-relaxed mb-3">
+                            <strong class="text-texto-titulo">O que é:</strong> Apresentações dinâmicas e inspiradoras sobre temas de imagem, marca pessoal e comunicação estratégica, personalizadas para o público do seu evento ou time.
+                        </p>
+                        <p class="text-acento leading-relaxed">
+                            <strong class="text-texto-titulo">Benefício:</strong> Eduque e motive seus colaboradores (ou clientes) sobre o poder da imagem, gerando engajamento, reflexão e mudança de comportamento com alto impacto.
+                        </p>
+                    </div>
+
                 </div>
-            </div>
+            </section>
+
+            <!-- Container 2: Varejo de alto impacto -->
+            <section>
+                <h2 class="text-3xl font-bold text-acento text-center mb-10 font-serif">Varejo de Alto Impacto (Foco em Moda)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+
+                    <!-- Card 2.1: Treinamento de Vendas -->
+                    <div class="bg-white p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+                        <img src="https://placehold.co/80x80/2D3752/F8F9F4?text=Vendas" alt="Ícone Treinamento de Vendas" class="rounded-full mb-6 w-20 h-20 self-start">
+                        <h3 class="text-2xl font-bold text-texto-titulo mb-4 font-serif">3. Treinamento de Vendas</h3>
+
+                        <p class="text-acento leading-relaxed mb-3">
+                            <strong class="text-texto-titulo">O que é:</strong> Treinamento prático e especializado, voltado especificamente para equipes de moda e varejo. Focamos em transformar a abordagem de vendas, ensinando os colaboradores a utilizar as ferramentas da consultoria de imagem (como cores, estilos e formas) diretamente no atendimento ao cliente.
+                        </p>
+                        <p class="text-acento leading-relaxed">
+                            <strong class="text-texto-titulo">Benefício:</strong> Capacite sua equipe para oferecer um atendimento consultivo e personalizado. Eles aprenderão a identificar as necessidades reais do cliente, usar o conhecimento de imagem para construir looks e combinações de forma estratégica, aumentando o valor médio da venda e a fidelização.
+                        </p>
+                    </div>
+
+                    <!-- Card 2.2: Experiência em loja -->
+                    <div class="bg-white p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+                        <img src="https://placehold.co/80x80/2D3752/F8F9F4?text=Loja" alt="Ícone Experiência em Loja" class="rounded-full mb-6 w-20 h-20 self-start">
+                        <h3 class="text-2xl font-bold text-texto-titulo mb-4 font-serif">4. Experiência em loja</h3>
+
+                        <p class="text-acento leading-relaxed mb-3">
+                            <strong class="text-texto-titulo">O que é:</strong> A sua marca promove um momento único e exclusivo para clientes, com a minha presença na loja. Eu transformo a experiência de compra oferecendo consultorias expressas para clientes VIP, ou conduzindo bate-papos temáticos (como tendências, combinações de cores ou personal styling).
+                        </p>
+                        <p class="text-acento leading-relaxed">
+                            <strong class="text-texto-titulo">Benefício:</strong> Aumente o fluxo de clientes qualificados, ofereça um diferencial de valor que eleva a percepção da marca e converta a visita em venda de forma consultiva, garantindo que o cliente saia satisfeito e se sinta especial.
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+
         </div>
     </main>
 
-    <!-- 
-      FOOTER (COPIADO DO INDEX.HTML)
-    -->
-    <footer class="bg-gray-900 text-gray-400 py-16">
+    <footer class="bg-acento text-texto-suave py-16 mt-20"> <!-- Adicionado mt-20 para mais espaço -->
         <div class="container mx-auto px-6 text-center">
             <div class="flex justify-center space-x-6 mb-6">
-                <a href="https://www.instagram.com/hagdamatos?igsh=MXFzbmNvZTBiY2dkbQ==" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Instagram</a>
-               <!-- <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Pinterest</a>
-                <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">LinkedIn</a>-->
+                <a href="https://www.instagram.com/hagdamatos?igsh=MXFzbmNvZTBiY2dkbQ==" target="_blank" rel="noopener noreferrer" class="hover:text-branco-off transition-colors">Instagram</a>
             </div>
             <p>&copy; 2025 Hagda Matos. Todos os direitos reservados.</p>
             <p class="text-sm mt-2">Feito com &hearts; por Danilo Matos</p>
