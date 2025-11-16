@@ -46,6 +46,13 @@
 
     <style>
         html { scroll-behavior: smooth; }
+        #servicos-container {
+            cursor: grab; /* Mãozinha "pegar" */
+            user-select: none; /* Impede a seleção de texto ao arrastar */
+        }
+        #servicos-container.active {
+            cursor: grabbing; /* Mãozinha "agarrando" */
+        }
     </style>
 </head>
 <body class="bg-fundo font-sans antialiased text-texto-corpo">
@@ -66,99 +73,201 @@
             <!-- Cabeçalho da Página -->
             <div class="text-center max-w-3xl mx-auto">
                 <a href="index.html" class="text-lg text-acento hover:underline">&larr; Voltar para o Início</a>
-                <h1 class="text-4xl md:text-5xl font-bold text-texto-titulo mt-4 mb-6 font-serif">
+                <h1 class="text-2xl md:text-4xl font-bold text-texto-titulo mt-4 mb-6 font-serif">
                     Serviços para Você
                 </h1>
-                <p class="text-xl text-acento mb-16">
+                <p class="text-base text-acento mb-16">
                     Sua imagem é a primeira e mais poderosa ferramenta de comunicação que você possui. Se você já se sentiu inseguro ao se vestir ou percebeu que seu guarda-roupa não reflete quem você realmente é, esta é a sua área. Minha consultoria pessoal é um caminho de autoconhecimento e estratégia visual, focado em ensinar você a Vestir-se com Intenção. Juntos, vamos desvendar suas cores, seu estilo e a morfologia do seu corpo, transformando a forma como você se vê e como o mundo te percebe. É hora de usar suas roupas como uma ferramenta consciente para alcançar seus objetivos e construir sua confiança.
                 </p>
-                <h2 class="text-3xl font-bold text-texto-titulo mb-12 font-serif">Subcategorias da Consultoria Pessoal</h2>
             </div>
 
-            <!-- Container 1: Base & Essência -->
-            <section class="mb-20">
-                <h2 class="text-3xl font-bold text-acento text-center mb-10 font-serif">Base & Essência (Autoconhecimento)</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+    <!-- Container Principal -->
+    <section class="mb-5">
+        <h2 class="text-3xl font-bold text-acento text-center mb-10 font-serif">
+            Base, Essência e Praticidade
+        </h2>
 
-                    <!-- Card 1.1: Descobrindo Suas Cores -->
-                    <div class="bg-white p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
-                        <img src="https://placehold.co/80x80/D1B1B2/323234?text=Cores" alt="Ícone Análise de Coloração Pessoal" class="rounded-full mb-6 w-20 h-20 self-start">
-                        <h3 class="text-2xl font-bold text-texto-titulo mb-2 font-serif">1. Descobrindo Suas Cores</h3>
-                        <p class="text-base font-semibold text-acento mb-4">(Análise de Coloração Pessoal)</p>
+        <div id="servicos-container" class="md:overflow-x-auto md:pb-6">
 
-                        <p class="text-acento leading-relaxed mb-3">
-                            <strong class="text-texto-titulo">O que é:</strong> Um estudo científico das cores que melhor harmonizam com o seu tom de pele, olhos e cabelo.
-                        </p>
-                        <p class="text-acento leading-relaxed">
-                            <strong class="text-texto-titulo">Benefício:</strong> Descubra sua cartela pessoal, aprenda a usar cores estrategicamente para iluminar sua imagem e economize eliminando compras de tons que te desfavorecem.
-                        </p>
-                    </div>
+            <div class="grid grid-cols-1 md:flex md:flex-nowrap md:space-x-8 gap-8 md:gap-0 max-w-none">
 
-                    <!-- Card 1.2: Estilo e Identidade -->
-                    <div class="bg-white p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
-                        <img src="https://placehold.co/80x80/D1B1B2/323234?text=Estilo" alt="Ícone Análise de Estilo" class="rounded-full mb-6 w-20 h-20 self-start">
-                        <h3 class="text-2xl font-bold text-texto-titulo mb-2 font-serif">2. Estilo e Identidade</h3>
-                        <p class="text-base font-semibold text-acento mb-4">(Análise de Estilo e Morfologia Corporal)</p>
-
-                        <p class="text-acento leading-relaxed mb-3">
-                            <strong class="text-texto-titulo">O que é:</strong> Um mergulho na sua identidade visual, mapeando os elementos do seu estilo pessoal, as mensagens que você deseja transmitir e as proporções do seu corpo.
-                        </p>
-                        <p class="text-acento leading-relaxed">
-                            <strong class="text-texto-titulo">Benefício:</strong> Receba seu Guia de Estilo, aprenda a valorizar sua silhueta e crie um guarda-roupa coeso que comunica quem você é, de forma autêntica e intencional.
-                        </p>
-                    </div>
-
+                <div class="bg-white p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col md:flex-none md:w-[30rem]">
+                    <img src="Fotos/Coloracao.jpg" alt="Ícone Análise de Coloração Pessoal" class="rounded-full mb-6 w-40 h-40 self-center">
+                    <h3 class="text-2xl font-bold text-texto-titulo mb-2 font-serif">Descobrindo Suas Cores</h3>
+                    <p class="text-base font-semibold text-acento mb-4">(Análise de Coloração Pessoal)</p>
+                    <p class="text-acento leading-relaxed mb-3">
+                        <strong class="text-texto-titulo">O que é:</strong> Um estudo científico das cores que melhor harmonizam com o seu tom de pele, olhos e cabelo.
+                    </p>
+                    <p class="text-acento leading-relaxed">
+                        <strong class="text-texto-titulo">Benefício:</strong> Descubra sua cartela pessoal, aprenda a usar cores estrategicamente para iluminar sua imagem e economize eliminando compras de tons que te desfavorecem.
+                    </p>
                 </div>
-            </section>
 
-            <!-- Container 2: Ajustes e Ocasiões -->
-            <section>
-                <h2 class="text-3xl font-bold text-acento text-center mb-10 font-serif">Ajustes e Ocasiões (Praticidade e Ajustes Pontuais)</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-
-                    <!-- Card 2.1: Mala Inteligente -->
-                    <div class="bg-white p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
-                        <img src="https://placehold.co/80x80/D1B1B2/323234?text=Mala" alt="Ícone Mala Inteligente" class="rounded-full mb-6 w-20 h-20 self-start">
-                        <h3 class="text-2xl font-bold text-texto-titulo mb-2 font-serif">3. Mala inteligente</h3>
-                        <p class="text-base font-semibold text-acento mb-4">(Otimização para viagens)</p>
-
-                        <p class="text-acento leading-relaxed mb-3">
-                            <strong class="text-texto-titulo">O que é:</strong> Um planejamento eficiente para viagens, focando em malas leves e versáteis.
-                        </p>
-                        <p class="text-acento leading-relaxed">
-                            <strong class="text-texto-titulo">Benefício:</strong> Tenha looks prontos e coordenados para cada dia e ocasião da sua viagem, otimizando espaço, tempo e garantindo que você esteja impecável do embarque ao destino.
-                        </p>
-                    </div>
-
-                    <!-- Card 2.2: Look Express -->
-                    <div class="bg-white p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
-                        <img src="https://placehold.co/80x80/D1B1B2/323234?text=Look" alt="Ícone Look Express" class="rounded-full mb-6 w-20 h-20 self-start">
-                        <h3 class="text-2xl font-bold text-texto-titulo mb-2 font-serif">4. Look Express</h3>
-                        <p class="text-base font-semibold text-acento mb-4">(Consultoria de última hora via WhatsApp)</p>
-
-                        <p class="text-acento leading-relaxed mb-3">
-                            <strong class="text-texto-titulo">O que é:</strong> Uma consultoria rápida e focada, feita remotamente, para solucionar o look de um evento urgente (casamento, entrevista, festa, etc.).
-                        </p>
-                        <p class="text-acento leading-relaxed">
-                            <strong class="text-texto-titulo">Benefício:</strong> Receba sugestões de peças, acessórios e combinações usando seu próprio guarda-roupa ou com links de compra, garantindo um visual adequado e impactante sem sair de casa.
-                        </p>
-                    </div>
-
+                <div class="bg-white p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col md:flex-none md:w-[30rem]">
+                    <img src="Fotos/Estilo.png" alt="Ícone Análise de Estilo" class="rounded-full mb-6 w-40 h-40 self-center">
+                    <h3 class="text-2xl font-bold text-texto-titulo mb-2 font-serif">Estilo e Identidade</h3>
+                    <p class="text-base font-semibold text-acento mb-4">(Análise de Estilo e Morfologia Corporal)</p>
+                    <p class="text-acento leading-relaxed mb-3">
+                        <strong class="text-texto-titulo">O que é:</strong> Um mergulho na sua identidade visual, mapeando os elementos do seu estilo pessoal, as mensagens que você deseja transmitir e as proporções do seu corpo.
+                    </p>
+                    <p class="text-acento leading-relaxed">
+                        <strong class="text-texto-titulo">Benefício:</strong> Receba seu Guia de Estilo, aprenda a valorizar sua silhueta e crie um guarda-roupa coeso que comunica quem você é, de forma autêntica e intencional.
+                    </p>
                 </div>
-            </section>
+
+                <div class="bg-white p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col md:flex-none md:w-[30rem]">
+                    <img src="Fotos/Mala.jpg" alt="Ícone Mala Inteligente" class="rounded-full mb-6 w-40 h-40 self-center">
+                    <h3 class="text-2xl font-bold text-texto-titulo mb-2 font-serif">Mala inteligente</h3>
+                    <p class="text-base font-semibold text-acento mb-4">(Otimização para viagens)</p>
+                    <p class="text-acento leading-relaxed mb-3">
+                        <strong class="text-texto-titulo">O que é:</strong> Um planejamento eficiente para viagens, focando em malas leves e versáteis.
+                    </p>
+                    <p class="text-acento leading-relaxed">
+                        <strong class="text-texto-titulo">Benefício:</strong> Tenha looks prontos e coordenados para cada dia e ocasião da sua viagem, otimizando espaço, tempo e garantindo que você esteja impecável do embarque ao destino.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col md:flex-none md:w-[30rem]">
+                    <img src="Fotos/fasthelp.jpg" alt="Ícone Look Express" class="rounded-full mb-6 w-40 h-40 self-center">
+                    <h3 class="text-2xl font-bold text-texto-titulo mb-2 font-serif">Look Express</h3>
+                    <p class="text-base font-semibold text-acento mb-4">(Consultoria de última hora via WhatsApp)</p>
+                    <p class="text-acento leading-relaxed mb-3">
+                        <strong class="text-texto-titulo">O que é:</strong> Uma consultoria rápida e focada, feita remotamente, para solucionar o look de um evento urgente (casamento, entrevista, festa, etc.).
+                    </p>
+                    <p class="text-acento leading-relaxed">
+                        <strong class="text-texto-titulo">Benefício:</strong> Receba sugestões de peças, acessórios e combinações usando seu próprio guarda-roupa ou com links de compra, garantindo um visual adequado e impactante sem sair de casa.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col md:flex-none md:w-[30rem]">
+                    <img src="Fotos/placeholder.svg" alt="Ícone montagem de looks" class="rounded-full mb-6 w-40 h-40 self-center">
+                    <h3 class="text-2xl font-bold text-texto-titulo mb-2 font-serif">Montagem de Looks com Truques de Estilo</h3>
+                    <p class="text-base font-semibold text-acento mb-4">(Amplie suas possibilidades)</p>
+                    <p class="text-acento leading-relaxed mb-3">
+                        <strong class="text-texto-titulo">O que é:</strong> Uma sessão prática e personalizada para criar e catalogar novos looks utilizando suas próprias peças. Te ensinarei a criar combinações inovadoras, multiplicar as opções do seu armário e maximizar o uso de cada peça.
+                    </p>
+                    <p class="text-acento leading-relaxed">
+                        <strong class="text-texto-titulo">Benefício:</strong> Você aprende na prática a usar truques de styling para valorizar seu corpo e seu estilo. Multiplique as possibilidades do seu guarda-roupa, garanta looks criativos para qualquer ocasião e elimine o "não tenho o que vestir".
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col md:flex-none md:w-[30rem]">
+                    <img src="Fotos/Estilo_2.jpg" alt="Ícone Curadoria de compras" class="rounded-full mb-6 w-40 h-40 self-center">
+                    <h3 class="text-2xl font-bold text-texto-titulo mb-2 font-serif">Curadoria de Compras</h3>
+                    <p class="text-base font-semibold text-acento mb-4">(Compras mais conscientes)</p>
+                    <p class="text-acento leading-relaxed mb-3">
+                        <strong class="text-texto-titulo">O que é:</strong> Uma experiência de compras guiada, feita de forma estratégica e focada na sua lista de necessidades, estilo e orçamento. Através de uma pré-seleção especialista (em lojas físicas ou online), eu garanto que cada peça adquirida seja uma adição intencional e de alto valor ao seu guarda-roupa.
+                    </p>
+                    <p class="text-acento leading-relaxed">
+                        <strong class="text-texto-titulo">Benefício:</strong> Elimine o erro na hora de comprar! Você garante que seu investimento seja feito apenas em peças que se encaixam perfeitamente no seu estilo e combinam com o que você já tem, economizando tempo e garantindo resultados certeiros e duradouros.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col md:flex-none md:w-[30rem]">
+                    <img src="Fotos/guardaroupa.jpg" alt="Ícone Otimização do guarda-roupa" class="rounded-full mb-6 w-40 h-40 self-center">
+                    <h3 class="text-2xl font-bold text-texto-titulo mb-2 font-serif">Otimização do guarda-roupa</h3>
+                    <p class="text-base font-semibold text-acento mb-4">(mantenha o mais importante)</p>
+                    <p class="text-acento leading-relaxed mb-3">
+                        <strong class="text-texto-titulo">O que é:</strong> Uma curadoria estratégica do seu guarda-roupa, que pode ser feita de forma presencial ou online/remota. Juntos, analisamos item por item para identificar o que deve ser mantido, customizado ou descartado, reorganizando as peças restantes de forma funcional.
+                    </p>
+                    <p class="text-acento leading-relaxed">
+                        <strong class="text-texto-titulo">Benefício:</strong> Tenha um armário leve, inteligente e alinhado ao seu estilo atual, eliminando o que não serve ou não comunica a sua intenção, e facilitando a rotina de se vestir diariamente.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
 
         </div>
     </main>
 
-    <footer class="bg-acento text-texto-suave py-16 mt-20"> <!-- Adicionado mt-20 para mais espaço -->
+    <section id="contato" class="bg-fundo py-6">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold text-texto-titulo mb-6 font-serif">
+                Pronta para transformar sua imagem?
+            </h2>
+            <p class="text-xl text-acento max-w-2xl mx-auto mb-10">
+                Vamos conversar! Clique no botão abaixo para agendar uma conversa inicial sem compromisso.
+            </p>
+            <a href="https://wa.me/message/EDKBGKGQPYKED1"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="bg-acento text-acento-texto text-lg font-bold py-4 px-10 rounded-full hover:bg-opacity-90 transition-all transform hover:scale-105 inline-block">
+                WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-acento text-texto-suave py-16 mt-10">
         <div class="container mx-auto px-6 text-center">
             <div class="flex justify-center space-x-6 mb-6">
-                <a href="https://www.instagram.com/hagdamatos?igsh=MXFzbmNvZTBiY2dkbQ==" target="_blank" rel="noopener noreferrer" class="hover:text-branco-off transition-colors">Instagram</a>
+                <a href="https://www.instagram.com/hagdamatos?igsh=MXFzbmNvZTBiY2dkbQ=="
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="hover:text-branco-off transition-colors inline-flex items-center space-x-2">
+
+                    <span>Instagram</span>
+
+                    <svg
+                        class="w-5 h-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
             </div>
             <p>&copy; 2025 Hagda Matos. Todos os direitos reservados.</p>
             <p class="text-sm mt-2">Feito com &hearts; por Danilo Matos</p>
         </div>
     </footer>
+<script>
+        // Seleciona o container que você deu o ID
+        const slider = document.querySelector('#servicos-container');
 
+        // Variáveis para guardar o estado do "arraste"
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        // Evento: Quando o mouse é pressionado (mousedown)
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.classList.add('active'); // Adiciona a classe pro cursor "grabbing"
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+            e.preventDefault(); // Impede o comportamento padrão (como arrastar imagem)
+        });
+
+        // Evento: Quando o mouse sai da área (mouseleave)
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.classList.remove('active');
+        });
+
+        // Evento: Quando o botão do mouse é solto (mouseup)
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.classList.remove('active');
+        });
+
+        // Evento: Quando o mouse se move (mousemove)
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return; // Só executa se o mouse estiver pressionado
+
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2; // O '* 2' torna o arraste mais rápido
+            slider.scrollLeft = scrollLeft - walk;
+        });
+
+    </script>
 </body>
 </html>
