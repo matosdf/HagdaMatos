@@ -17,27 +17,27 @@
                 extend: {
                     fontFamily: {
                         sans: ['Poppins', 'sans-serif'],
-                        serif: ['Playfair+Display', 'serif'],
+                        serif: ['Playfair Display', 'serif'],
                     },
                     colors: {
                         // --- Cores Base (Sua Paleta) ---
-                        'azul-escuro': '#2D3752',
-                        'cinza-claro': '#A6ABB1',
-                        'rosa': '#D1B1B2',
-                        'preto-fundo': '#323234',
-                        'cinza-escuro': '#BBB6B2',
-                        'branco-off': '#F8F9F4',
+                        'marrom-escuro': '#4c2b09',
+                        'marrom-claro': '#6d3a14',
+                        'bege-escuro': '#7b4e12',
+                        'bege-claro': '#ab7843',
+                        'tom-claro': '#dbc096',
+                        'tom-super-claro': '#d8bda7',
 
                         // --- Mapeamento Semântico (Para usar no site) ---
-                        'fundo': '#F8F9F4',            // Cor principal do fundo
-                        'fundo-secao': '#D1B1B2',      // Cor de fundo para seções
+                        'fundo': '#4c2b09',            // Cor principal do fundo
+                        'fundo-secao': '#dbc096',      // Cor de fundo para seções
 
-                        'texto-titulo': '#323234',     // Cor para títulos
-                        'texto-corpo': '#BBB6B2',       // Cor para parágrafos (AGORA É #BBB6B2)
-                        'texto-suave': '#BBB6B2',      // Cor para textos secundários
+                        'texto-titulo': '#ab7843',     // Cor para títulos
+                        'texto-corpo': '#6d3a14',       // Cor para parágrafos
+                        'texto-suave': '#6d3a14',      // Cor para textos secundários
 
-                        'acento': '#2D3752',          // Cor de destaque/botões
-                        'acento-texto': '#F8F9F4'       // Cor do texto em cima do acento
+                        'acento': '#7b4e12',          // Cor de destaque/botões
+                        'acento-texto': '#d8bda7'       // Cor do texto em cima do acento
                     }
                 }
             }
@@ -59,7 +59,7 @@
 
     <header class="bg-preto-fundo/90 backdrop-blur-md shadow-lg sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold text-branco-off font-serif">
+            <a href="index.html" class="text-2xl font-bold text-texto-titulo font-serif">
                 Hagda Matos
             </a>
             <a href="index.html#contato" class="bg-acento text-acento-texto font-bold py-2 px-5 rounded-full hover:bg-opacity-90 transition-all">
@@ -72,18 +72,18 @@
         <div class="container mx-auto px-6">
             <!-- Cabeçalho da Página -->
             <div class="text-center max-w-3xl mx-auto">
-                <a href="index.html" class="text-lg text-acento hover:underline">&larr; Voltar para o Início</a>
+                <a href="index.html" class="text-lg text-acento-texto hover:underline">&larr; Voltar para o Início</a>
                 <h1 class="text-2xl md:text-4xl font-bold text-texto-titulo mt-4 mb-6 font-serif">
                     Serviços para Você
                 </h1>
-                <p class="text-base text-acento mb-16">
+                <p class="text-base text-acento-texto mb-16">
                     Sua imagem é a primeira e mais poderosa ferramenta de comunicação que você possui. Se você já se sentiu inseguro ao se vestir ou percebeu que seu guarda-roupa não reflete quem você realmente é, esta é a sua área. Minha consultoria pessoal é um caminho de autoconhecimento e estratégia visual, focado em ensinar você a Vestir-se com Intenção. Juntos, vamos desvendar suas cores, seu estilo e a morfologia do seu corpo, transformando a forma como você se vê e como o mundo te percebe. É hora de usar suas roupas como uma ferramenta consciente para alcançar seus objetivos e construir sua confiança.
                 </p>
             </div>
 
     <!-- Container Principal -->
     <section class="mb-5">
-        <h2 class="text-3xl font-bold text-acento text-center mb-10 font-serif">
+        <h2 class="text-3xl font-bold text-texto-titulo text-center mb-10 font-serif">
             Base, Essência e Praticidade
         </h2>
 
@@ -91,87 +91,87 @@
 
             <div class="grid grid-cols-1 md:flex md:flex-nowrap md:space-x-8 gap-8 md:gap-0 max-w-none">
 
-                <div class="bg-white p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col md:flex-none md:w-[30rem]">
-                    <img src="Fotos/Coloracao.jpg" alt="Ícone Análise de Coloração Pessoal" class="rounded-full mb-6 w-40 h-40 self-center">
-                    <h3 class="text-2xl font-bold text-texto-titulo mb-2 font-serif">Descobrindo Suas Cores</h3>
+                <div class="bg-acento-texto p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col md:flex-none md:w-[30rem]">
+                    <img src="Fotos/coloracao2.jpeg" alt="Ícone Análise de Coloração Pessoal" class="rounded-full mb-6 w-40 h-40 self-center">
+                    <h3 class="text-2xl font-bold text-fundo mb-2 font-serif">Descobrindo Suas Cores</h3>
                     <p class="text-base font-semibold text-acento mb-4">(Análise de Coloração Pessoal)</p>
                     <p class="text-acento leading-relaxed mb-3">
-                        <strong class="text-texto-titulo">O que é:</strong> Um estudo científico das cores que melhor harmonizam com o seu tom de pele, olhos e cabelo.
+                        <strong class="text-fundo">O que é:</strong> Um estudo científico das cores que melhor harmonizam com o seu tom de pele, olhos e cabelo.
                     </p>
                     <p class="text-acento leading-relaxed">
-                        <strong class="text-texto-titulo">Benefício:</strong> Descubra sua cartela pessoal, aprenda a usar cores estrategicamente para iluminar sua imagem e economize eliminando compras de tons que te desfavorecem.
+                        <strong class="text-fundo">Benefício:</strong> Descubra sua cartela pessoal, aprenda a usar cores estrategicamente para iluminar sua imagem e economize eliminando compras de tons que te desfavorecem.
                     </p>
                 </div>
 
-                <div class="bg-white p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col md:flex-none md:w-[30rem]">
+                <div class="bg-acento-texto p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col md:flex-none md:w-[30rem]">
                     <img src="Fotos/Estilo.png" alt="Ícone Análise de Estilo" class="rounded-full mb-6 w-40 h-40 self-center">
-                    <h3 class="text-2xl font-bold text-texto-titulo mb-2 font-serif">Estilo e Identidade</h3>
+                    <h3 class="text-2xl font-bold text-fundo mb-2 font-serif">Estilo e Identidade</h3>
                     <p class="text-base font-semibold text-acento mb-4">(Análise de Estilo e Morfologia Corporal)</p>
                     <p class="text-acento leading-relaxed mb-3">
-                        <strong class="text-texto-titulo">O que é:</strong> Um mergulho na sua identidade visual, mapeando os elementos do seu estilo pessoal, as mensagens que você deseja transmitir e as proporções do seu corpo.
+                        <strong class="text-fundo">O que é:</strong> Um mergulho na sua identidade visual, mapeando os elementos do seu estilo pessoal, as mensagens que você deseja transmitir e as proporções do seu corpo.
                     </p>
                     <p class="text-acento leading-relaxed">
-                        <strong class="text-texto-titulo">Benefício:</strong> Receba seu Guia de Estilo, aprenda a valorizar sua silhueta e crie um guarda-roupa coeso que comunica quem você é, de forma autêntica e intencional.
+                        <strong class="text-fundo">Benefício:</strong> Receba seu Guia de Estilo, aprenda a valorizar sua silhueta e crie um guarda-roupa coeso que comunica quem você é, de forma autêntica e intencional.
                     </p>
                 </div>
 
-                <div class="bg-white p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col md:flex-none md:w-[30rem]">
+                <div class="bg-acento-texto p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col md:flex-none md:w-[30rem]">
                     <img src="Fotos/Mala.jpg" alt="Ícone Mala Inteligente" class="rounded-full mb-6 w-40 h-40 self-center">
-                    <h3 class="text-2xl font-bold text-texto-titulo mb-2 font-serif">Mala inteligente</h3>
+                    <h3 class="text-2xl font-bold text-fundo mb-2 font-serif">Mala inteligente</h3>
                     <p class="text-base font-semibold text-acento mb-4">(Otimização para viagens)</p>
                     <p class="text-acento leading-relaxed mb-3">
-                        <strong class="text-texto-titulo">O que é:</strong> Um planejamento eficiente para viagens, focando em malas leves e versáteis.
+                        <strong class="text-fundo">O que é:</strong> Um planejamento eficiente para viagens, focando em malas leves e versáteis.
                     </p>
                     <p class="text-acento leading-relaxed">
-                        <strong class="text-texto-titulo">Benefício:</strong> Tenha looks prontos e coordenados para cada dia e ocasião da sua viagem, otimizando espaço, tempo e garantindo que você esteja impecável do embarque ao destino.
+                        <strong class="text-fundo">Benefício:</strong> Tenha looks prontos e coordenados para cada dia e ocasião da sua viagem, otimizando espaço, tempo e garantindo que você esteja impecável do embarque ao destino.
                     </p>
                 </div>
 
-                <div class="bg-white p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col md:flex-none md:w-[30rem]">
+                <div class="bg-acento-texto p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col md:flex-none md:w-[30rem]">
                     <img src="Fotos/fasthelp.jpg" alt="Ícone Look Express" class="rounded-full mb-6 w-40 h-40 self-center">
-                    <h3 class="text-2xl font-bold text-texto-titulo mb-2 font-serif">Look Express</h3>
+                    <h3 class="text-2xl font-bold text-fundo mb-2 font-serif">Look Express</h3>
                     <p class="text-base font-semibold text-acento mb-4">(Consultoria de última hora via WhatsApp)</p>
                     <p class="text-acento leading-relaxed mb-3">
-                        <strong class="text-texto-titulo">O que é:</strong> Uma consultoria rápida e focada, feita remotamente, para solucionar o look de um evento urgente (casamento, entrevista, festa, etc.).
+                        <strong class="text-fundo">O que é:</strong> Uma consultoria rápida e focada, feita remotamente, para solucionar o look de um evento urgente (casamento, entrevista, festa, etc.).
                     </p>
                     <p class="text-acento leading-relaxed">
-                        <strong class="text-texto-titulo">Benefício:</strong> Receba sugestões de peças, acessórios e combinações usando seu próprio guarda-roupa ou com links de compra, garantindo um visual adequado e impactante sem sair de casa.
+                        <strong class="text-fundo">Benefício:</strong> Receba sugestões de peças, acessórios e combinações usando seu próprio guarda-roupa ou com links de compra, garantindo um visual adequado e impactante sem sair de casa.
                     </p>
                 </div>
 
-                <div class="bg-white p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col md:flex-none md:w-[30rem]">
-                    <img src="Fotos/placeholder.svg" alt="Ícone montagem de looks" class="rounded-full mb-6 w-40 h-40 self-center">
-                    <h3 class="text-2xl font-bold text-texto-titulo mb-2 font-serif">Montagem de Looks com Truques de Estilo</h3>
+                <div class="bg-acento-texto p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col md:flex-none md:w-[30rem]">
+                    <img src="Fotos/styling.jpeg" alt="Ícone montagem de looks" class="rounded-full mb-6 w-40 h-40 self-center">
+                    <h3 class="text-2xl font-bold text-fundo mb-2 font-serif">Montagem de Looks com Truques de Estilo</h3>
                     <p class="text-base font-semibold text-acento mb-4">(Amplie suas possibilidades)</p>
                     <p class="text-acento leading-relaxed mb-3">
-                        <strong class="text-texto-titulo">O que é:</strong> Uma sessão prática e personalizada para criar e catalogar novos looks utilizando suas próprias peças. Te ensinarei a criar combinações inovadoras, multiplicar as opções do seu armário e maximizar o uso de cada peça.
+                        <strong class="text-fundo">O que é:</strong> Uma sessão prática e personalizada para criar e catalogar novos looks utilizando suas próprias peças. Te ensinarei a criar combinações inovadoras, multiplicar as opções do seu armário e maximizar o uso de cada peça.
                     </p>
                     <p class="text-acento leading-relaxed">
-                        <strong class="text-texto-titulo">Benefício:</strong> Você aprende na prática a usar truques de styling para valorizar seu corpo e seu estilo. Multiplique as possibilidades do seu guarda-roupa, garanta looks criativos para qualquer ocasião e elimine o "não tenho o que vestir".
+                        <strong class="text-fundo">Benefício:</strong> Você aprende na prática a usar truques de styling para valorizar seu corpo e seu estilo. Multiplique as possibilidades do seu guarda-roupa, garanta looks criativos para qualquer ocasião e elimine o "não tenho o que vestir".
                     </p>
                 </div>
 
-                <div class="bg-white p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col md:flex-none md:w-[30rem]">
+                <div class="bg-acento-texto p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col md:flex-none md:w-[30rem]">
                     <img src="Fotos/Estilo_2.jpg" alt="Ícone Curadoria de compras" class="rounded-full mb-6 w-40 h-40 self-center">
-                    <h3 class="text-2xl font-bold text-texto-titulo mb-2 font-serif">Curadoria de Compras</h3>
+                    <h3 class="text-2xl font-bold text-fundo mb-2 font-serif">Curadoria de Compras</h3>
                     <p class="text-base font-semibold text-acento mb-4">(Compras mais conscientes)</p>
                     <p class="text-acento leading-relaxed mb-3">
-                        <strong class="text-texto-titulo">O que é:</strong> Uma experiência de compras guiada, feita de forma estratégica e focada na sua lista de necessidades, estilo e orçamento. Através de uma pré-seleção especialista (em lojas físicas ou online), eu garanto que cada peça adquirida seja uma adição intencional e de alto valor ao seu guarda-roupa.
+                        <strong class="text-fundo">O que é:</strong> Uma experiência de compras guiada, feita de forma estratégica e focada na sua lista de necessidades, estilo e orçamento. Através de uma pré-seleção especialista (em lojas físicas ou online), eu garanto que cada peça adquirida seja uma adição intencional e de alto valor ao seu guarda-roupa.
                     </p>
                     <p class="text-acento leading-relaxed">
-                        <strong class="text-texto-titulo">Benefício:</strong> Elimine o erro na hora de comprar! Você garante que seu investimento seja feito apenas em peças que se encaixam perfeitamente no seu estilo e combinam com o que você já tem, economizando tempo e garantindo resultados certeiros e duradouros.
+                        <strong class="text-fundo">Benefício:</strong> Elimine o erro na hora de comprar! Você garante que seu investimento seja feito apenas em peças que se encaixam perfeitamente no seu estilo e combinam com o que você já tem, economizando tempo e garantindo resultados certeiros e duradouros.
                     </p>
                 </div>
 
-                <div class="bg-white p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col md:flex-none md:w-[30rem]">
+                <div class="bg-acento-texto p-8 rounded-lg shadow-xl border border-fundo-secao/50 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col md:flex-none md:w-[30rem]">
                     <img src="Fotos/guardaroupa.jpg" alt="Ícone Otimização do guarda-roupa" class="rounded-full mb-6 w-40 h-40 self-center">
-                    <h3 class="text-2xl font-bold text-texto-titulo mb-2 font-serif">Otimização do guarda-roupa</h3>
+                    <h3 class="text-2xl font-bold text-fundo mb-2 font-serif">Otimização do guarda-roupa</h3>
                     <p class="text-base font-semibold text-acento mb-4">(mantenha o mais importante)</p>
                     <p class="text-acento leading-relaxed mb-3">
-                        <strong class="text-texto-titulo">O que é:</strong> Uma curadoria estratégica do seu guarda-roupa, que pode ser feita de forma presencial ou online/remota. Juntos, analisamos item por item para identificar o que deve ser mantido, customizado ou descartado, reorganizando as peças restantes de forma funcional.
+                        <strong class="text-fundo">O que é:</strong> Uma curadoria estratégica do seu guarda-roupa, que pode ser feita de forma presencial ou online/remota. Juntos, analisamos item por item para identificar o que deve ser mantido, customizado ou descartado, reorganizando as peças restantes de forma funcional.
                     </p>
                     <p class="text-acento leading-relaxed">
-                        <strong class="text-texto-titulo">Benefício:</strong> Tenha um armário leve, inteligente e alinhado ao seu estilo atual, eliminando o que não serve ou não comunica a sua intenção, e facilitando a rotina de se vestir diariamente.
+                        <strong class="text-fundo">Benefício:</strong> Tenha um armário leve, inteligente e alinhado ao seu estilo atual, eliminando o que não serve ou não comunica a sua intenção, e facilitando a rotina de se vestir diariamente.
                     </p>
                 </div>
 
@@ -187,7 +187,7 @@
             <h2 class="text-4xl font-bold text-texto-titulo mb-6 font-serif">
                 Pronta para transformar sua imagem?
             </h2>
-            <p class="text-xl text-acento max-w-2xl mx-auto mb-10">
+            <p class="text-xl text-acento-texto max-w-2xl mx-auto mb-10">
                 Vamos conversar! Clique no botão abaixo para agendar uma conversa inicial sem compromisso.
             </p>
             <a href="https://wa.me/message/EDKBGKGQPYKED1"
@@ -199,13 +199,13 @@
         </div>
     </section>
 
-    <footer class="bg-acento text-texto-suave py-16 mt-10">
+    <footer class="bg-acento text-acento-texto py-16">
         <div class="container mx-auto px-6 text-center">
             <div class="flex justify-center space-x-6 mb-6">
                 <a href="https://www.instagram.com/hagdamatos?igsh=MXFzbmNvZTBiY2dkbQ=="
                    target="_blank"
                    rel="noopener noreferrer"
-                   class="hover:text-branco-off transition-colors inline-flex items-center space-x-2">
+                   class="hover:text-texto-titulo transition-colors inline-flex items-center space-x-2">
 
                     <span>Instagram</span>
 
