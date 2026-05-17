@@ -1,94 +1,264 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Em breve - Hagda Matos Consultoria de Imagem</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Poppins', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    },
-                    colors: {
-                        // --- Cores Base (Sua Paleta Mantida) ---
-                        'marrom-escuro': '#4c2b09',
-                        'marrom-claro': '#6d3a14',
-                        'bege-escuro': '#7b4e12',
-                        'bege-claro': '#ab7843',
-                        'tom-claro': '#dbc096',
-                        'tom-super-claro': '#d8bda7',
-
-                        // --- Mapeamento Semântico ---
-                        'fundo': '#4c2b09',
-                        'fundo-secao': '#dbc096',
-                        'texto-titulo': '#ab7843',
-                        'texto-corpo': '#6d3a14',
-                        'texto-suave': '#6d3a14',
-                        'acento': '#7b4e12',
-                        'acento-texto': '#d8bda7'
-                    }
-                }
-            }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hagda Matos - Consultoria de Imagem</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          'marrom-escuro': '#4c2b09',
+          'marrom-claro': '#6d3a14',
+          'bege-escuro': '#7b4e12',
+          'bege-claro': '#ab7843',
+          'tom-claro': '#dbc096',
+          'tom-super-claro': '#d8bda7',
+          'cream': '#F5F0EA',
+          'dark': '#1C1310',
+        },
+        fontFamily: {
+          sans: ['Jost', 'sans-serif'],
+          serif: ['Cormorant Garamond', 'Georgia', 'serif'],
         }
-    </script>
+      }
+    }
+  }
+</script>
 </head>
+<body class="bg-cream text-dark font-sans antialiased w-full overflow-x-hidden">
 
-<body class="bg-fundo font-sans antialiased text-texto-corpo flex flex-col min-h-screen">
+  <nav class="bg-cream border-b border-tom-super-claro px-6 py-1 flex flex-col md:flex-row items-center justify-between sticky top-0 z-50 gap-4 md:gap-0">
+    <div class="font-serif text-lg text-marrom-escuro text-center md:text-left tracking-wide">
+      Hagda Matos
+      <span class="block text-[11px] tracking-[0.18em] text-bege-claro font-sans font-light uppercase mt-1">Consultoria de Imagem</span>
+    </div>
+    <div class="flex flex-wrap justify-center gap-4 md:gap-8">
+      <a href="#metodo" class="text-xs tracking-widest uppercase text-marrom-escuro hover:text-bege-claro transition-colors">Método</a>
+      <a href="#planos" class="text-xs tracking-widest uppercase text-marrom-escuro hover:text-bege-claro transition-colors">Planos</a>
+      <a href="#empresas" class="text-xs tracking-widest uppercase text-marrom-escuro hover:text-bege-claro transition-colors">Para empresas</a>
+      <a href="#contato" class="text-xs tracking-widest uppercase text-marrom-escuro hover:text-bege-claro transition-colors">Contato</a>
+    </div>
+    <a href="#contato" class="bg-marrom-escuro text-cream text-[11px] tracking-widest uppercase py-2.5 px-5 hover:bg-marrom-claro transition-colors text-center w-full md:w-auto mt-2 md:mt-0">Agendar conversa</a>
+  </nav>
 
-    <main class="flex-grow flex flex-col items-center justify-center px-6 py-12 text-center">
+  <section class="bg-dark min-h-[85vh] grid grid-cols-1 lg:grid-cols-4">
 
-        <img src="Fotos/6.png"
-             alt="Logo Hagda Matos"
-             class="mb-10 w-64 md:w-80 aspect-square object-cover drop-shadow-lg rounded-full">
+    <div class="p-8 md:p-12 lg:p-16 flex flex-col justify-center lg:col-span-2">
+      <div class="text-[14px] tracking-[0.2em] uppercase text-bege-claro mb-6">Método H.A.G · Consultoria de Imagem</div>
+      <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-cream leading-[1.1] mb-6">
+        Você já tem o repertório.<br><em class="italic text-tom-claro">Falta a imagem confirmar.</em>
+      </h1>
+      <p class="text-lg font-light text-tom-super-claro leading-relaxed max-w-xl mb-10">
+        Imagem estratégica para mulheres que conquistaram muito — e querem que a presença reflita cada conquista.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+        <a href="#metodo" class="bg-bege-claro text-cream text-[11px] tracking-widest uppercase py-3.5 px-7 hover:bg-bege-escuro transition-colors w-full sm:w-auto text-center">Conhecer o método</a>
+      </div>
 
-        <h1 class="text-4xl md:text-5xl font-bold text-texto-titulo mb-4 font-serif">
-            Site em Construção
-        </h1>
-        <p class="text-lg md:text-xl text-acento-texto max-w-lg mb-12">
-            Estamos preparando uma nova experiência para você. Em breve, um espaço dedicado a revelar a sua melhor versão.
-        </p>
-
-        <div class="flex flex-col sm:flex-row gap-4 items-center justify-center">
-
-            <a href="https://wa.me/5581998375233"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="flex items-center justify-center gap-2 bg-acento text-acento-texto text-lg font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition-all transform hover:scale-105 w-full sm:w-auto">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
-                </svg>
-                Falar no WhatsApp
-            </a>
-
-            <a href="https://www.instagram.com/hagdamatos?igsh=MXFzbmNvZTBiY2dkbQ=="
-               target="_blank"
-               rel="noopener noreferrer"
-               class="flex items-center justify-center gap-2 border-2 border-texto-titulo text-texto-titulo text-lg font-bold py-3 px-8 rounded-full hover:bg-texto-titulo hover:text-fundo transition-all transform hover:scale-105 w-full sm:w-auto">
-                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
-                Instagram
-            </a>
-
+      <div class="flex gap-6 mt-12 border-t border-[#2E2018] pt-8">
+        <div>
+          <div class="font-serif text-3xl text-bege-claro leading-none">H</div>
+          <div class="text-[10px] tracking-widest uppercase text-bege-claro mt-1">Harmonia</div>
         </div>
-    </main>
+        <div>
+          <div class="font-serif text-3xl text-bege-claro leading-none">A</div>
+          <div class="text-[10px] tracking-widest uppercase text-bege-claro mt-1">Arquétipo</div>
+        </div>
+        <div>
+          <div class="font-serif text-3xl text-bege-claro leading-none">G</div>
+          <div class="text-[10px] tracking-widest uppercase text-bege-claro mt-1">Geometria</div>
+        </div>
+      </div>
+    </div>
 
-    <footer class="w-full py-6 text-center text-acento-texto/70 text-sm">
-        <p>&copy; 2025 Hagda Matos. Todos os direitos reservados.</p>
-        <p class="mt-1">Feito com &hearts; por Danilo Matos</p>
-    </footer>
+    <div class="bg-dark flex items-center justify-center p-8 lg:p-4 lg:py-12 lg:col-span-1">
+      <img src="Fotos/Hero.jpeg" alt="Foto Hagda Matos" class="w-full h-full object-cover max-h-[600px] rounded-xl shadow-2xl border border-[#2E2018]">
+    </div>
 
-</body>
-</html>
+    <div class="bg-marrom-escuro py-20 lg:py-0 flex items-center justify-center lg:col-span-1">
+      <div class="text-center">
+        <img src="Fotos/6.png" alt="Logo Hagda Matos Consultoria de Imagem" class="w-80 mx-auto object-cover max-h-[600px] rounded-xl shadow-2xl border border-[#2E2018]">
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-cream py-20 px-8 md:px-12 lg:px-20">
+    <div class="text-[10px] tracking-[0.2em] uppercase text-bege-claro mb-4">Sobre</div>
+    <h2 class="font-serif text-3xl md:text-[38px] font-light text-dark leading-[1.15] mb-4">
+      Imagem não é superfície.<br><em class="italic">É comunicação.</em>
+    </h2>
+    <div class="w-12 h-[1px] bg-bege-claro my-6"></div>
+    <p class="text-sm font-light text-marrom-claro leading-relaxed max-w-[520px]">
+      O que você veste está dizendo algo sobre você agora — com ou sem a sua permissão. Trabalho com mulheres que já chegaram longe e querem que cada detalhe da sua presença confirme isso. Não com regras de moda. Com estratégia construída a partir de quem você realmente é.
+    </p>
+  </section>
+
+  <section id="metodo" class="bg-dark">
+    <div class="grid grid-cols-1 lg:grid-cols-2">
+      <div class="p-8 md:p-12 lg:p-20">
+        <div class="text-[10px] tracking-[0.2em] uppercase text-bege-claro mb-4">Método H.A.G</div>
+        <h2 class="font-serif text-3xl md:text-[38px] font-light text-cream leading-[1.15] mb-4">
+          Três pilares.<br><em class="italic text-tom-claro">Uma identidade.</em>
+        </h2>
+        <div class="w-12 h-[1px] bg-bege-claro my-6"></div>
+        <p class="text-sm font-light text-tom-super-claro leading-relaxed max-w-[520px]">
+          Desenvolvido para mulheres que já têm o repertório — e querem que a imagem confirme isso. Cada pilar trabalha em conjunto para construir uma presença que é genuinamente sua.
+        </p>
+      </div>
+
+      <div class="p-8 md:p-12 lg:p-20 flex flex-col gap-px bg-marrom-claro">
+        <div class="bg-dark p-8 flex gap-6 items-start">
+          <div class="font-serif text-4xl md:text-5xl text-bege-claro leading-none min-w-[40px]">H</div>
+          <div>
+            <div class="font-serif text-lg text-tom-super-claro mb-1.5">Harmonia Cromática</div>
+            <div class="text-xs text-marrom-claro leading-relaxed">As cores certas que fazem sua presença falar antes de você abrir a boca.</div>
+          </div>
+        </div>
+        <div class="bg-dark p-8 flex gap-6 items-start">
+          <div class="font-serif text-4xl md:text-5xl text-bege-claro leading-none min-w-[40px]">A</div>
+          <div>
+            <div class="font-serif text-lg text-tom-super-claro mb-1.5">Arquétipo</div>
+            <div class="text-xs text-marrom-claro leading-relaxed">Seu perfil comportamental traduzido em imagem. Porque estilo sem essência é fantasia.</div>
+          </div>
+        </div>
+        <div class="bg-dark p-8 flex gap-6 items-start">
+          <div class="font-serif text-4xl md:text-5xl text-bege-claro leading-none min-w-[40px]">G</div>
+          <div>
+            <div class="font-serif text-lg text-tom-super-claro mb-1.5">Geometria Corporal</div>
+            <div class="text-xs text-marrom-claro leading-relaxed">Seu corpo como ponto de partida — não como problema a resolver.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-cream py-20 px-8 md:px-12 lg:px-20">
+    <div class="text-[10px] tracking-[0.2em] uppercase text-bege-claro mb-4">O diferencial</div>
+    <h2 class="font-serif text-3xl md:text-[38px] font-light text-dark leading-[1.15] mb-4">
+      Uma metodologia que respeita<br><em class="italic">quem você já é.</em>
+    </h2>
+    <div class="w-12 h-[1px] bg-bege-claro my-6"></div>
+    <p class="text-sm font-light text-marrom-claro leading-relaxed max-w-[520px]">
+      O Método H.A.G não começa pelo guarda-roupa. Começa pela escuta. Cada estratégia é traçada a partir de quem você realmente é — seus valores, sua essência, sua história — para que o resultado seja fiel a você, não a uma versão genérica de estilo.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-tom-super-claro mt-12">
+      <div class="bg-cream p-8">
+        <div class="font-serif text-4xl text-tom-claro leading-none mb-3">01</div>
+        <div class="font-serif text-lg text-marrom-escuro mb-2">Escuta ativa e cocriação</div>
+        <div class="text-xs text-bege-escuro leading-relaxed">A estratégia é construída com você, não para você. A escuta profunda garante que cada decisão de imagem seja fiel à sua essência — não ao que está na moda ou ao que funciona para outra pessoa.</div>
+      </div>
+      <div class="bg-cream p-8">
+        <div class="font-serif text-4xl text-tom-claro leading-none mb-3">02</div>
+        <div class="font-serif text-lg text-marrom-escuro mb-2">Autonomia real ao final</div>
+        <div class="text-xs text-bege-escuro leading-relaxed">O objetivo do método é que você não precise de mim depois. Ao final da consultoria, você sabe se vestir com intenção, todos os dias, com a segurança de quem entende a própria imagem.</div>
+      </div>
+      <div class="bg-cream p-8">
+        <div class="font-serif text-4xl text-tom-claro leading-none mb-3">03</div>
+        <div class="font-serif text-lg text-marrom-escuro mb-2">Transformação rápida e efetiva</div>
+        <div class="text-xs text-bege-escuro leading-relaxed">Resultados concretos em semanas — não meses. O método é desenhado para que a transformação aconteça de forma intensa, estruturada e duradoura, no menor tempo possível.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="planos" class="bg-tom-super-claro py-20 px-8 md:px-12 lg:px-20">
+    <div class="text-[10px] tracking-[0.2em] uppercase text-bege-claro mb-4">Planos</div>
+    <h2 class="font-serif text-3xl md:text-[38px] font-light text-dark leading-[1.15]">
+      Dois caminhos.<br><em class="italic">Você escolhe onde começar.</em>
+    </h2>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-px bg-bege-claro mt-12">
+      <div class="bg-cream p-8 lg:p-10 flex flex-col h-full">
+        <div class="text-[10px] tracking-widest uppercase text-bege-claro mb-4">H.A.G Estratégico</div>
+        <div class="font-serif text-3xl text-dark mb-2">Estratégico</div>
+        <div class="text-xs text-bege-claro mb-6 tracking-wide">4 a 6 encontros</div>
+
+        <ul class="flex flex-col gap-3 mb-10 flex-grow">
+          <li class="text-[13px] text-marrom-escuro flex gap-2 items-start leading-relaxed">
+            <span class="text-bege-claro shrink-0">—</span> Análise de coloração pessoal
+          </li>
+          <li class="text-[13px] text-marrom-escuro flex gap-2 items-start leading-relaxed">
+            <span class="text-bege-claro shrink-0">—</span> Análise de estilo e arquétipo
+          </li>
+          <li class="text-[13px] text-marrom-escuro flex gap-2 items-start leading-relaxed">
+            <span class="text-bege-claro shrink-0">—</span> Análise de morfologia corporal
+          </li>
+          <li class="text-[13px] text-marrom-escuro flex gap-2 items-start leading-relaxed">
+            <span class="text-bege-claro shrink-0">—</span> Dossiê completo com referências visuais
+          </li>
+        </ul>
+        <a href="#contato" class="inline-block border border-bege-claro text-bege-escuro text-[11px] tracking-widest uppercase py-3 px-6 hover:bg-bege-claro hover:text-cream transition-colors text-center">Quero este plano</a>
+      </div>
+
+      <div class="bg-marrom-escuro p-8 lg:p-10 flex flex-col h-full">
+        <div class="text-[10px] tracking-widest uppercase text-tom-claro mb-4">H.A.G Experiência Completa</div>
+        <div class="font-serif text-3xl text-cream mb-2">Experiência Completa</div>
+        <div class="text-xs text-tom-claro mb-6 tracking-wide">6 a 11 encontros</div>
+
+        <ul class="flex flex-col gap-3 mb-10 flex-grow">
+          <li class="text-[13px] text-tom-super-claro flex gap-2 items-start leading-relaxed">
+            <span class="text-tom-claro shrink-0">—</span> Tudo do H.A.G Estratégico
+          </li>
+          <li class="text-[13px] text-tom-super-claro flex gap-2 items-start leading-relaxed">
+            <span class="text-tom-claro shrink-0">—</span> Revitalização do guarda-roupa da estação
+          </li>
+          <li class="text-[13px] text-tom-super-claro flex gap-2 items-start leading-relaxed">
+            <span class="text-tom-claro shrink-0">—</span> Personal shopper
+          </li>
+          <li class="text-[13px] text-tom-super-claro flex gap-2 items-start leading-relaxed">
+            <span class="text-tom-claro shrink-0">—</span> Montagem de looks catalogados
+          </li>
+          <li class="text-[13px] text-tom-super-claro flex gap-2 items-start leading-relaxed">
+            <span class="text-tom-claro shrink-0">—</span> Suporte VIP por 30 dias
+          </li>
+          <li class="text-[13px] text-tom-super-claro flex gap-2 items-start leading-relaxed">
+            <span class="text-tom-claro shrink-0">—</span> Sessão de revisão e alinhamento
+          </li>
+        </ul>
+        <a href="#contato" class="inline-block border border-bege-claro bg-bege-claro text-cream text-[11px] tracking-widest uppercase py-3 px-6 hover:bg-transparent hover:text-bege-claro transition-colors text-center">Quero este plano</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="empresas" class="bg-marrom-escuro">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center p-8 md:p-12 lg:p-20">
+      <div>
+        <div class="text-[10px] tracking-[0.2em] uppercase text-tom-claro mb-4">Para empresas</div>
+        <h2 class="font-serif text-3xl md:text-[38px] font-light text-cream leading-[1.15] mb-4">
+          Imagem que gera<br><em class="italic text-tom-claro">presença institucional.</em>
+        </h2>
+        <p class="text-sm font-light text-tom-super-claro leading-relaxed mb-8">
+          Equipes que se comunicam com consistência e intenção transmitem mais confiança — para clientes, parceiros e líderes. Levo o Método H.A.G para o ambiente corporativo através de workshops e palestras sob medida.
+        </p>
+        <a href="#contato" class="inline-block bg-bege-claro text-cream text-[11px] tracking-widest uppercase py-3.5 px-7 hover:bg-bege-escuro transition-colors text-center">Solicitar proposta</a>
+      </div>
+
+      <div class="flex flex-col gap-px bg-marrom-claro">
+        <div class="bg-marrom-escuro p-6 border-l-2 border-bege-claro">
+          <div class="font-serif text-lg text-tom-super-claro mb-1">Workshops de imagem corporativa</div>
+          <div class="text-xs text-bege-escuro leading-relaxed">Para equipes que precisam transmitir autoridade, coesão e identidade institucional em qualquer contexto.</div>
+        </div>
+        <div class="bg-marrom-escuro p-6 border-l-2 border-bege-claro">
+          <div class="font-serif text-lg text-tom-super-claro mb-1">Palestras para líderes e executivas</div>
+          <div class="text-xs text-bege-escuro leading-relaxed">Conteúdo sobre presença, imagem estratégica e comunicação não-verbal para ambientes de alta performance.</div>
+        </div>
+        <div class="bg-marrom-escuro p-6 border-l-2 border-bege-claro">
+          <div class="font-serif text-lg text-tom-super-claro mb-1">Programas personalizados</div>
+          <div class="text-xs text-bege-escuro leading-relaxed">Diagnóstico e formato adaptados à cultura e necessidades específicas da sua empresa.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-cream py-16 px-8 text-center">
+    <h2 class="font-serif text-3xl text-dark mb-2">Acompanhe</h2>
+    <p class="text-sm text-bege-claro mb-10">Conteúdo sobre imagem, presença e estratégia — toda semana</p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="#" class="flex items-center gap-2 py-3 px-5 border border-tom-super-claro bg-white text-xs tracking-wide uppercase text-marrom-escuro hover:bg-cream transition-colors">
+        @hagdamatos
+      </a>
+      <a href="#" class="
