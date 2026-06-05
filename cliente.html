@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Área da Cliente | Hagda Matos</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1C1310">
+  <link rel="icon" type="image/png" sizes="192x192" href="Fotos/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/portal.css">
+</head>
+<body>
+  <main class="portal-shell">
+    <header class="portal-topbar">
+      <div class="brand">Hagda Matos<small>Área da cliente</small></div>
+      <button class="button-quiet" type="button" data-logout>Sair</button>
+    </header>
+
+    <section class="grid">
+      <article class="panel panel-wide">
+        <h1 id="client-name">Sua consultoria</h1>
+        <p class="muted">Aqui ficam materiais, referências e orientações liberadas pela consultoria.</p>
+      </article>
+
+      <article class="panel">
+        <h2>Guia da estação</h2>
+        <p id="seasonal-guide">O PDF com tendências e recomendações sazonais aparecerá aqui quando estiver disponível.</p>
+        <a id="seasonal-link" class="button" href="#" target="_blank" rel="noopener" hidden>Abrir PDF</a>
+      </article>
+
+      <article class="panel">
+        <h2>Fotos e referências</h2>
+        <p>Área preparada para fotos de looks, provas, cartelas e referências visuais da cliente.</p>
+        <div id="photos-list" class="client-list"></div>
+      </article>
+
+      <article class="panel panel-wide">
+        <h2>Referências do Pinterest</h2>
+        <p>Cole links de pins ou pastas que representem coisas que você gosta. A Hagda poderá revisar essas escolhas na área da proprietária.</p>
+        <form id="pinterest-form">
+          <label>
+            Link do Pinterest
+            <input type="url" name="pinUrl" placeholder="https://br.pinterest.com/pin/..." required>
+          </label>
+          <label>
+            Observações
+            <textarea name="notes" placeholder="O que você gostou nessa referência?"></textarea>
+          </label>
+          <button type="submit">Salvar referência</button>
+          <p id="pin-status" class="status"></p>
+        </form>
+        <div id="pins-list" class="client-list"></div>
+      </article>
+    </section>
+  </main>
+  <script src="assets/js/cliente.js" defer></script>
+</body>
+</html>

@@ -25,3 +25,8 @@ Hagda Matos oferece consultoria de imagem em São José dos Campos, São Paulo. 
 ## Páginas
 
 - Página inicial: https://www.hagda.com.br/
+- Área reservada: https://www.hagda.com.br/login.html
+
+## Área reservada
+
+A área reservada é privada, marcada como `noindex` e destinada a clientes e à proprietária. Ela não deve ser usada como fonte pública de conteúdo indexável. O acesso exige autenticação, sessão por cookie seguro e senhas armazenadas por hash.

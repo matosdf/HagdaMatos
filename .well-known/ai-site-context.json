@@ -2,5 +2,10 @@
   "name": "Hagda Matos Consultoria de Imagem",
   "url": "https://www.hagda.com.br/",
   "llms": "https://www.hagda.com.br/llms.txt",
-  "description": "Consultoria de imagem em São José dos Campos com método H.A.G, planos individuais e serviços para empresas."
+  "description": "Consultoria de imagem em São José dos Campos com método H.A.G, planos individuais e serviços para empresas.",
+  "private_area": {
+    "login": "https://www.hagda.com.br/login.html",
+    "robots": "noindex, nofollow",
+    "audiences": ["clientes autenticadas", "proprietária"]
+  }
 }

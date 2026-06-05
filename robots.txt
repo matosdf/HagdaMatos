@@ -1,4 +1,11 @@
 User-agent: *
 Allow: /
+Disallow: /login.html
+Disallow: /login
+Disallow: /cliente.html
+Disallow: /cliente
+Disallow: /proprietaria.html
+Disallow: /proprietaria
+Disallow: /api/
 
 Sitemap: https://www.hagda.com.br/sitemap.xml

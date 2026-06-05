@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login | Hagda Matos</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1C1310">
+  <link rel="icon" type="image/png" sizes="192x192" href="Fotos/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/portal.css">
+</head>
+<body>
+  <main class="portal-shell">
+    <section class="portal-card">
+      <div class="brand">Hagda Matos<small>Área reservada</small></div>
+      <h1>Entrar</h1>
+      <p>Acesso exclusivo para clientes e proprietária. Use as credenciais cadastradas pela consultoria.</p>
+
+      <form id="login-form">
+        <label>
+          E-mail
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+        <label>
+          Senha
+          <input type="password" name="password" autocomplete="current-password" required>
+        </label>
+        <button type="submit">Acessar área</button>
+        <p id="login-status" class="status" role="status"></p>
+      </form>
+    </section>
+  </main>
+  <script src="assets/js/login.js" defer></script>
+</body>
+</html>
