@@ -37,7 +37,11 @@ module.exports = async function handler(req, res) {
       "Set-Cookie": cookie
     });
   } catch (error) {
+    console.error("Falha ao autenticar:", error);
     const status = error.code === "DB_NOT_CONFIGURED" || error.code === "SESSION_SECRET_INVALID" ? 503 : 500;
-    return sendJson(res, status, { error: error.message || "Erro ao autenticar." });
+    const message = status === 503
+      ? "Serviço temporariamente indisponível."
+      : "Erro ao autenticar. Tente novamente.";
+    return sendJson(res, status, { error: message });
   }
 };
