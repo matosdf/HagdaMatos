@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Login | Hagda Matos</title>
+  <title>Redefinir senha | Hagda Matos</title>
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#1C1310">
   <link rel="icon" type="image/png" sizes="192x192" href="Fotos/favicon.png">
@@ -16,24 +16,22 @@
   <main class="portal-shell">
     <section class="portal-card">
       <div class="brand">Hagda Matos<small>Área reservada</small></div>
-      <h1>Entrar</h1>
-      <p>Acesso exclusivo para clientes e proprietária. Use as credenciais cadastradas pela consultoria.</p>
-
-      <form id="login-form">
+      <h1>Redefinir senha</h1>
+      <p>Escolha uma nova senha com pelo menos 12 caracteres.</p>
+      <form id="password-form">
         <label>
-          E-mail
-          <input type="email" name="email" autocomplete="email" required>
+          Nova senha
+          <input type="password" name="password" autocomplete="new-password" minlength="12" required>
         </label>
         <label>
-          Senha
-          <input type="password" name="password" autocomplete="current-password" required>
+          Confirmar nova senha
+          <input type="password" name="confirmation" autocomplete="new-password" minlength="12" required>
         </label>
-        <button type="submit">Acessar área</button>
-        <p id="login-status" class="status" role="status"></p>
+        <button type="submit">Atualizar senha</button>
+        <p id="password-status" class="status" role="status"></p>
       </form>
-      <button id="reset-password" class="button-quiet" type="button">Esqueci minha senha</button>
     </section>
   </main>
-  <script src="assets/js/login.js" defer></script>
+  <script src="assets/js/redefinir-senha.js" defer></script>
 </body>
 </html>

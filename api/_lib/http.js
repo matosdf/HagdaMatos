@@ -31,4 +31,28 @@ function methodNotAllowed(res) {
   sendJson(res, 405, { error: "Método não permitido." });
 }
 
-module.exports = { sendJson, readJson, methodNotAllowed };
+function requireSameOrigin(req) {
+  const origin = req.headers.origin;
+  const host = req.headers["x-forwarded-host"] || req.headers.host;
+  if (!origin || !host) {
+    const error = new Error("Origem não autorizada.");
+    error.code = "INVALID_ORIGIN";
+    throw error;
+  }
+
+  let originUrl;
+  try {
+    originUrl = new URL(origin);
+  } catch (_error) {
+    const error = new Error("Origem não autorizada.");
+    error.code = "INVALID_ORIGIN";
+    throw error;
+  }
+  if (originUrl.host !== host || !["https:", "http:"].includes(originUrl.protocol)) {
+    const error = new Error("Origem não autorizada.");
+    error.code = "INVALID_ORIGIN";
+    throw error;
+  }
+}
+
+module.exports = { sendJson, readJson, methodNotAllowed, requireSameOrigin };

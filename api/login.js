@@ -1,11 +1,12 @@
 const { query } = require("./_lib/db");
-const { sendJson, readJson, methodNotAllowed } = require("./_lib/http");
-const { createSessionCookie, verifyPassword } = require("./_lib/security");
+const { sendJson, readJson, methodNotAllowed, requireSameOrigin } = require("./_lib/http");
+const { clearAuthCookies, createAuthCookies, signInWithPassword } = require("./_lib/supabase-auth");
 
 module.exports = async function handler(req, res) {
   if (req.method !== "POST") return methodNotAllowed(res);
 
   try {
+    requireSameOrigin(req);
     const { email, password } = await readJson(req);
     const normalizedEmail = String(email || "").trim().toLowerCase();
 
@@ -13,28 +14,26 @@ module.exports = async function handler(req, res) {
       return sendJson(res, 400, { error: "Informe e-mail e senha." });
     }
 
-    const result = await query(
-      "select id, email, password_hash, password_salt, role, client_id from app_users where lower(email) = $1 limit 1",
-      [normalizedEmail]
-    );
-    const user = result.rows[0];
-
-    if (!user || !(await verifyPassword(password, user.password_salt, user.password_hash))) {
+    const session = await signInWithPassword(normalizedEmail, password);
+    if (!session?.user) {
       return sendJson(res, 401, { error: "Credenciais inválidas." });
     }
 
-    await query("update app_users set last_login_at = now() where id = $1", [user.id]);
+    const result = await query(
+      "select role from profiles where auth_user_id = $1 limit 1",
+      [session.user.id]
+    );
+    const profile = result.rows[0];
+    if (!profile) {
+      return sendJson(res, 403, { error: "Acesso ainda não liberado." }, {
+        "Set-Cookie": clearAuthCookies()
+      });
+    }
 
-    const redirectTo = user.role === "owner" ? "/proprietaria.html" : "/cliente.html";
-    const cookie = createSessionCookie({
-      userId: user.id,
-      email: user.email,
-      role: user.role,
-      clientId: user.client_id
-    });
+    const redirectTo = profile.role === "owner" ? "/proprietaria.html" : "/cliente.html";
 
-    return sendJson(res, 200, { ok: true, role: user.role, redirectTo }, {
-      "Set-Cookie": cookie
+    return sendJson(res, 200, { ok: true, role: profile.role, redirectTo }, {
+      "Set-Cookie": createAuthCookies(session)
     });
   } catch (error) {
     console.error("Falha ao autenticar:", error);
@@ -44,9 +43,10 @@ module.exports = async function handler(req, res) {
       "DB_CA_INVALID",
       "DB_URL_INVALID",
       "DB_SSL_OPTIONS_CONFLICT",
-      "SESSION_SECRET_INVALID"
+      "AUTH_NOT_CONFIGURED",
+      "AUTH_URL_INVALID"
     ];
-    const status = configurationErrors.includes(error.code) ? 503 : 500;
+    const status = error.code === "INVALID_ORIGIN" ? 403 : configurationErrors.includes(error.code) ? 503 : 500;
     const message = status === 503
       ? "Serviço temporariamente indisponível."
       : "Erro ao autenticar. Tente novamente.";

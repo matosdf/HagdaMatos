@@ -13,15 +13,16 @@ create table if not exists clients (
   updated_at timestamptz not null default now()
 );
 
-create table if not exists app_users (
-  id uuid primary key default gen_random_uuid(),
-  email text not null unique,
-  password_hash text not null,
-  password_salt text not null,
+create table if not exists profiles (
+  auth_user_id uuid primary key references auth.users(id) on delete cascade,
   role text not null check (role in ('client', 'owner')),
   client_id uuid references clients(id) on delete cascade,
   created_at timestamptz not null default now(),
-  last_login_at timestamptz
+  updated_at timestamptz not null default now(),
+  check (
+    (role = 'owner' and client_id is null) or
+    (role = 'client' and client_id is not null)
+  )
 );
 
 create table if not exists client_photos (
@@ -51,8 +52,87 @@ create table if not exists birthday_notifications (
   unique (client_id, notification_type, notification_date)
 );
 
-create index if not exists idx_app_users_client_id on app_users(client_id);
+create index if not exists idx_profiles_client_id on profiles(client_id);
 create index if not exists idx_client_photos_client_id on client_photos(client_id);
 create index if not exists idx_pinterest_client_id on client_pinterest_selections(client_id);
 create index if not exists idx_clients_birth_date on clients(birth_date);
 create index if not exists idx_birthday_notifications_client_id on birthday_notifications(client_id);
+
+create or replace function public.current_profile_role()
+returns text
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select role from public.profiles where auth_user_id = auth.uid()
+$$;
+
+create or replace function public.current_profile_client_id()
+returns uuid
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select client_id from public.profiles where auth_user_id = auth.uid()
+$$;
+
+revoke all on function public.current_profile_role() from public;
+revoke all on function public.current_profile_client_id() from public;
+grant execute on function public.current_profile_role() to authenticated;
+grant execute on function public.current_profile_client_id() to authenticated;
+
+alter table profiles enable row level security;
+alter table clients enable row level security;
+alter table client_photos enable row level security;
+alter table client_pinterest_selections enable row level security;
+alter table birthday_notifications enable row level security;
+
+revoke all on profiles, clients, client_photos, client_pinterest_selections, birthday_notifications from anon;
+grant select, insert, update, delete on profiles, clients, client_photos, client_pinterest_selections, birthday_notifications to authenticated;
+
+create policy "profiles_select_own_or_owner" on profiles
+for select to authenticated
+using (auth_user_id = auth.uid() or public.current_profile_role() = 'owner');
+
+create policy "clients_select_own_or_owner" on clients
+for select to authenticated
+using (id = public.current_profile_client_id() or public.current_profile_role() = 'owner');
+
+create policy "photos_select_own_or_owner" on client_photos
+for select to authenticated
+using (client_id = public.current_profile_client_id() or public.current_profile_role() = 'owner');
+
+create policy "pins_select_own_or_owner" on client_pinterest_selections
+for select to authenticated
+using (client_id = public.current_profile_client_id() or public.current_profile_role() = 'owner');
+
+create policy "clients_insert_own_pins" on client_pinterest_selections
+for insert to authenticated
+with check (client_id = public.current_profile_client_id());
+
+create policy "owner_manage_profiles" on profiles
+for all to authenticated
+using (public.current_profile_role() = 'owner')
+with check (public.current_profile_role() = 'owner');
+
+create policy "owner_manage_clients" on clients
+for all to authenticated
+using (public.current_profile_role() = 'owner')
+with check (public.current_profile_role() = 'owner');
+
+create policy "owner_manage_photos" on client_photos
+for all to authenticated
+using (public.current_profile_role() = 'owner')
+with check (public.current_profile_role() = 'owner');
+
+create policy "owner_manage_pins" on client_pinterest_selections
+for all to authenticated
+using (public.current_profile_role() = 'owner')
+with check (public.current_profile_role() = 'owner');
+
+create policy "owner_manage_birthday_notifications" on birthday_notifications
+for all to authenticated
+using (public.current_profile_role() = 'owner')
+with check (public.current_profile_role() = 'owner');

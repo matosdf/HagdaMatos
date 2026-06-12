@@ -1,12 +1,12 @@
 const { query } = require("./_lib/db");
 const { sendJson, methodNotAllowed } = require("./_lib/http");
-const { requireRole } = require("./_lib/security");
+const { authHeaders, requireRole } = require("./_lib/security");
 
 module.exports = async function handler(req, res) {
   if (req.method !== "GET") return methodNotAllowed(res);
 
   try {
-    const session = requireRole(req, ["client"]);
+    const session = await requireRole(req, ["client"]);
     const clientResult = await query(
       `select id, full_name, contact_phone, email, completed_services, important_notes, seasonal_pdf_url
        from clients
@@ -44,10 +44,10 @@ module.exports = async function handler(req, res) {
       },
       photos: photos.rows,
       pinterestSelections: pins.rows
-    });
+    }, authHeaders(session));
   } catch (error) {
     return sendJson(res, error.code === "UNAUTHORIZED" ? 401 : 500, {
-      error: error.message || "Erro ao carregar área da cliente."
-    });
+      error: error.code === "UNAUTHORIZED" ? "Acesso não autorizado." : "Erro ao carregar área da cliente."
+    }, authHeaders(error));
   }
 };

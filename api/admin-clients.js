@@ -1,12 +1,12 @@
 const { query } = require("./_lib/db");
 const { sendJson, methodNotAllowed } = require("./_lib/http");
-const { requireRole } = require("./_lib/security");
+const { authHeaders, requireRole } = require("./_lib/security");
 
 module.exports = async function handler(req, res) {
   if (req.method !== "GET") return methodNotAllowed(res);
 
   try {
-    requireRole(req, ["owner"]);
+    const session = await requireRole(req, ["owner"]);
     const clientsResult = await query(
       `select id, full_name, birth_date, contact_phone, email, completed_services, important_notes, seasonal_pdf_url
        from clients
@@ -15,7 +15,7 @@ module.exports = async function handler(req, res) {
     const clientIds = clientsResult.rows.map(client => client.id);
 
     if (!clientIds.length) {
-      return sendJson(res, 200, { clients: [] });
+      return sendJson(res, 200, { clients: [] }, authHeaders(session));
     }
 
     const photosResult = await query(
@@ -41,11 +41,11 @@ module.exports = async function handler(req, res) {
       pinterestSelections: pinsByClient[client.id] || []
     }));
 
-    return sendJson(res, 200, { clients });
+    return sendJson(res, 200, { clients }, authHeaders(session));
   } catch (error) {
     return sendJson(res, error.code === "UNAUTHORIZED" ? 401 : 500, {
-      error: error.message || "Erro ao carregar clientes."
-    });
+      error: error.code === "UNAUTHORIZED" ? "Acesso não autorizado." : "Erro ao carregar clientes."
+    }, authHeaders(error));
   }
 };
 

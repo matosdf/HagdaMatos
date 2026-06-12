@@ -1,6 +1,7 @@
 const { query } = require("../_lib/db");
 const { sendJson } = require("../_lib/http");
 const { sendTelegramMessage } = require("../_lib/telegram");
+const crypto = require("crypto");
 
 const TIME_ZONE = "America/Sao_Paulo";
 
@@ -14,7 +15,11 @@ module.exports = async function handler(req, res) {
     req.headers.authorization?.replace(/^Bearer\s+/i, "") ||
     req.headers["x-vercel-cron-signature"];
 
-  if (expectedSecret && receivedSecret !== expectedSecret) {
+  if (!expectedSecret) {
+    return sendJson(res, 503, { error: "Cron não configurado." });
+  }
+
+  if (!sameSecret(receivedSecret, expectedSecret)) {
     return sendJson(res, 401, { error: "Cron não autorizado." });
   }
 
@@ -50,6 +55,14 @@ module.exports = async function handler(req, res) {
     return sendJson(res, status, { error: error.message || "Erro ao processar aniversários." });
   }
 };
+
+function sameSecret(received, expected) {
+  if (!received || !expected) return false;
+  const receivedBuffer = Buffer.from(received);
+  const expectedBuffer = Buffer.from(expected);
+  return receivedBuffer.length === expectedBuffer.length &&
+    crypto.timingSafeEqual(receivedBuffer, expectedBuffer);
+}
 
 function getDateInSaoPaulo() {
   const formatter = new Intl.DateTimeFormat("en-CA", {

@@ -1,12 +1,12 @@
 const { query } = require("./_lib/db");
 const { sendJson, methodNotAllowed } = require("./_lib/http");
-const { requireRole } = require("./_lib/security");
+const { authHeaders, requireRole } = require("./_lib/security");
 
 module.exports = async function handler(req, res) {
   if (req.method !== "GET") return methodNotAllowed(res);
 
   try {
-    const session = requireRole(req, ["client", "owner"]);
+    const session = await requireRole(req, ["client", "owner"]);
     let client = null;
 
     if (session.clientId) {
@@ -23,10 +23,10 @@ module.exports = async function handler(req, res) {
         role: session.role,
         client
       }
-    });
+    }, authHeaders(session));
   } catch (error) {
     return sendJson(res, error.code === "UNAUTHORIZED" ? 401 : 500, {
-      error: error.message || "Erro ao consultar sessão."
-    });
+      error: error.code === "UNAUTHORIZED" ? "Acesso não autorizado." : "Erro ao consultar sessão."
+    }, authHeaders(error));
   }
 };

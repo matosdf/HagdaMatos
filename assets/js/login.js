@@ -26,3 +26,28 @@ form.addEventListener("submit", async event => {
     statusEl.className = "status error";
   }
 });
+
+document.querySelector("#reset-password").addEventListener("click", async () => {
+  const email = form.elements.email.value.trim();
+  if (!email) {
+    statusEl.textContent = "Informe seu e-mail para recuperar a senha.";
+    statusEl.className = "status error";
+    return;
+  }
+
+  statusEl.textContent = "Solicitando recuperação...";
+  statusEl.className = "status";
+  try {
+    const response = await fetch("/api/request-password-reset", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email })
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "Não foi possível solicitar a recuperação.");
+    statusEl.textContent = data.message;
+  } catch (error) {
+    statusEl.textContent = error.message;
+    statusEl.className = "status error";
+  }
+});

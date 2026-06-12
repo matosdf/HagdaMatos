@@ -1,12 +1,13 @@
 const { query } = require("./_lib/db");
-const { sendJson, readJson, methodNotAllowed } = require("./_lib/http");
-const { requireRole } = require("./_lib/security");
+const { sendJson, readJson, methodNotAllowed, requireSameOrigin } = require("./_lib/http");
+const { authHeaders, requireRole } = require("./_lib/security");
 
 module.exports = async function handler(req, res) {
   if (req.method !== "POST") return methodNotAllowed(res);
 
   try {
-    const session = requireRole(req, ["client"]);
+    requireSameOrigin(req);
+    const session = await requireRole(req, ["client"]);
     const { pinUrl, title, notes } = await readJson(req);
     const url = String(pinUrl || "").trim();
 
@@ -21,10 +22,11 @@ module.exports = async function handler(req, res) {
       [session.clientId, url, title || null, notes || null]
     );
 
-    return sendJson(res, 201, { selection: result.rows[0] });
+    return sendJson(res, 201, { selection: result.rows[0] }, authHeaders(session));
   } catch (error) {
-    return sendJson(res, error.code === "UNAUTHORIZED" ? 401 : 500, {
-      error: error.message || "Erro ao salvar referência."
-    });
+    const status = error.code === "UNAUTHORIZED" ? 401 : error.code === "INVALID_ORIGIN" ? 403 : 500;
+    return sendJson(res, status, {
+      error: error.code === "UNAUTHORIZED" ? "Acesso não autorizado." : "Erro ao salvar referência."
+    }, authHeaders(error));
   }
 };

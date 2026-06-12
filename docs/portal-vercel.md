@@ -8,7 +8,8 @@ Configure na Vercel:
 
 - `DATABASE_URL` ou `POSTGRES_URL`: conexão PostgreSQL.
 - `SUPABASE_DB_CA_BASE64`: certificado raiz do banco Supabase codificado em Base64.
-- `SESSION_SECRET`: string aleatória com pelo menos 32 caracteres.
+- `SUPABASE_URL`: URL pública do projeto Supabase.
+- `SUPABASE_PUBLISHABLE_KEY`: chave publicável do Supabase. Projetos antigos podem usar `SUPABASE_ANON_KEY`.
 - `CRON_SECRET`: segredo para proteger rotas agendadas.
 - `TELEGRAM_BOT_TOKEN`: token do bot criado no BotFather.
 - `TELEGRAM_OWNER_CHAT_ID`: chat da proprietária que receberá os lembretes.
@@ -21,7 +22,7 @@ Exemplo para gerar um segredo local:
 
 Para configurar a validação TLS do banco:
 
-1. No painel Supabase, abra `Project Settings` → `Database` → `SSL Configuration`.
+1. No painel Supabase, abra `Database` → `Settings` → `SSL Configuration`.
 2. Ative `Enforce SSL on incoming connections` e baixe o certificado raiz.
 3. Converta o arquivo para Base64:
 
@@ -37,44 +38,36 @@ O backend recusa conexões externas quando esse certificado não está configura
 
 Execute o schema em `database/schema.sql` no PostgreSQL.
 
+Execute também `database/002_supabase_auth.sql` caso o schema inicial tenha sido aplicado
+antes da migração para Supabase Auth.
+
 Tabelas principais:
 
 - `clients`: nome da cliente, data de aniversário, telefone, e-mail, serviços realizados e observações importantes.
-- `app_users`: usuários de login com `role` `client` ou `owner`.
+- `profiles`: associa usuários do Supabase Auth aos papéis `client` ou `owner`.
 - `client_photos`: fotos e referências visuais associadas à cliente.
 - `client_pinterest_selections`: links do Pinterest salvos pela cliente para revisão da proprietária.
 - `birthday_notifications`: histórico de lembretes de aniversário enviados.
 
-## Senhas
+## Supabase Auth
 
-As senhas não devem ser salvas em texto puro. Gere hash e salt com:
+As senhas e sessões são gerenciadas pelo Supabase Auth. O backend mantém os tokens
+em cookies `HttpOnly` e consulta `profiles` para autorizar cada rota.
 
-```powershell
-npm run password:hash
-```
+Para criar a primeira proprietária:
 
-O terminal solicitará e confirmará uma senha com pelo menos 12 caracteres sem exibi-la
-ou registrá-la no histórico de comandos.
-
-O resultado gera:
-
-```json
-{
-  "salt": "...",
-  "hash": "..."
-}
-```
-
-Use esses valores ao inserir em `app_users`.
-
-Exemplo de proprietária:
+1. No Supabase, abra `Authentication` → `Users` e crie a usuária.
+2. Copie o UUID dessa usuária.
+3. No SQL Editor, execute:
 
 ```sql
-insert into app_users (email, password_hash, password_salt, role)
-values ('email-da-proprietaria@exemplo.com', 'HASH_GERADO', 'SALT_GERADO', 'owner');
+insert into public.profiles (auth_user_id, role)
+values ('UUID_DA_USUARIA', 'owner');
 ```
 
-Exemplo de cliente:
+Para criar uma cliente:
+
+1. Cadastre a cliente e obtenha seu UUID:
 
 ```sql
 insert into clients (full_name, birth_date, contact_phone, email, completed_services, important_notes)
@@ -87,10 +80,20 @@ values (
   'Observações importantes da consultoria.'
 )
 returning id;
-
-insert into app_users (email, password_hash, password_salt, role, client_id)
-values ('cliente@exemplo.com', 'HASH_GERADO', 'SALT_GERADO', 'client', 'ID_RETORNADO');
 ```
+
+2. Crie a usuária em `Authentication` → `Users`.
+3. Associe os UUIDs:
+
+```sql
+insert into public.profiles (auth_user_id, role, client_id)
+values ('UUID_DA_USUARIA', 'client', 'UUID_DA_CLIENTE');
+```
+
+Em `Authentication` → `URL Configuration`, configure:
+
+- Site URL: `https://hagda-matos.vercel.app`
+- Redirect URL: `https://hagda-matos.vercel.app/redefinir-senha.html`
 
 ## Lembretes de aniversário por Telegram
 
@@ -120,9 +123,10 @@ curl.exe -H "Authorization: Bearer SEU_CRON_SECRET" https://www.hagda.com.br/api
 
 ## Segurança
 
-- Sessão via cookie `HttpOnly`, `SameSite=Lax` e `Secure` em produção.
+- Sessão via cookies `HttpOnly`, `SameSite=Strict`, `Secure` e prefixo `__Host-` em produção.
+- Credenciais, recuperação de senha e rotação de tokens gerenciadas pelo Supabase Auth.
 - Conexão PostgreSQL com TLS e validação estrita do certificado raiz do Supabase.
-- Senha validada com hash `scrypt`, salt individual e comparação em tempo constante.
+- RLS habilitado nas tabelas privadas, com isolamento por cliente e papel.
 - Páginas internas têm `noindex, nofollow`.
 - APIs retornam dados apenas depois de validar a sessão e a função do usuário.
 
