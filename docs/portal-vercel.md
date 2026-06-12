@@ -21,14 +21,15 @@ Exemplo para gerar um segredo local:
 
 Para configurar a validação TLS do banco:
 
-1. No painel Supabase, abra `Connect` e baixe o certificado raiz em `SSL Certificate`.
-2. Converta o arquivo para Base64:
+1. No painel Supabase, abra `Project Settings` → `Database` → `SSL Configuration`.
+2. Ative `Enforce SSL on incoming connections` e baixe o certificado raiz.
+3. Converta o arquivo para Base64:
 
 ```powershell
 [Convert]::ToBase64String([IO.File]::ReadAllBytes("C:\caminho\prod-ca-2021.crt"))
 ```
 
-3. Salve o resultado na Vercel como `SUPABASE_DB_CA_BASE64`.
+4. Salve o resultado na Vercel como `SUPABASE_DB_CA_BASE64`.
 
 O backend recusa conexões externas quando esse certificado não está configurado ou é inválido.
 
