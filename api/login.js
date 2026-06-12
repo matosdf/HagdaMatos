@@ -42,6 +42,8 @@ module.exports = async function handler(req, res) {
       "DB_NOT_CONFIGURED",
       "DB_CA_NOT_CONFIGURED",
       "DB_CA_INVALID",
+      "DB_URL_INVALID",
+      "DB_SSL_OPTIONS_CONFLICT",
       "SESSION_SECRET_INVALID"
     ];
     const status = configurationErrors.includes(error.code) ? 503 : 500;

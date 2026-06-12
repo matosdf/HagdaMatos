@@ -2,6 +2,30 @@ const { Pool } = require("pg");
 
 let pool;
 
+function validateConnectionString(connectionString) {
+  let parsed;
+  try {
+    parsed = new URL(connectionString);
+  } catch (_error) {
+    const error = new Error("String de conexão do banco inválida.");
+    error.code = "DB_URL_INVALID";
+    throw error;
+  }
+
+  if (!["postgres:", "postgresql:"].includes(parsed.protocol)) {
+    const error = new Error("Protocolo da conexão do banco inválido.");
+    error.code = "DB_URL_INVALID";
+    throw error;
+  }
+
+  const conflictingSslOptions = ["sslmode", "sslcert", "sslkey", "sslrootcert"];
+  if (conflictingSslOptions.some(option => parsed.searchParams.has(option))) {
+    const error = new Error("A URL do banco contém opções SSL que substituem a validação segura.");
+    error.code = "DB_SSL_OPTIONS_CONFLICT";
+    throw error;
+  }
+}
+
 function getSslConfig(connectionString) {
   if (connectionString.includes("localhost") || connectionString.includes("127.0.0.1")) {
     return false;
@@ -15,7 +39,10 @@ function getSslConfig(connectionString) {
   }
 
   const ca = Buffer.from(encodedCa, "base64").toString("utf8");
-  if (!ca.includes("-----BEGIN CERTIFICATE-----")) {
+  if (
+    !ca.includes("-----BEGIN CERTIFICATE-----") ||
+    !ca.includes("-----END CERTIFICATE-----")
+  ) {
     const error = new Error("Certificado raiz do banco inválido.");
     error.code = "DB_CA_INVALID";
     throw error;
@@ -35,6 +62,8 @@ function getPool() {
     error.code = "DB_NOT_CONFIGURED";
     throw error;
   }
+
+  validateConnectionString(connectionString);
 
   if (!pool) {
     pool = new Pool({
