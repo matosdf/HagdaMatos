@@ -5,7 +5,8 @@
   "description": "Site Hagda Matos com portal privado preparado para Vercel e PostgreSQL.",
   "scripts": {
     "dev": "vercel dev",
-    "db:schema": "psql \"$DATABASE_URL\" -f database/schema.sql"
+    "db:schema": "psql \"$DATABASE_URL\" -f database/schema.sql",
+    "password:hash": "node scripts/create-password-hash.js"
   },
   "dependencies": {
     "pg": "^8.11.5"

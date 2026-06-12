@@ -50,9 +50,11 @@ Tabelas principais:
 As senhas não devem ser salvas em texto puro. Gere hash e salt com:
 
 ```powershell
-$env:SESSION_SECRET="uma-string-segura-com-mais-de-32-caracteres"
-node scripts/create-password-hash.js "senha-da-pessoa"
+npm run password:hash
 ```
+
+O terminal solicitará e confirmará uma senha com pelo menos 12 caracteres sem exibi-la
+ou registrá-la no histórico de comandos.
 
 O resultado gera:
 
