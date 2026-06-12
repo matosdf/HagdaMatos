@@ -38,7 +38,13 @@ module.exports = async function handler(req, res) {
     });
   } catch (error) {
     console.error("Falha ao autenticar:", error);
-    const status = error.code === "DB_NOT_CONFIGURED" || error.code === "SESSION_SECRET_INVALID" ? 503 : 500;
+    const configurationErrors = [
+      "DB_NOT_CONFIGURED",
+      "DB_CA_NOT_CONFIGURED",
+      "DB_CA_INVALID",
+      "SESSION_SECRET_INVALID"
+    ];
+    const status = configurationErrors.includes(error.code) ? 503 : 500;
     const message = status === 503
       ? "Serviço temporariamente indisponível."
       : "Erro ao autenticar. Tente novamente.";

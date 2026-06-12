@@ -2,6 +2,31 @@ const { Pool } = require("pg");
 
 let pool;
 
+function getSslConfig(connectionString) {
+  if (connectionString.includes("localhost") || connectionString.includes("127.0.0.1")) {
+    return false;
+  }
+
+  const encodedCa = process.env.SUPABASE_DB_CA_BASE64;
+  if (!encodedCa) {
+    const error = new Error("Certificado raiz do banco não configurado.");
+    error.code = "DB_CA_NOT_CONFIGURED";
+    throw error;
+  }
+
+  const ca = Buffer.from(encodedCa, "base64").toString("utf8");
+  if (!ca.includes("-----BEGIN CERTIFICATE-----")) {
+    const error = new Error("Certificado raiz do banco inválido.");
+    error.code = "DB_CA_INVALID";
+    throw error;
+  }
+
+  return {
+    ca,
+    rejectUnauthorized: true
+  };
+}
+
 function getPool() {
   const connectionString = process.env.POSTGRES_URL || process.env.DATABASE_URL;
 
@@ -14,7 +39,7 @@ function getPool() {
   if (!pool) {
     pool = new Pool({
       connectionString,
-      ssl: connectionString.includes("localhost") ? false : { rejectUnauthorized: false }
+      ssl: getSslConfig(connectionString)
     });
   }
 

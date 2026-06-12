@@ -7,6 +7,7 @@ Esta branch prepara o site para rodar na Vercel com páginas públicas estática
 Configure na Vercel:
 
 - `DATABASE_URL` ou `POSTGRES_URL`: conexão PostgreSQL.
+- `SUPABASE_DB_CA_BASE64`: certificado raiz do banco Supabase codificado em Base64.
 - `SESSION_SECRET`: string aleatória com pelo menos 32 caracteres.
 - `CRON_SECRET`: segredo para proteger rotas agendadas.
 - `TELEGRAM_BOT_TOKEN`: token do bot criado no BotFather.
@@ -17,6 +18,19 @@ Exemplo para gerar um segredo local:
 ```powershell
 [Convert]::ToBase64String((1..48 | ForEach-Object { Get-Random -Maximum 256 }))
 ```
+
+Para configurar a validação TLS do banco:
+
+1. No painel Supabase, abra `Connect` e baixe o certificado raiz em `SSL Certificate`.
+2. Converta o arquivo para Base64:
+
+```powershell
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("C:\caminho\prod-ca-2021.crt"))
+```
+
+3. Salve o resultado na Vercel como `SUPABASE_DB_CA_BASE64`.
+
+O backend recusa conexões externas quando esse certificado não está configurado ou é inválido.
 
 ## Banco de dados
 
@@ -104,6 +118,7 @@ curl.exe -H "Authorization: Bearer SEU_CRON_SECRET" https://www.hagda.com.br/api
 ## Segurança
 
 - Sessão via cookie `HttpOnly`, `SameSite=Lax` e `Secure` em produção.
+- Conexão PostgreSQL com TLS e validação estrita do certificado raiz do Supabase.
 - Senha validada com hash `scrypt`, salt individual e comparação em tempo constante.
 - Páginas internas têm `noindex, nofollow`.
 - APIs retornam dados apenas depois de validar a sessão e a função do usuário.
