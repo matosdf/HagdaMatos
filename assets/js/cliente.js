@@ -40,7 +40,7 @@ function createCard(title, text, link) {
   return card;
 }
 
-async function loadDashboard() {
+async function loadDashboard({ redirectOnUnauthorized = true } = {}) {
   try {
     const data = await requestJson("/api/client-dashboard");
     document.querySelector("#client-name").textContent = `Olá, ${data.client.full_name}`;
@@ -65,30 +65,36 @@ async function loadDashboard() {
       pin => createCard(pin.title || "Pinterest", pin.notes, pin.pin_url)
     );
   } catch (error) {
-    window.location.href = "/login.html";
+    if (redirectOnUnauthorized) window.location.href = "/login.html";
+    else throw error;
   }
 }
 
 document.querySelector("[data-logout]").addEventListener("click", logout);
 document.querySelector("#pinterest-form").addEventListener("submit", async event => {
   event.preventDefault();
+  const form = event.currentTarget;
+  const submitButton = form.querySelector('button[type="submit"]');
   const statusEl = document.querySelector("#pin-status");
   statusEl.textContent = "Salvando referência...";
   statusEl.className = "status";
+  submitButton.disabled = true;
 
   try {
-    const payload = Object.fromEntries(new FormData(event.currentTarget).entries());
+    const payload = Object.fromEntries(new FormData(form).entries());
     await requestJson("/api/pinterest-selection", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
     });
-    event.currentTarget.reset();
+    form.reset();
+    await loadDashboard({ redirectOnUnauthorized: false });
     statusEl.textContent = "Referência salva.";
-    await loadDashboard();
   } catch (error) {
     statusEl.textContent = error.message;
     statusEl.className = "status error";
+  } finally {
+    submitButton.disabled = false;
   }
 });
 
