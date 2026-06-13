@@ -4,6 +4,7 @@ create table if not exists public.profiles (
   auth_user_id uuid primary key references auth.users(id) on delete cascade,
   role text not null check (role in ('client', 'owner')),
   client_id uuid references public.clients(id) on delete cascade,
+  is_active boolean not null default true,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
   check (
@@ -13,6 +14,7 @@ create table if not exists public.profiles (
 );
 
 create index if not exists idx_profiles_client_id on public.profiles(client_id);
+create unique index if not exists idx_profiles_unique_client on public.profiles(client_id) where client_id is not null;
 
 create or replace function public.current_profile_role()
 returns text
@@ -21,7 +23,7 @@ stable
 security definer
 set search_path = public
 as $$
-  select role from public.profiles where auth_user_id = auth.uid()
+  select role from public.profiles where auth_user_id = auth.uid() and is_active = true
 $$;
 
 create or replace function public.current_profile_client_id()
@@ -31,7 +33,7 @@ stable
 security definer
 set search_path = public
 as $$
-  select client_id from public.profiles where auth_user_id = auth.uid()
+  select client_id from public.profiles where auth_user_id = auth.uid() and is_active = true
 $$;
 
 revoke all on function public.current_profile_role() from public;

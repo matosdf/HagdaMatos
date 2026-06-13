@@ -19,13 +19,65 @@
       <button class="button-quiet" type="button" data-logout>Sair</button>
     </header>
 
-    <section class="panel">
-      <h1>Clientes</h1>
-      <p>Visão inicial das clientes cadastradas, serviços realizados, observações importantes, fotos e referências salvas.</p>
-      <p id="owner-status" class="status"></p>
-      <div id="clients-list" class="client-list"></div>
+    <section class="grid owner-grid">
+      <article class="panel">
+        <h1>Clientes</h1>
+        <p>Cadastre e gerencie clientes antes de liberar o acesso ao portal.</p>
+        <button id="new-client" type="button">Cadastrar cliente</button>
+        <p id="owner-status" class="status" role="status"></p>
+      </article>
+
+      <article class="panel panel-wide">
+        <div id="clients-list" class="client-list"></div>
+      </article>
     </section>
   </main>
+
+  <dialog id="client-dialog">
+    <form id="client-form" method="dialog">
+      <header class="dialog-header">
+        <div>
+          <p class="eyebrow">Área da proprietária</p>
+          <h2 id="client-form-title">Cadastrar cliente</h2>
+        </div>
+        <button class="button-quiet button-small" type="button" data-close-dialog>Fechar</button>
+      </header>
+
+      <input type="hidden" name="clientId">
+      <div class="form-grid">
+        <label>
+          Nome completo
+          <input type="text" name="fullName" maxlength="120" required>
+        </label>
+        <label>
+          E-mail
+          <input type="email" name="email" maxlength="254" required>
+        </label>
+        <label>
+          Telefone
+          <input type="tel" name="contactPhone" maxlength="40">
+        </label>
+        <label>
+          Data de aniversário
+          <input type="date" name="birthDate">
+        </label>
+      </div>
+      <label>
+        Serviços realizados
+        <input type="text" name="completedServices" placeholder="Coloração pessoal, análise de estilo">
+        <span class="field-help">Separe os serviços por vírgulas.</span>
+      </label>
+      <label>
+        Observações importantes
+        <textarea name="importantNotes" maxlength="4000"></textarea>
+      </label>
+      <div class="dialog-actions">
+        <button type="submit">Salvar cliente</button>
+        <button class="button-quiet" type="button" data-close-dialog>Cancelar</button>
+      </div>
+      <p id="client-form-status" class="status" role="status"></p>
+    </form>
+  </dialog>
   <script src="assets/js/proprietaria.js" defer></script>
 </body>
 </html>

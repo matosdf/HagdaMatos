@@ -79,4 +79,19 @@ async function query(text, params = []) {
   return getPool().query(text, params);
 }
 
-module.exports = { query };
+async function transaction(callback) {
+  const client = await getPool().connect();
+  try {
+    await client.query("begin");
+    const result = await callback(client);
+    await client.query("commit");
+    return result;
+  } catch (error) {
+    await client.query("rollback");
+    throw error;
+  } finally {
+    client.release();
+  }
+}
+
+module.exports = { query, transaction };

@@ -10,6 +10,7 @@ Configure na Vercel:
 - `SUPABASE_DB_CA_BASE64`: certificado raiz do banco Supabase codificado em Base64.
 - `SUPABASE_URL`: URL pública do projeto Supabase.
 - `SUPABASE_PUBLISHABLE_KEY`: chave publicável do Supabase. Projetos antigos podem usar `SUPABASE_ANON_KEY`.
+- `SUPABASE_SECRET_KEY`: chave secreta usada somente no backend para enviar convites e desativar acessos.
 - `CRON_SECRET`: segredo para proteger rotas agendadas.
 - `TELEGRAM_BOT_TOKEN`: token do bot criado no BotFather.
 - `TELEGRAM_OWNER_CHAT_ID`: chat da proprietária que receberá os lembretes.
@@ -40,6 +41,9 @@ Execute o schema em `database/schema.sql` no PostgreSQL.
 
 Execute também `database/002_supabase_auth.sql` caso o schema inicial tenha sido aplicado
 antes da migração para Supabase Auth.
+
+Execute `database/003_client_management.sql` para habilitar cadastro, convite e
+desativação de clientes pela área da proprietária.
 
 Tabelas principais:
 
@@ -94,6 +98,21 @@ Em `Authentication` → `URL Configuration`, configure:
 
 - Site URL: `https://hagda-matos.vercel.app`
 - Redirect URL: `https://hagda-matos.vercel.app/redefinir-senha.html`
+
+## Gestão de clientes
+
+A área da proprietária permite:
+
+- cadastrar e editar clientes;
+- enviar um convite de acesso separado do cadastro;
+- desativar e reativar o acesso sem apagar os dados;
+- consultar serviços, observações, fotos e referências.
+
+Para habilitar convites e controle de acesso, crie `SUPABASE_SECRET_KEY` na Vercel
+usando a chave secreta encontrada em `Project Settings` → `API Keys`.
+
+Essa chave deve existir somente nas variáveis do backend da Vercel. Nunca a coloque
+em HTML, JavaScript do navegador, commits, mensagens ou capturas de tela.
 
 ## Lembretes de aniversário por Telegram
 

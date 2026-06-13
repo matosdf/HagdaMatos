@@ -25,6 +25,17 @@ function getAuthConfig() {
   return { url: url.origin, publishableKey };
 }
 
+function getAdminAuthConfig() {
+  const config = getAuthConfig();
+  const secretKey = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!secretKey) {
+    const error = new Error("Administração do Supabase Auth não configurada.");
+    error.code = "AUTH_ADMIN_NOT_CONFIGURED";
+    throw error;
+  }
+  return { ...config, secretKey };
+}
+
 function getCookieNames() {
   const prefix = process.env.NODE_ENV === "production" ? "__Host-" : "";
   return {
@@ -74,6 +85,19 @@ async function authRequest(path, options = {}) {
     ...options,
     headers: {
       apikey: publishableKey,
+      "Content-Type": "application/json",
+      ...options.headers
+    }
+  });
+}
+
+async function adminAuthRequest(path, options = {}) {
+  const { url, secretKey } = getAdminAuthConfig();
+  return fetch(`${url}/auth/v1${path}`, {
+    ...options,
+    headers: {
+      apikey: secretKey,
+      Authorization: `Bearer ${secretKey}`,
       "Content-Type": "application/json",
       ...options.headers
     }
@@ -166,13 +190,60 @@ async function updatePassword(accessToken, password) {
   return response.ok;
 }
 
+async function inviteUserByEmail(email, redirectTo) {
+  const response = await adminAuthRequest("/invite", {
+    method: "POST",
+    body: JSON.stringify({
+      email,
+      redirect_to: redirectTo
+    })
+  });
+  const payload = await response.json();
+  if (!response.ok) {
+    const error = new Error(payload.message || payload.msg || "Não foi possível enviar o convite.");
+    error.code = response.status === 422 ? "AUTH_USER_EXISTS" : "AUTH_INVITE_FAILED";
+    throw error;
+  }
+  const user = payload.user || payload;
+  if (!user?.id) {
+    const error = new Error("Resposta inválida ao enviar convite.");
+    error.code = "AUTH_INVITE_FAILED";
+    throw error;
+  }
+  return user;
+}
+
+async function setUserAccess(authUserId, active) {
+  const response = await adminAuthRequest(`/admin/users/${encodeURIComponent(authUserId)}`, {
+    method: "PUT",
+    body: JSON.stringify({ ban_duration: active ? "none" : "876000h" })
+  });
+  if (!response.ok) {
+    const payload = await response.json();
+    const error = new Error(payload.message || payload.msg || "Não foi possível alterar o acesso.");
+    error.code = "AUTH_ACCESS_UPDATE_FAILED";
+    throw error;
+  }
+  return response.json();
+}
+
+async function deleteAuthUser(authUserId) {
+  const response = await adminAuthRequest(`/admin/users/${encodeURIComponent(authUserId)}`, {
+    method: "DELETE"
+  });
+  return response.ok;
+}
+
 module.exports = {
   clearAuthCookies,
   createAuthCookies,
+  deleteAuthUser,
   getAuthenticatedUser,
+  inviteUserByEmail,
   requestPasswordReset,
   refreshAuthenticatedUser,
   signInWithPassword,
   signOut,
+  setUserAccess,
   updatePassword
 };

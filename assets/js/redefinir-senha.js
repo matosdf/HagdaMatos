@@ -4,7 +4,7 @@ const hash = new URLSearchParams(window.location.hash.slice(1));
 const accessToken = hash.get("access_token");
 window.history.replaceState(null, "", window.location.pathname);
 
-if (!accessToken || hash.get("type") !== "recovery") {
+if (!accessToken || !["recovery", "invite"].includes(hash.get("type"))) {
   statusEl.textContent = "Link inválido ou expirado. Solicite uma nova recuperação.";
   statusEl.className = "status error";
   form.querySelector("button").disabled = true;

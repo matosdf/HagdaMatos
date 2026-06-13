@@ -22,7 +22,7 @@ async function requireRole(req, roles) {
   }
 
   const result = await query(
-    `select auth_user_id, role, client_id
+    `select auth_user_id, role, client_id, is_active
      from profiles
      where auth_user_id = $1
      limit 1`,
@@ -30,7 +30,7 @@ async function requireRole(req, roles) {
   );
   const profile = result.rows[0];
 
-  if (!profile || !roles.includes(profile.role)) {
+  if (!profile || !profile.is_active || !roles.includes(profile.role)) {
     const error = new Error("Acesso não autorizado.");
     error.code = "UNAUTHORIZED";
     error.cookies = clearAuthCookies();
