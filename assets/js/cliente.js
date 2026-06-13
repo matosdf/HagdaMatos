@@ -40,6 +40,44 @@ function createCard(title, text, link) {
   return card;
 }
 
+function createPinterestCard(pin) {
+  const card = createCard(pin.title || "Referência do Pinterest", pin.notes || "Sem observação.", pin.pin_url);
+  card.classList.add("reference-card");
+
+  const removeButton = document.createElement("button");
+  removeButton.type = "button";
+  removeButton.className = "icon-button";
+  removeButton.setAttribute("aria-label", "Excluir referência");
+  removeButton.title = "Excluir referência";
+  removeButton.textContent = "×";
+  removeButton.addEventListener("click", () => deletePinterestSelection(pin, removeButton));
+  card.prepend(removeButton);
+  return card;
+}
+
+async function deletePinterestSelection(pin, button) {
+  const confirmed = window.confirm("Excluir esta referência do Pinterest?");
+  if (!confirmed) return;
+
+  const statusEl = document.querySelector("#pin-status");
+  button.disabled = true;
+  statusEl.textContent = "Excluindo referência...";
+  statusEl.className = "status";
+  try {
+    await requestJson("/api/pinterest-selection", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ selectionId: pin.id })
+    });
+    await loadDashboard({ redirectOnUnauthorized: false });
+    statusEl.textContent = "Referência excluída.";
+  } catch (error) {
+    statusEl.textContent = error.message;
+    statusEl.className = "status error";
+    button.disabled = false;
+  }
+}
+
 async function loadDashboard({ redirectOnUnauthorized = true } = {}) {
   try {
     const data = await requestJson("/api/client-dashboard");
@@ -62,7 +100,7 @@ async function loadDashboard({ redirectOnUnauthorized = true } = {}) {
       document.querySelector("#pins-list"),
       data.pinterestSelections,
       "Nenhuma referência salva ainda.",
-      pin => createCard(pin.title || "Pinterest", pin.notes, pin.pin_url)
+      createPinterestCard
     );
   } catch (error) {
     if (redirectOnUnauthorized) window.location.href = "/login.html";

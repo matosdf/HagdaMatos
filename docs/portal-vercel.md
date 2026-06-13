@@ -45,6 +45,9 @@ antes da migração para Supabase Auth.
 Execute `database/003_client_management.sql` para habilitar cadastro, convite e
 desativação de clientes pela área da proprietária.
 
+Execute `database/004_pinterest_self_delete.sql` para permitir que cada cliente
+exclua somente as próprias referências do Pinterest.
+
 Tabelas principais:
 
 - `clients`: nome da cliente, data de aniversário, telefone, e-mail, serviços realizados e observações importantes.
@@ -119,7 +122,8 @@ A área da proprietária permite:
 - cadastrar e editar clientes;
 - enviar um convite de acesso separado do cadastro;
 - desativar e reativar o acesso sem apagar os dados;
-- consultar serviços, observações, fotos e referências.
+- consultar serviços, observações, fotos e referências, incluindo as observações
+  enviadas pela cliente em cada link do Pinterest.
 
 Para habilitar convites e controle de acesso, crie `SUPABASE_SECRET_KEY` na Vercel
 usando a chave secreta encontrada em `Project Settings` → `API Keys`.

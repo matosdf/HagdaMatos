@@ -115,6 +115,10 @@ create policy "clients_insert_own_pins" on client_pinterest_selections
 for insert to authenticated
 with check (client_id = public.current_profile_client_id());
 
+create policy "clients_delete_own_pins" on client_pinterest_selections
+for delete to authenticated
+using (client_id = public.current_profile_client_id());
+
 create policy "owner_manage_profiles" on profiles
 for all to authenticated
 using (public.current_profile_role() = 'owner')

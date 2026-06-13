@@ -72,8 +72,8 @@ function renderClient(client) {
     tagList.appendChild(tag);
   });
 
-  card.querySelector("[data-pins]").appendChild(renderLinks("Referências do Pinterest", pins, "pin_url"));
-  card.querySelector("[data-photos]").appendChild(renderLinks("Fotos liberadas", photos, "image_url"));
+  card.querySelector("[data-pins]").appendChild(renderLinks("Referências do Pinterest", pins, "pin_url", true));
+  card.querySelector("[data-photos]").appendChild(renderLinks("Fotos liberadas", photos, "image_url", false));
   card.querySelector("[data-edit]").addEventListener("click", () => openClientForm(client));
 
   const accessButton = card.querySelector("[data-access-action]");
@@ -151,7 +151,7 @@ function formatBirthday(value) {
   return `${day}/${month}`;
 }
 
-function renderLinks(title, items, urlKey) {
+function renderLinks(title, items, urlKey, showNotes) {
   const wrapper = document.createElement("div");
   wrapper.className = "reference-list";
   const heading = document.createElement("h4");
@@ -167,12 +167,20 @@ function renderLinks(title, items, urlKey) {
   }
 
   items.forEach(item => {
+    const itemWrapper = document.createElement("article");
+    itemWrapper.className = "reference-item";
     const link = document.createElement("a");
     link.href = item[urlKey];
     link.target = "_blank";
     link.rel = "noopener";
     link.textContent = item.title || item[urlKey];
-    wrapper.appendChild(link);
+    itemWrapper.appendChild(link);
+    if (showNotes) {
+      const notes = document.createElement("p");
+      notes.textContent = item.notes || "Sem observação enviada pela cliente.";
+      itemWrapper.appendChild(notes);
+    }
+    wrapper.appendChild(itemWrapper);
   });
   return wrapper;
 }
