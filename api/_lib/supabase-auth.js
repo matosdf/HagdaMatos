@@ -174,9 +174,9 @@ function parseAccessToken(cookies, accessCookieName) {
 }
 
 async function requestPasswordReset(email, redirectTo) {
-  const response = await authRequest("/recover", {
+  const response = await authRequest(`/recover?redirect_to=${encodeURIComponent(redirectTo)}`, {
     method: "POST",
-    body: JSON.stringify({ email, redirect_to: redirectTo })
+    body: JSON.stringify({ email })
   });
   return response.ok;
 }
@@ -191,12 +191,9 @@ async function updatePassword(accessToken, password) {
 }
 
 async function inviteUserByEmail(email, redirectTo) {
-  const response = await adminAuthRequest("/invite", {
+  const response = await adminAuthRequest(`/invite?redirect_to=${encodeURIComponent(redirectTo)}`, {
     method: "POST",
-    body: JSON.stringify({
-      email,
-      redirect_to: redirectTo
-    })
+    body: JSON.stringify({ email })
   });
   const payload = await response.json();
   if (!response.ok) {

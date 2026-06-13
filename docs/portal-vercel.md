@@ -97,7 +97,20 @@ values ('UUID_DA_USUARIA', 'client', 'UUID_DA_CLIENTE');
 Em `Authentication` → `URL Configuration`, configure:
 
 - Site URL: `https://hagda-matos.vercel.app`
-- Redirect URL: `https://hagda-matos.vercel.app/redefinir-senha.html`
+- Redirect URL permitida: `https://hagda-matos.vercel.app/redefinir-senha.html`
+
+Se a URL de redefinição não estiver explicitamente permitida, o Supabase ignora o
+destino solicitado e redireciona convites para a `Site URL`.
+
+Para personalizar o convite, abra `Authentication` → `Email Templates` → `Invite user`.
+O botão ou link principal do modelo deve apontar para:
+
+```html
+<a href="{{ .ConfirmationURL }}">Aceitar convite</a>
+```
+
+Não substitua `ConfirmationURL` por `SiteURL`, pois isso leva a cliente para a página
+principal sem concluir o convite.
 
 ## Gestão de clientes
 
