@@ -38,21 +38,29 @@
       </article>
 
       <article class="panel panel-wide">
-        <h2>Referências do Pinterest</h2>
-        <p>Cole links de pins ou pastas que representem coisas que você gosta. A Hagda poderá revisar essas escolhas na área da proprietária.</p>
-        <form id="pinterest-form">
+        <h2>Referências de redes sociais</h2>
+        <p>Compartilhe perfis ou publicações do Instagram e LinkedIn que tenham elementos interessantes para você. A Hagda poderá revisar suas escolhas e comentários.</p>
+        <form id="social-reference-form">
           <label>
-            Link do Pinterest
-            <input type="url" name="pinUrl" placeholder="https://br.pinterest.com/pin/..." required>
+            Rede social
+            <select name="network" required>
+              <option value="">Escolha uma rede</option>
+              <option value="instagram">Instagram</option>
+              <option value="linkedin">LinkedIn</option>
+            </select>
+          </label>
+          <label>
+            Link da publicação ou perfil
+            <input type="url" name="socialUrl" placeholder="https://www.instagram.com/..." required>
           </label>
           <label>
             Observações
             <textarea name="notes" placeholder="O que você gostou nessa referência?"></textarea>
           </label>
           <button type="submit">Salvar referência</button>
-          <p id="pin-status" class="status"></p>
+          <p id="social-reference-status" class="status"></p>
         </form>
-        <div id="pins-list" class="client-list"></div>
+        <div id="social-references-list" class="client-list"></div>
       </article>
     </section>
   </main>

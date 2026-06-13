@@ -26,7 +26,7 @@ function renderClient(client) {
   card.className = `client-card${client.is_active ? "" : " client-card-inactive"}`;
   const services = client.completed_services || [];
   const photos = client.photos || [];
-  const pins = client.pinterestSelections || [];
+  const socialReferences = client.socialReferences || [];
   const accessLabel = !client.auth_user_id
     ? "Acesso não convidado"
     : client.access_active
@@ -52,7 +52,7 @@ function renderClient(client) {
     </div>
     <div class="tag-list"></div>
     <p data-notes></p>
-    <div data-pins></div>
+    <div data-social-references></div>
     <div data-photos></div>
     <p class="status" data-action-status role="status"></p>
   `;
@@ -62,7 +62,7 @@ function renderClient(client) {
   card.querySelector("[data-phone]").textContent = `Telefone: ${client.contact_phone || "não informado"}`;
   card.querySelector("[data-email]").textContent = `E-mail: ${client.email}`;
   card.querySelector("[data-birthday]").textContent = `Aniversário: ${formatBirthday(client.birth_date)}`;
-  card.querySelector("[data-counts]").textContent = `Fotos: ${photos.length} · Pinterest: ${pins.length}`;
+  card.querySelector("[data-counts]").textContent = `Fotos: ${photos.length} · Redes sociais: ${socialReferences.length}`;
   card.querySelector("[data-notes]").textContent = client.important_notes || "Sem observações importantes cadastradas.";
 
   const tagList = card.querySelector(".tag-list");
@@ -72,7 +72,7 @@ function renderClient(client) {
     tagList.appendChild(tag);
   });
 
-  card.querySelector("[data-pins]").appendChild(renderLinks("Referências do Pinterest", pins, "pin_url", true));
+  card.querySelector("[data-social-references]").appendChild(renderSocialReferences(socialReferences));
   card.querySelector("[data-photos]").appendChild(renderLinks("Fotos liberadas", photos, "image_url", false));
   card.querySelector("[data-edit]").addEventListener("click", () => openClientForm(client));
 
@@ -180,6 +180,39 @@ function renderLinks(title, items, urlKey, showNotes) {
       notes.textContent = item.notes || "Sem observação enviada pela cliente.";
       itemWrapper.appendChild(notes);
     }
+    wrapper.appendChild(itemWrapper);
+  });
+  return wrapper;
+}
+
+function renderSocialReferences(items) {
+  const wrapper = document.createElement("div");
+  wrapper.className = "reference-list";
+  const heading = document.createElement("h4");
+  heading.textContent = "Referências de redes sociais";
+  wrapper.appendChild(heading);
+
+  if (!items.length) {
+    const empty = document.createElement("p");
+    empty.className = "muted";
+    empty.textContent = "Nenhuma referência cadastrada.";
+    wrapper.appendChild(empty);
+    return wrapper;
+  }
+
+  items.forEach(item => {
+    const itemWrapper = document.createElement("article");
+    itemWrapper.className = "reference-item";
+    const link = document.createElement("a");
+    link.href = item.social_url;
+    link.target = "_blank";
+    link.rel = "noopener";
+    link.textContent = item.network === "linkedin" ? "LinkedIn" : item.network === "instagram" ? "Instagram" : "Referência anterior";
+    itemWrapper.appendChild(link);
+
+    const notes = document.createElement("p");
+    notes.textContent = item.notes || "Sem observação enviada pela cliente.";
+    itemWrapper.appendChild(notes);
     wrapper.appendChild(itemWrapper);
   });
   return wrapper;

@@ -34,20 +34,20 @@ async function listClients(req, res) {
        order by created_at desc`,
       [clientIds]
     );
-    const pinsResult = await query(
-      `select id, client_id, pin_url, title, notes, created_at
-       from client_pinterest_selections
+    const socialReferencesResult = await query(
+      `select id, client_id, network, social_url, notes, created_at
+       from client_social_references
        where client_id = any($1::uuid[])
        order by created_at desc`,
       [clientIds]
     );
 
     const photosByClient = groupByClient(photosResult.rows);
-    const pinsByClient = groupByClient(pinsResult.rows);
+    const socialReferencesByClient = groupByClient(socialReferencesResult.rows);
     const clients = clientsResult.rows.map(client => ({
       ...client,
       photos: photosByClient[client.id] || [],
-      pinterestSelections: pinsByClient[client.id] || []
+      socialReferences: socialReferencesByClient[client.id] || []
     }));
 
     return sendJson(res, 200, { clients }, authHeaders(session));

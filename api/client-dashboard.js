@@ -27,9 +27,9 @@ module.exports = async function handler(req, res) {
        limit 24`,
       [client.id]
     );
-    const pins = await query(
-      `select id, pin_url, title, notes, created_at
-       from client_pinterest_selections
+    const socialReferences = await query(
+      `select id, network, social_url, notes, created_at
+       from client_social_references
        where client_id = $1
        order by created_at desc
        limit 24`,
@@ -43,7 +43,7 @@ module.exports = async function handler(req, res) {
         pdfUrl: client.seasonal_pdf_url
       },
       photos: photos.rows,
-      pinterestSelections: pins.rows
+      socialReferences: socialReferences.rows
     }, authHeaders(session));
   } catch (error) {
     return sendJson(res, error.code === "UNAUTHORIZED" ? 401 : 500, {

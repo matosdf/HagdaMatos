@@ -45,15 +45,15 @@ antes da migração para Supabase Auth.
 Execute `database/003_client_management.sql` para habilitar cadastro, convite e
 desativação de clientes pela área da proprietária.
 
-Execute `database/004_pinterest_self_delete.sql` para permitir que cada cliente
-exclua somente as próprias referências do Pinterest.
+Execute `database/005_social_references.sql` para migrar as referências do Pinterest
+para referências de Instagram e LinkedIn, preservando links já cadastrados.
 
 Tabelas principais:
 
 - `clients`: nome da cliente, data de aniversário, telefone, e-mail, serviços realizados e observações importantes.
 - `profiles`: associa usuários do Supabase Auth aos papéis `client` ou `owner`.
 - `client_photos`: fotos e referências visuais associadas à cliente.
-- `client_pinterest_selections`: links do Pinterest salvos pela cliente para revisão da proprietária.
+- `client_social_references`: links de Instagram e LinkedIn comentados pela cliente.
 - `birthday_notifications`: histórico de lembretes de aniversário enviados.
 
 ## Supabase Auth
@@ -122,8 +122,8 @@ A área da proprietária permite:
 - cadastrar e editar clientes;
 - enviar um convite de acesso separado do cadastro;
 - desativar e reativar o acesso sem apagar os dados;
-- consultar serviços, observações, fotos e referências, incluindo as observações
-  enviadas pela cliente em cada link do Pinterest.
+- consultar serviços, observações, fotos e referências, incluindo os comentários
+  enviados pela cliente em cada link do Instagram ou LinkedIn.
 
 Para habilitar convites e controle de acesso, crie `SUPABASE_SECRET_KEY` na Vercel
 usando a chave secreta encontrada em `Project Settings` → `API Keys`.
@@ -170,4 +170,4 @@ curl.exe -H "Authorization: Bearer SEU_CRON_SECRET" https://www.hagda.com.br/api
 
 - Tela administrativa para cadastrar clientes sem SQL manual.
 - Upload autenticado de PDFs e fotos em Vercel Blob, S3 ou Supabase Storage.
-- Integração oficial com Pinterest OAuth se a feature for validada.
+- Upload privado de PDFs e fotos em Supabase Storage.

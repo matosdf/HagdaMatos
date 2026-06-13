@@ -36,13 +36,18 @@ create table if not exists client_photos (
   created_at timestamptz not null default now()
 );
 
-create table if not exists client_pinterest_selections (
+create table if not exists client_social_references (
   id uuid primary key default gen_random_uuid(),
   client_id uuid not null references clients(id) on delete cascade,
-  pin_url text not null,
-  title text,
+  network text not null check (network in ('instagram', 'linkedin', 'legacy')),
+  social_url text not null,
   notes text,
-  created_at timestamptz not null default now()
+  created_at timestamptz not null default now(),
+  check (
+    network = 'legacy'
+    or (network = 'instagram' and lower(social_url) ~ '^https://([a-z0-9-]+\.)?instagram\.com(/|$)')
+    or (network = 'linkedin' and lower(social_url) ~ '^https://([a-z0-9-]+\.)?linkedin\.com(/|$)')
+  )
 );
 
 create table if not exists birthday_notifications (
@@ -57,7 +62,7 @@ create table if not exists birthday_notifications (
 create index if not exists idx_profiles_client_id on profiles(client_id);
 create unique index if not exists idx_profiles_unique_client on profiles(client_id) where client_id is not null;
 create index if not exists idx_client_photos_client_id on client_photos(client_id);
-create index if not exists idx_pinterest_client_id on client_pinterest_selections(client_id);
+create index if not exists idx_social_references_client_id on client_social_references(client_id);
 create index if not exists idx_clients_birth_date on clients(birth_date);
 create index if not exists idx_birthday_notifications_client_id on birthday_notifications(client_id);
 
@@ -89,11 +94,11 @@ grant execute on function public.current_profile_client_id() to authenticated;
 alter table profiles enable row level security;
 alter table clients enable row level security;
 alter table client_photos enable row level security;
-alter table client_pinterest_selections enable row level security;
+alter table client_social_references enable row level security;
 alter table birthday_notifications enable row level security;
 
-revoke all on profiles, clients, client_photos, client_pinterest_selections, birthday_notifications from anon;
-grant select, insert, update, delete on profiles, clients, client_photos, client_pinterest_selections, birthday_notifications to authenticated;
+revoke all on profiles, clients, client_photos, client_social_references, birthday_notifications from anon;
+grant select, insert, update, delete on profiles, clients, client_photos, client_social_references, birthday_notifications to authenticated;
 
 create policy "profiles_select_own_or_owner" on profiles
 for select to authenticated
@@ -107,15 +112,18 @@ create policy "photos_select_own_or_owner" on client_photos
 for select to authenticated
 using (client_id = public.current_profile_client_id() or public.current_profile_role() = 'owner');
 
-create policy "pins_select_own_or_owner" on client_pinterest_selections
+create policy "social_references_select_own_or_owner" on client_social_references
 for select to authenticated
 using (client_id = public.current_profile_client_id() or public.current_profile_role() = 'owner');
 
-create policy "clients_insert_own_pins" on client_pinterest_selections
+create policy "clients_insert_own_social_references" on client_social_references
 for insert to authenticated
-with check (client_id = public.current_profile_client_id());
+with check (
+  client_id = public.current_profile_client_id()
+  and network in ('instagram', 'linkedin')
+);
 
-create policy "clients_delete_own_pins" on client_pinterest_selections
+create policy "clients_delete_own_social_references" on client_social_references
 for delete to authenticated
 using (client_id = public.current_profile_client_id());
 
@@ -134,7 +142,7 @@ for all to authenticated
 using (public.current_profile_role() = 'owner')
 with check (public.current_profile_role() = 'owner');
 
-create policy "owner_manage_pins" on client_pinterest_selections
+create policy "owner_manage_social_references" on client_social_references
 for all to authenticated
 using (public.current_profile_role() = 'owner')
 with check (public.current_profile_role() = 'owner');
