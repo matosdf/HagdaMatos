@@ -135,6 +135,27 @@
     <a href="https://wa.me/5512992006109" class="nav-cta" target="_blank" rel="noopener">Vamos conversar</a>
   </nav>
 
+  <aside class="event-banner" data-event-banner data-event-expires="2026-08-20T00:00:00-03:00" aria-labelledby="event-banner-title">
+    <div class="event-date" aria-label="19 de agosto de 2026">
+      <strong>19</strong>
+      <span>ago · 2026</span>
+    </div>
+    <div class="event-copy">
+      <p class="eyebrow">Encontro presencial · São José dos Campos</p>
+      <h2 id="event-banner-title">Café com Empresários</h2>
+      <p>Hagda Matos conduz esta experiência sobre liderança consciente, cultura organizacional e resultados sustentáveis.</p>
+      <div class="event-meta" aria-label="Informações do evento">
+        <span>Quarta-feira</span>
+        <span>9h às 11h</span>
+        <span>ACI São José dos Campos</span>
+      </div>
+    </div>
+    <a class="button event-button" href="https://www.sympla.com.br/evento/cafe-com-empresarios/3498921?share_id=copiarlink" target="_blank" rel="noopener" aria-label="Ver o evento Café com Empresários no Sympla">
+      Ver evento no Sympla
+      <span aria-hidden="true">↗</span>
+    </a>
+  </aside>
+
   <main id="conteudo">
     <section class="hero">
       <div class="hero-copy">
@@ -370,5 +391,16 @@
     <p>© 2026 Hagda Matos Consultoria de Imagem. São José dos Campos, SP.</p>
     <a href="llms.txt">Informações para IA</a>
   </footer>
+  <script>
+    (() => {
+      const banner = document.querySelector("[data-event-banner]");
+      if (!banner) return;
+
+      const expiration = Date.parse(banner.dataset.eventExpires);
+      if (Number.isFinite(expiration) && Date.now() >= expiration) {
+        banner.hidden = true;
+      }
+    })();
+  </script>
 </body>
 </html>
