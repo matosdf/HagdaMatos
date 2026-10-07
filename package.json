@@ -1,0 +1,20 @@
+{
+  "name": "hm-presenca-performance",
+  "version": "1.0.0",
+  "description": "Site institucional e Autodiagnóstico de Inteligência Operacional — HM Presença & Performance",
+  "main": "api/diagnostico.js",
+  "scripts": {
+    "start": "npx serve .",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.7"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "private": true
+}

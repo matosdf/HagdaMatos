@@ -9,9 +9,11 @@ A HM Presença & Performance atua na interseção entre pessoas, comunicação e
 - Página inicial: https://www.hagda.com.br/
 - Para empresas: https://www.hagda.com.br/empresas.html
 - Para pessoas: https://www.hagda.com.br/pessoas.html
+- Autodiagnóstico de Inteligência Operacional e Risco: https://www.hagda.com.br/diagnostico/
 
 ## Soluções para empresas
 
+- Inteligência Operacional e Gestão do Conhecimento: Mapeamento de conhecimento tácito, auditoria semântica e higienização de acervo, esteiras ágeis de captura de rotinas e Segundo Cérebro Corporativo seguro (RAG corporativo).
 - Cultura e identidade: fortalecimento da identidade interna e tradução de valores em comportamentos percebidos.
 - Liderança e presença: presença executiva, comunicação, posicionamento e imagem.
 - Desenvolvimento de pessoas: treinamentos e experiências sobre imagem, postura, comunicação e relacionamento.
