@@ -1,0 +1,17 @@
+:root {
+  --brown-950: #1c1310;
+  --brown-900: #2b1c16;
+  --brown-800: #4c2b09;
+  --brown-700: #6d3a14;
+  --caramel: #ab7843;
+  --sand: #dbc096;
+  --rose-sand: #d8bda7;
+  --cream: #f5f0ea;
+  --paper: #fffaf7;
+  --ink-muted: #704f40;
+  --line: rgba(76, 43, 9, 0.2);
+  --line-light: rgba(219, 192, 150, 0.3);
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --sans: "Jost", Arial, sans-serif;
+  --page-x: clamp(1.25rem, 6vw, 6rem);
+}

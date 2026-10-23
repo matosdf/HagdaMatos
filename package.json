@@ -2,19 +2,32 @@
   "name": "hm-presenca-performance",
   "version": "1.0.0",
   "description": "Site institucional e Autodiagnóstico de Inteligência Operacional — HM Presença & Performance",
-  "main": "api/diagnostico.js",
   "scripts": {
-    "start": "npx serve .",
-    "test": "node --test"
+    "dev": "node node_modules/next/dist/bin/next dev",
+    "build": "node node_modules/next/dist/bin/next build --webpack",
+    "start": "node node_modules/next/dist/bin/next start",
+    "typecheck": "node node_modules/typescript/bin/tsc --noEmit",
+    "test": "node --conditions=react-server --import tsx --test tests/*.test.ts"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.49.1"
+    "@supabase/ssr": "^0.8.0",
+    "@supabase/supabase-js": "^2.49.1",
+    "next": "^16.0.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "server-only": "^0.0.1",
+    "zod": "^4.0.0"
   },
   "devDependencies": {
-    "dotenv": "^16.4.7"
+    "@electric-sql/pglite": "^0.5.11",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.0.0"
   },
   "private": true
 }

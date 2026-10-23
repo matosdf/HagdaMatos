@@ -1,0 +1,306 @@
+{
+  "axes": {
+    "1": {
+      "id": 1,
+      "shortName": "Conhecimento Tácito",
+      "fullName": "Eixo 1: Conhecimento Tácito",
+      "solution": "Mapeamento de Conhecimento Tácito & Blindagem Operacional",
+      "bottleneckText": "O conhecimento crítico da empresa está retido na memória individual de colaboradores-chave. Desligamentos, férias ou entrada de novos talentos geram lentidão, perda de padrão e sobrecarga severa da liderança com dúvidas repetitivas.",
+      "questionIndices": [
+        0,
+        1,
+        2
+      ]
+    },
+    "2": {
+      "id": 2,
+      "shortName": "Acervo & Caos Documental",
+      "fullName": "Eixo 2: Acervo & Caos Documental",
+      "solution": "Auditoria Semântica com NLP & Higienização de Acervo",
+      "bottleneckText": "A equipe perde horas produtivas semanalmente navegando em pastas confusas, nuvens desordenadas e versões duplicadas. A falta de catalogação inteligente faz o time reinventar a roda com frequência.",
+      "questionIndices": [
+        3,
+        4,
+        5
+      ]
+    },
+    "3": {
+      "id": 3,
+      "shortName": "Captura de Rotinas",
+      "fullName": "Eixo 3: Captura de Rotinas",
+      "solution": "Esteira Ágil de Captura de Rotinas (Áudio WhatsApp → POPs vivos)",
+      "bottleneckText": "As decisões e regras práticas do negócio circulam em mensagens soltas e áudios voláteis que se perdem. Os manuais de processos ou inexistem ou são PDFs estáticos que ninguém abre no dia a dia.",
+      "questionIndices": [
+        6,
+        7
+      ]
+    },
+    "4": {
+      "id": 4,
+      "shortName": "Governança & IA",
+      "fullName": "Eixo 4: Governança & IA",
+      "solution": "Segundo Cérebro Corporativo Seguro (RAG Corporativo)",
+      "bottleneckText": "A empresa carece de um acervo corporativo integrado a inteligência artificial privada para buscas imediatas com citação de fontes, ou opera com ferramentas de IA públicas sem controle de segurança de dados e LGPD.",
+      "questionIndices": [
+        8,
+        9
+      ]
+    }
+  },
+  "levels": [
+    {
+      "min": 10,
+      "max": 18,
+      "level": 1,
+      "badgeClass": "level-1-badge",
+      "title": "Nível 1 — Operação em Risco Crítico",
+      "description": "Existe altíssima dependência de pessoas específicas e dispersão de informações. Qualquer desligamento ou imprevisto causa desestabilização direta na entrega, retrabalho diário e sobrecarga severa na liderança."
+    },
+    {
+      "min": 19,
+      "max": 27,
+      "level": 2,
+      "badgeClass": "level-2-badge",
+      "title": "Nível 2 — Operação Vulnerável a Pessoas",
+      "description": "A rotina opera, mas consome tempo excessivo com dúvidas repetitivas, lentidão no onboarding de novos colaboradores e fricção na busca de arquivos. A produtividade e a margem estão represadas pela falta de esteiras estruturadas de conhecimento."
+    },
+    {
+      "min": 28,
+      "max": 34,
+      "level": 3,
+      "badgeClass": "level-3-badge",
+      "title": "Nível 3 — Operação Digitalizada com Fricção",
+      "description": "A empresa já possui ferramentas digitais e acervo organizado em nuvem, mas ainda há ruídos na atualização contínua de processos e na autonomia dos times. O próximo passo é transformar a documentação em um sistema vivo e inteligente."
+    },
+    {
+      "min": 35,
+      "max": 40,
+      "level": 4,
+      "badgeClass": "level-4-badge",
+      "title": "Nível 4 — Operação Inteligente e Blindada",
+      "description": "Sua empresa possui processos maduros, boa governança de informações e busca eficiência de ponta. É o perfil ideal para implementar Segundo Cérebro Corporativo (IA/RAG Privado) e esteiras autônomas de alto impacto."
+    }
+  ],
+  "questions": [
+    {
+      "axisId": 1,
+      "question": "Se o seu colaborador mais experiente saísse hoje, o que aconteceria?",
+      "options": [
+        {
+          "points": 1,
+          "text": "Caos operacional e perda de clientes."
+        },
+        {
+          "points": 2,
+          "text": "Ficamos com dúvidas e lentidão por semanas."
+        },
+        {
+          "points": 3,
+          "text": "Boa parte está anotada, mas exige adaptação."
+        },
+        {
+          "points": 4,
+          "text": "Zero impacto: tudo está registrado e consultável."
+        }
+      ]
+    },
+    {
+      "axisId": 1,
+      "question": "Quanto tempo um novo colaborador demora para produzir com autonomia total?",
+      "options": [
+        {
+          "points": 1,
+          "text": "Mais de 6 meses adivinhando a rotina."
+        },
+        {
+          "points": 2,
+          "text": "Entre 3 e 6 meses com muita supervisão."
+        },
+        {
+          "points": 3,
+          "text": "Cerca de 1 a 2 meses."
+        },
+        {
+          "points": 4,
+          "text": "Menos de 30 dias com onboarding estruturado."
+        }
+      ]
+    },
+    {
+      "axisId": 1,
+      "question": "A liderança é acionada para tirar dúvidas operacionais repetitivas?",
+      "options": [
+        {
+          "points": 1,
+          "text": "Diariamente; os líderes viram gargalo da operação."
+        },
+        {
+          "points": 2,
+          "text": "Frequentemente na semana."
+        },
+        {
+          "points": 3,
+          "text": "Raramente, só em exceções reais."
+        },
+        {
+          "points": 4,
+          "text": "Quase nunca; o time consulta a base corporativa."
+        }
+      ]
+    },
+    {
+      "axisId": 2,
+      "question": "Como estão organizados os arquivos e contratos da empresa hoje?",
+      "options": [
+        {
+          "points": 1,
+          "text": "Drives pessoais, nomes confusos e pastas \"Diversos\"."
+        },
+        {
+          "points": 2,
+          "text": "Em nuvem corporativa, mas desorganizada e com versões duplicadas."
+        },
+        {
+          "points": 3,
+          "text": "Pastas categorizadas manualmente por departamento."
+        },
+        {
+          "points": 4,
+          "text": "Base centralizada, catalogada e higienizada."
+        }
+      ]
+    },
+    {
+      "axisId": 2,
+      "question": "Quanto tempo a equipe gasta procurando documentos ou propostas antigas?",
+      "options": [
+        {
+          "points": 1,
+          "text": "Horas por dia, muitas vezes sem achar o que procura."
+        },
+        {
+          "points": 2,
+          "text": "Entre 1 e 2 horas diárias no labirinto de arquivos."
+        },
+        {
+          "points": 3,
+          "text": "Menos de 30 minutos."
+        },
+        {
+          "points": 4,
+          "text": "Encontra qualquer informação em segundos por busca inteligente."
+        }
+      ]
+    },
+    {
+      "axisId": 2,
+      "question": "Com que frequência sua equipe refaz trabalhos do zero por não achar arquivos anteriores?",
+      "options": [
+        {
+          "points": 1,
+          "text": "Quase toda semana reinventamos a roda."
+        },
+        {
+          "points": 2,
+          "text": "Regularmente em propostas e apresentações."
+        },
+        {
+          "points": 3,
+          "text": "Raramente acontece."
+        },
+        {
+          "points": 4,
+          "text": "Nunca; usamos acervos mestres auditados."
+        }
+      ]
+    },
+    {
+      "axisId": 3,
+      "question": "Onde as decisões e regras operacionais do dia a dia circulam na prática?",
+      "options": [
+        {
+          "points": 1,
+          "text": "Em conversas e áudios no WhatsApp que somem dias depois."
+        },
+        {
+          "points": 2,
+          "text": "Em reuniões sem ata que ninguém documenta."
+        },
+        {
+          "points": 3,
+          "text": "Em e-mails e anotações dispersas."
+        },
+        {
+          "points": 4,
+          "text": "Em esteiras automatizadas que convertem rotinas em procedimentos."
+        }
+      ]
+    },
+    {
+      "axisId": 3,
+      "question": "Os manuais de processos (POPs) da sua empresa refletem a realidade atual?",
+      "options": [
+        {
+          "points": 1,
+          "text": "Não temos nenhum manual oficial."
+        },
+        {
+          "points": 2,
+          "text": "Temos PDFs antigos de 80 páginas que ninguém abre."
+        },
+        {
+          "points": 3,
+          "text": "Estão razoavelmente atualizados, mas dão trabalho para manter."
+        },
+        {
+          "points": 4,
+          "text": "São vivos, enxutos e integrados à rotina de trabalho."
+        }
+      ]
+    },
+    {
+      "axisId": 4,
+      "question": "Como a equipe utiliza inteligência artificial (ChatGPT, etc.) hoje?",
+      "options": [
+        {
+          "points": 1,
+          "text": "Uso livre e sem controle, com risco de dados e LGPD."
+        },
+        {
+          "points": 2,
+          "text": "Proibido ou não incentivado formalmente."
+        },
+        {
+          "points": 3,
+          "text": "Liberado com orientações gerais de uso."
+        },
+        {
+          "points": 4,
+          "text": "Usamos ambiente corporativo privado com regras de conformidade."
+        }
+      ]
+    },
+    {
+      "axisId": 4,
+      "question": "A sua empresa possui um \"Segundo Cérebro\" centralizado para consultas da equipe?",
+      "options": [
+        {
+          "points": 1,
+          "text": "Não; cada um responde com base no que lembra."
+        },
+        {
+          "points": 2,
+          "text": "Temos manuais, mas a busca é lenta e manual."
+        },
+        {
+          "points": 3,
+          "text": "Testando ferramentas de IA, mas sem dados proprietários."
+        },
+        {
+          "points": 4,
+          "text": "Sim; IA privada (RAG) que cita fontes oficiais em segundos."
+        }
+      ]
+    }
+  ]
+}

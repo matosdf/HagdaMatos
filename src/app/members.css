@@ -1,0 +1,17 @@
+.member-main{max-width:1120px;margin:auto;padding:clamp(2rem,6vw,5rem) clamp(1.25rem,5vw,4rem);min-height:65vh}
+.member-main h1{font-size:clamp(2.8rem,6vw,4.7rem);line-height:1.05;margin-bottom:1.3rem}
+.member-main h2{font-size:2.1rem;line-height:1.2}.member-main p{color:var(--ink-muted)}
+.member-intro{max-width:48rem;margin-bottom:2.5rem}.member-kicker{color:var(--caramel);text-transform:uppercase;letter-spacing:.17em;font-size:.75rem}
+.member-card{background:var(--paper);border:1px solid var(--line);padding:clamp(1.5rem,4vw,2.5rem);margin:1.5rem 0}
+.member-card.narrow{max-width:36rem}.member-form{display:grid;gap:1.1rem}.member-form label{display:grid;gap:.4rem;font-size:.9rem}
+.member-form input,.member-form select,.member-form textarea{font:inherit;color:var(--brown-950);background:var(--cream);border:1px solid var(--line);padding:.8rem;width:100%;border-radius:0}
+.member-form input[type=checkbox]{width:auto}.member-form .check{display:flex;align-items:start;gap:.6rem}.member-form button{cursor:pointer}
+.member-form input:focus-visible,.member-form select:focus-visible,.member-form textarea:focus-visible{outline:2px solid var(--caramel);outline-offset:2px}
+.member-actions{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin-top:1.4rem}.member-actions a:not(.button){text-decoration:underline;text-underline-offset:4px}
+.member-message{border-left:3px solid var(--caramel);padding:.8rem 1rem;background:var(--cream);color:var(--brown-800)}
+.member-price{font-family:var(--serif);font-size:3rem;color:var(--brown-800)}.member-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:1.5rem}
+.member-grid .member-card{margin:0}.member-card video{width:100%;background:var(--brown-950);margin-top:1rem}
+.member-status{display:inline-block;border:1px solid var(--line);padding:.2rem .7rem;font-size:.8rem;margin-bottom:1rem}
+.member-footer{padding:2rem var(--page-x);border-top:1px solid var(--line);font-size:.85rem;color:var(--ink-muted)}
+.member-table{width:100%;border-collapse:collapse;font-size:.9rem}.member-table th,.member-table td{text-align:left;padding:.8rem;border-bottom:1px solid var(--line)}
+.member-table-wrap{overflow:auto}.member-muted{font-size:.85rem}button:disabled{opacity:.55;cursor:wait}.member-back{display:inline-block;margin-bottom:1.5rem;text-decoration:underline}

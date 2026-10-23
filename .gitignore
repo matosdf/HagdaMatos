@@ -1,2 +1,15 @@
 Fotos/*.mov
 Fotos/*.mp4
+public/Fotos/*.mov
+public/Fotos/*.mp4
+node_modules/
+.next/
+out/
+.env*
+!.env.example
+*.tsbuildinfo
+.vercel/
+.idea/
+tmp/
+coverage/
+storage-local/

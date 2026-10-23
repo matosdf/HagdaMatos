@@ -1,0 +1,2 @@
+'use client';
+export default function ErrorPage({reset}:{reset:()=>void}){return <div className="member-card"><h1>Não foi possível abrir este espaço.</h1><p>Tente novamente. Se o problema continuar, entre em contato com a HM.</p><div className="member-actions"><button className="button button-dark" onClick={reset}>Tentar novamente</button><a href="https://wa.me/5512992006109">Falar com a HM</a><a href="/login">Entrar na conta</a></div></div>;}
