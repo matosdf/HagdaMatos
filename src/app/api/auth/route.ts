@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { serverClient } from '@/lib/supabase/server';
 import { failure,HttpError,json,readJson,requireOrigin } from '@/lib/http';
+import { signupFailure } from '@/lib/signup-errors';
 const schema=z.discriminatedUnion('mode',[
   z.object({mode:z.literal('login'),email:z.email().max(200),password:z.string().min(1).max(128)}),
   z.object({mode:z.literal('cadastro'),email:z.email().max(200),password:z.string().min(12).max(128),name:z.string().trim().min(3).max(150)}),
@@ -19,7 +20,11 @@ export async function POST(request:Request) {
       if(process.env.REGISTRATION_ENABLED!=='true')throw new HttpError(503,'Cadastros ainda não disponíveis.');
       const {error}=await supabase.auth.signUp({email:input.email,password:input.password,
         options:{data:{full_name:input.name},emailRedirectTo:`${process.env.NEXT_PUBLIC_APP_URL}/auth/confirm`}});
-      if(error)throw new HttpError(400,'Não foi possível cadastrar. Tente novamente ou entre em contato com a HM.');
+      if(error){
+        const safe=signupFailure(error);
+        console.warn('[Auth signup]',safe.diagnostic);
+        throw new HttpError(safe.status,safe.message);
+      }
       return json({message:'Confira seu e-mail para confirmar a conta. Se já possui cadastro, entre ou recupere sua senha.'});
     }
     if(input.mode==='recuperar'){

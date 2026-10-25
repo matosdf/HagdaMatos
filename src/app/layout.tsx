@@ -10,6 +10,6 @@ export default function RootLayout({children}:{children:React.ReactNode}) {
     <header className="landing-header"><a className="logo-lockup" href="/"><img src="/Fotos/Logo-transparente.png" width="88" height="61" alt="HM" /><span>presença <i>e</i> performance</span></a>
       <nav aria-label="Navegação principal"><a href="/">Início</a><a href="/membros">Biblioteca</a><a href="/conta">Minha conta</a><a href="/planos">Assinatura</a></nav></header>
     <main id="conteudo" className="member-main">{children}</main>
-    <footer className="member-footer">HM Presença &amp; Performance · Um espaço para sua presença evoluir.<br /><a href="https://wa.me/5512992006109">Falar com a HM</a></footer>
+    <footer className="member-footer">HM Presença &amp; Performance · Um espaço para sua presença evoluir.<br /><a href="https://wa.me/5512992006109">Falar com a HM</a> · <a href="/termos">Termos</a> · <a href="/privacidade">Privacidade</a></footer>
   </body></html>;
 }

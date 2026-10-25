@@ -41,6 +41,12 @@ Os scripts usam Node diretamente para funcionar em caminhos Windows que contêm 
 
 `/` serve a página institucional existente; `/diagnostico` serve a campanha sem mudar o endereço público. Os arquivos antigos de campanhas redirecionam para as novas pastas. CSS e JavaScript do guia foram extraídos; os tokens visuais foram separados. O diagnóstico compartilha as perguntas entre navegador e backend e recalcula os resultados no servidor.
 
+## Regras aprovadas em 24/10/2026
+
+R$ 129,00 por 30 dias, até seis períodos/180 dias. Pagamentos antecipados somam ao saldo; cancelamento preserva acesso pago. Retenção prevista por 90 dias após fim do acesso pago ou cancelamento posterior.
+
+Consulte o [passo a passo Supabase](docs/supabase-passo-a-passo.md), [backlog](docs/backlog.md), [termos](docs/minutas/termos-da-assinatura.md) e [privacidade](docs/minutas/politica-de-privacidade.md). Asaas permanece bloqueado até a próxima iteração; exclusão de dados está apenas em prévia.
+
 ## Área exclusiva
 
 - `/login`, `/cadastro`, `/recuperar-senha`: autenticação e confirmação por e-mail.
@@ -52,7 +58,7 @@ Os scripts usam Node diretamente para funcionar em caminhos Windows que contêm 
 
 Não há acesso pago fictício nem chave secreta no navegador. Cadastro, cobrança e uso do Asaas de produção estão desativados no exemplo. Vídeos pagos não devem ser colocados em `public/`.
 
-Consulte [configuração e pendências](docs/assinaturas-asaas.md) antes de habilitar serviços. O [contexto original](arquitetura_e_contexto_do_sistema_de_assinaturas.md) registra suas decisões; o guia operacional registra os ajustes da implementação.
+Consulte [configuração e pendências](docs/assinaturas-asaas.md) antes de habilitar serviços. As [decisões vigentes](docs/decisoes-2026-10-24.md) registram as regras comerciais e prevalecem sobre os exemplos do planejamento anterior.
 
 ## Histórico
 

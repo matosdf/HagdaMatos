@@ -1,0 +1,93 @@
+[
+  {
+    "id": "01",
+    "priority": "P0",
+    "title": "[P0][01] Preparar Supabase de testes e separar as credenciais",
+    "file": "docs/backlog/01.md",
+    "dependencies": []
+  },
+  {
+    "id": "02",
+    "priority": "P0",
+    "title": "[P0][02] Aplicar schema de testes e cadastrar a proprietária com RLS",
+    "file": "docs/backlog/02.md",
+    "dependencies": [
+      "01"
+    ]
+  },
+  {
+    "id": "03",
+    "priority": "P0",
+    "title": "[P0][03] Homologar cadastro, confirmação e recuperação de conta",
+    "file": "docs/backlog/03.md",
+    "dependencies": [
+      "02"
+    ]
+  },
+  {
+    "id": "04",
+    "priority": "P0",
+    "title": "[P0][04] Revisar e aprovar termos e política de privacidade",
+    "file": "docs/backlog/04.md",
+    "dependencies": []
+  },
+  {
+    "id": "05",
+    "priority": "P1",
+    "title": "[P1][05] Organizar e homologar a biblioteca comum de vídeos",
+    "file": "docs/backlog/05.md",
+    "dependencies": [
+      "02"
+    ]
+  },
+  {
+    "id": "06",
+    "priority": "P0",
+    "title": "[P0][06] Integrar Asaas Sandbox às novas regras de 30 dias",
+    "file": "docs/backlog/06.md",
+    "dependencies": [
+      "03",
+      "04"
+    ]
+  },
+  {
+    "id": "07",
+    "priority": "P0",
+    "title": "[P0][07] Homologar antecipação, limite financeiro e reconciliação",
+    "file": "docs/backlog/07.md",
+    "dependencies": [
+      "06"
+    ]
+  },
+  {
+    "id": "08",
+    "priority": "P0",
+    "title": "[P0][08] Ativar retenção e exclusão após 90 dias com salvaguardas",
+    "file": "docs/backlog/08.md",
+    "dependencies": [
+      "02",
+      "04",
+      "07"
+    ]
+  },
+  {
+    "id": "09",
+    "priority": "P1",
+    "title": "[P1][09] Projetar comunicação própria, independente do Asaas",
+    "file": "docs/backlog/09.md",
+    "dependencies": []
+  },
+  {
+    "id": "10",
+    "priority": "P0",
+    "title": "[P0][10] Validar ponta a ponta e preparar lançamento controlado",
+    "file": "docs/backlog/10.md",
+    "dependencies": [
+      "03",
+      "04",
+      "05",
+      "07",
+      "08"
+    ]
+  }
+]

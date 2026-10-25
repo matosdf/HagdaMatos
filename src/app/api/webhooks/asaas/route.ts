@@ -10,6 +10,7 @@ const payloadSchema = z.object({ id:z.string().min(1).max(200), event:z.string()
 });
 export async function POST(request:Request) {
   try {
+    if(process.env.ASAAS_INTEGRATION_READY!=='true')throw new HttpError(503,'Integração Asaas aguardando homologação das regras de 30 dias.');
     if (!process.env.ASAAS_WEBHOOK_SECRET) throw new HttpError(503,'Webhook ainda não configurado.');
     if (!secretMatches(request.headers.get('asaas-access-token'),process.env.ASAAS_WEBHOOK_SECRET))
       throw new HttpError(401,'Webhook não autorizado.');

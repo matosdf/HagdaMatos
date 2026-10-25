@@ -6,7 +6,7 @@ export async function POST(request:Request) {
   try {
     requireOrigin(request);
     const {user}=await requireUser();
-    if (process.env.BILLING_ENABLED!=='true') throw new HttpError(503,'Cobranças ainda não configuradas.');
+    if (process.env.BILLING_ENABLED!=='true'||process.env.ASAAS_INTEGRATION_READY!=='true') throw new HttpError(503,'Cobranças ainda não configuradas.');
     const admin=adminClient();
     const {data:subscription,error}=await admin.from('subscriptions').select('id,provider_subscription_id')
       .eq('user_id',user.id).eq('provider_canceled',false).maybeSingle();
@@ -16,6 +16,6 @@ export async function POST(request:Request) {
     const {error:updateError}=await admin.from('subscriptions')
       .update({cancellation_requested_at:new Date().toISOString()}).eq('id',subscription.id);
     if(updateError) throw updateError;
-    return json({message:'Cancelamento solicitado. A confirmação será recebida pelo provedor.'});
+    return json({message:'Cancelamento solicitado. Os períodos já pagos permanecem disponíveis até o fim da vigência. A recorrência será interrompida após a confirmação do provedor.'});
   } catch(error) {return failure(error);}
 }
