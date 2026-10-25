@@ -59,6 +59,12 @@ A variável antiga `SUBSCRIPTION_MONTHLY_PRICE` é apenas referência no exemplo
 
 ## Recuperar contratação interrompida
 
+### Cancelamento direto
+
+O menu e o rodapé da área exclusiva têm atalho para `/conta#cancelar-assinatura`. A seção aparece antes da troca de e-mail, com botão explícito, sem justificativa ou telas de retenção. O pedido é enviado em um clique; a interface distingue ausência de assinatura, solicitação pendente e confirmação do provedor. Mostra o fim do acesso pago e contato por e-mail em caso de indisponibilidade. Desligar `BILLING_ENABLED` para parar vendas não bloqueia o cancelamento de assinaturas existentes. A chamada externa continua dependendo da homologação Asaas; até lá o ambiente de testes informa que o cancelamento automático está em preparação.
+
+Minha conta e o endpoint de cancelamento usam sessão autenticada para consulta própria, inclusive quando a cliente foi bloqueada para conteúdos. Biblioteca, administração, checkout e troca de e-mail continuam exigindo conta não bloqueada. Na homologação financeira: testar cancelamento com saldo, sem saldo, após antecipação, após bloqueio administrativo, repetição/concorrência, falha do provedor e webhook de confirmação. A interrupção efetiva e o prazo de resposta precisam ser comprovados no Sandbox; a interface não é prova de cancelamento externo.
+
 A trava `checkout_attempts` evita criação concorrente. Uma resposta ambígua fica `needs_review`; não repetir POST financeiro às cegas. Na futura homologação, conferir no Asaas a assinatura pelo UUID em `externalReference`, completar vínculos e reenviar o evento autenticado. Nunca marcar acesso pago manualmente na produção para contornar falta de pagamento.
 
 ## O que ainda não está ativo

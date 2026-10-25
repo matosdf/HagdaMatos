@@ -18,3 +18,7 @@ Nenhum segredo deve ser incluído nas tarefas.
 ## Ponto de retomada — 25/10/2026
 
 Variáveis do Preview confirmadas. Próximo passo: redeploy na Vercel, conferir retornos do Supabase e testar autenticação/isolamento com cliente comum (#5 e #4). SMTP e templates preparados; Asaas permanece desativado. O [roteiro principal](https://github.com/matosdf/HagdaMatos/issues/2) detalha a ordem atual. As issues abertas têm itens de preparação concluídos e pendências explícitas.
+
+## Atualização de privacidade e cancelamento — 25/10/2026
+
+Links oficiais e cancelamento direto implementados; 38 testes, tipos e build passando. Próximo: conferir o Preview atualizado e concluir os testes reais de autenticação/permissões. As issues #6, #8, #9, #10 e #12 registram decisões recentes e homologações ainda pendentes.

@@ -1,6 +1,5 @@
 # Termos da assinatura
-
-Minuta para revisão — não aprovada para lançamento · 24/10/2026
+Atualizada em 25/10/2026
 
 ## 1. Serviço e responsável
 
@@ -20,7 +19,7 @@ O acesso é pessoal e intransferível. A cliente deve manter os dados corretos e
 
 ## 5. Cancelamento e término
 
-A cliente pode solicitar o cancelamento de novas cobranças pela conta ou pelo atendimento. O cancelamento não elimina os dias já pagos: o acesso permanece até o fim do saldo válido. Ao esgotar os seis períodos, o produto se encerra. Eventual readmissão respeita os períodos já adquiridos e não reinicia automaticamente esse limite.
+A cliente pode usar o link [Cancelar assinatura](https://www.hmpp.com.br/conta#cancelar-assinatura) no menu ou rodapé para chegar diretamente ao botão **Cancelar assinatura e próximas cobranças** em Minha conta. Não é necessário justificar a decisão nem falar com o atendimento para usar o cancelamento automático. Em caso de indisponibilidade, o atendimento por e-mail permanece disponível. A conta informa o andamento até a confirmação do provedor. O cancelamento não elimina os dias já pagos: o acesso permanece até o fim do saldo válido. Ao esgotar os seis períodos, o produto se encerra. Eventual readmissão respeita os períodos já adquiridos e não reinicia automaticamente esse limite.
 
 ## 6. Arrependimento, estornos e contestações
 

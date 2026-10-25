@@ -13,6 +13,9 @@
 .legal-link:hover{color:#0b3870;text-decoration-thickness:2px}
 .legal-link:focus-visible{outline:2px solid #1454a3;outline-offset:3px}
 .member-form .member-message p+p{margin-top:.8rem}
+.privacy-links{padding-left:1.3rem}.privacy-links li+li{margin-top:.7rem}
+.cancellation-card{border-left:4px solid var(--caramel);scroll-margin-top:7rem}.cancellation-card p{margin-bottom:1rem}
+.cancellation-card button{max-width:100%;white-space:normal;text-align:center}
 .member-price{font-family:var(--serif);font-size:3rem;color:var(--brown-800)}.member-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:1.5rem}
 .member-grid .member-card{margin:0}.member-card video{width:100%;background:var(--brown-950);margin-top:1rem}
 .member-status{display:inline-block;border:1px solid var(--line);padding:.2rem .7rem;font-size:.8rem;margin-bottom:1rem}
