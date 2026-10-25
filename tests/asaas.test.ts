@@ -1,24 +1,18 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {AsaasGateway} from '../src/lib/payments/asaas.provider';
-test('adaptador cria assinatura sem dados de cartão e obtém fatura na cobrança',async()=>{
-  const original=global.fetch;process.env.ASAAS_API_KEY='test-only-not-a-real-key';
-  process.env.ASAAS_API_URL='https://api-sandbox.asaas.com/v3';
-  const calls:{url:string;body:Record<string,unknown>|undefined}[]=[];
-  global.fetch=async(input,init)=>{
-    const url=String(input),body=init?.body?JSON.parse(String(init.body)):undefined;
-    calls.push({url,body});
-    return Response.json(url.endsWith('/customers')?{id:'cus_test'}:url.endsWith('/subscriptions')?{id:'sub_test'}:
-      {data:[{dueDate:'2026-10-23',invoiceUrl:'https://sandbox.asaas.com/i/test'}]});
-  };
+test('adaptador não cria mês de calendário como se fosse 30 dias nem repete total antecipado',async()=>{
+  const original=global.fetch;let calls=0;
+  global.fetch=async()=>{calls++;return Response.json({});};
   try{
-    const result=await new AsaasGateway().createSubscription({reference:'attempt',userId:'member',email:'example@example.com',
-      name:'Cliente de teste',cpfCnpj:'00000000000',phone:'11999999999',billingType:'CREDIT_CARD',amountCents:9700});
-    assert.equal(result.providerSubscriptionId,'sub_test');assert.equal(result.paymentUrl,'https://sandbox.asaas.com/i/test');
-    assert.equal(calls[1].body?.value,97);assert.equal(calls[1].body?.cycle,'MONTHLY');
-    assert.equal(calls[1].body?.externalReference,'attempt');
-    assert.equal(calls[1].body?.creditCard,undefined);assert.equal(calls.length,3);
-  }finally{global.fetch=original;delete process.env.ASAAS_API_KEY;delete process.env.ASAAS_API_URL;}
+    for(const billingType of ['CREDIT_CARD','PIX'] as const){
+      const input={reference:'attempt',userId:'member',email:'example@example.com',
+        name:'Cliente de teste',cpfCnpj:'00000000000',phone:'11999999999',billingType,amountCents:12900};
+      await assert.rejects(()=>new AsaasGateway().createSubscription(input),/30 dias exatos/);
+      await assert.rejects(()=>new AsaasGateway().createSubscription({...input,amountCents:25800}),/sem multiplicação/);
+    }
+    assert.equal(calls,0);
+  }finally{global.fetch=original;}
 });
 test('produção exige opt-in e nenhuma requisição é enviada sem configuração',async()=>{
   let requested=false;const original=global.fetch;global.fetch=async()=>{requested=true;return Response.json({});};

@@ -34,6 +34,16 @@ Nenhuma migração externa, criação de conta, cobrança, upload de vídeo real
 
 ## Asaas continua no backlog
 
+### Decisão de pagamento e recorrência — 25/10/2026
+
+- Somente `PIX` e `CREDIT_CARD`. A escolha aberta `UNDEFINED` foi retirada do formulário, validação e contrato do gateway. A URL de cobrança hospedada pelo Asaas é um recurso técnico, não uma terceira forma de pagamento nem autorização para boleto.
+- **Recorrente:** escolher 60 dias significa duas cobranças de R$129 separadas por 30 dias. Cada pagamento libera 30 dias; reservar duração não libera acesso ainda não pago. A recorrência deve parar na duração contratada, considerando períodos já adquiridos e o teto de seis por produto.
+- **Antecipado:** escolher 60 dias significa R$258 em uma única cobrança; as próximas renovações são de R$129/30 dias somente depois de esgotado o saldo pago. Antecipar os seis períodos não deixa renovações restantes. Antecipação não multiplica o valor nem o intervalo da renovação.
+- O resumo da interface distingue as duas modalidades, valor inicial, valor por renovação e quantidade restante. O Pix convencional exige ação a cada pagamento; o cartão deverá permitir renovação automática homologada.
+- Encontrado no adaptador antigo: `MONTHLY`, que não representa 30 dias exatos. A criação dessa assinatura foi removida e bloqueada antes de requisições externas. A capacidade `recurringScheduleReady()` permanece false independentemente das flags de ambiente, impedindo o checkout antes de gravar tentativa ou criar cobrança.
+- Antes de habilitar: persistir modalidade, duração contratada, unidades de cada pagamento e consentimento de renovação; separar cobrança inicial única de assinatura; programar a próxima cobrança usando o saldo efetivamente confirmado pelo webhook; limitar quantidade restante no provedor e conciliar cancelamentos, antecipações posteriores, estornos e concorrência. Nunca reaproveitar `requested_units=N` para atribuir N créditos a uma cobrança recorrente de R$129.
+- Os testes verificam o contrato comercial e ausência de requisições no adaptador bloqueado. Isso não equivale à homologação do agendador real. A integração permanece para a próxima iteração Asaas.
+
 O adaptador legado fica preservado para evolução, mas ainda precisa de data real de pagamento (`paidAt`), compras antecipadas, prevenção de cobranças após o sexto período, vínculo do cartão e conciliação. Seu cálculo anterior por mês de calendário não pode alimentar o motor novo. Todos os endpoints financeiros devem continuar desativados até homologação.
 
 Manter:

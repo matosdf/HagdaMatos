@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
 import { serverClient } from '@/lib/supabase/server';
+import { confirmationDestination } from '@/lib/auth-confirm';
 export async function GET(request:Request){
-  const url=new URL(request.url),code=url.searchParams.get('code');
-  if(code){
+  const url=new URL(request.url);
+  const destination=await confirmationDestination(url.searchParams,async code=>{
     const {error}=await (await serverClient()).auth.exchangeCodeForSession(code);
-    if(!error){const next=url.searchParams.get('next')==='/conta/nova-senha'?'/conta/nova-senha':'/conta';
-      return NextResponse.redirect(new URL(next,process.env.NEXT_PUBLIC_APP_URL || url.origin));}
-  }
-  return NextResponse.redirect(new URL('/login?confirmacao=erro',process.env.NEXT_PUBLIC_APP_URL || url.origin));
+    return !error;
+  });
+  return NextResponse.redirect(new URL(destination,process.env.NEXT_PUBLIC_APP_URL || url.origin));
 }

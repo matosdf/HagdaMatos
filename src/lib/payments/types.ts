@@ -1,4 +1,4 @@
-export type BillingType = 'PIX' | 'CREDIT_CARD' | 'UNDEFINED';
+export type BillingType = 'PIX' | 'CREDIT_CARD';
 export type PaymentState = 'pending' | 'paid' | 'overdue' | 'revoked';
 export interface CreateCheckoutInput {
   reference: string; userId: string; email: string; name: string; cpfCnpj: string;

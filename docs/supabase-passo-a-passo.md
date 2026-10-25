@@ -46,6 +46,7 @@ Podemos parar aqui e conferir o próximo passo juntos. Não vou operar seu paine
 - O template **Change email address** deve preservar `{{ .ConfirmationURL }}`. O retorno usa `/auth/confirm`, já permitido na lista de redirecionamentos. Abra os links no navegador que iniciou a solicitação (PKCE).
 - Teste com uma conta de cliente descartável e dois endereços acessíveis: solicite a troca, confirme ambos, atualize `/conta`, saia e entre com o novo endereço. Confira também confirmação divergente e endereço igual ao atual.
 - A troca preserva o ID de usuário, assinatura e permissões. A interface mostra o endereço pendente devolvido pelo Supabase; só trate a alteração como concluída quando o e-mail atual mudar.
+- Na troca segura, o primeiro clique retorna uma mensagem sem código de sessão; o callback reconhece esse retorno e orienta confirmar o link na outra caixa de entrada. Não deve orientar recuperação de senha nessa etapa. Após os dois cliques, entrar com o novo endereço e a mesma senha.
 - A validação real por SMTP depende da configuração do projeto e deve ser feita antes da publicação. Não use a conta da proprietária para o primeiro teste.
 
 Abra **você** um terminal PowerShell 7 separado, no projeto, e execute:

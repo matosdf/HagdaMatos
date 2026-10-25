@@ -18,6 +18,6 @@ export async function POST(request: Request) {
         throw new HttpError(429, 'O limite de solicitações foi atingido. Aguarde antes de tentar novamente.');
       throw new HttpError(400, 'Não foi possível solicitar a alteração. Confira o endereço ou tente novamente mais tarde.');
     }
-    return json({ message: 'Solicitação enviada. Confira o novo e-mail e o atual: pode ser necessário confirmar nos dois endereços. Após concluir, atualize esta página para conferir o e-mail da conta.' });
+    return json({ message: 'Solicitação enviada. Falta confirmar a troca nos DOIS endereços: abra a mensagem no e-mail atual e clique no botão de confirmação; depois faça o mesmo no novo e-mail. A ordem não importa. Confirmar apenas um link não conclui a troca. Use o mesmo navegador e confira o spam. Após confirmar ambos, atualize Minha conta ou entre com o novo e-mail e a mesma senha.' });
   } catch (error) { return failure(error); }
 }

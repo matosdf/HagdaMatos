@@ -2,7 +2,9 @@ import 'server-only';
 import { z } from 'zod';
 import { addCalendarMonth } from './domain';
 import { normalizePaymentState, validInvoiceUrl } from './asaas-data';
-import type { CreateCheckoutInput, PaymentGateway, PaymentSnapshot } from './types';
+import { billingTypeSchema, recurringSchedulePending } from './policy';
+import { PRODUCT } from '../product';
+import type { CheckoutResponse, CreateCheckoutInput, PaymentGateway, PaymentSnapshot } from './types';
 
 const idSchema = z.string().min(1).max(150).regex(/^[a-zA-Z0-9_-]+$/);
 const paymentSchema = z.object({
@@ -34,28 +36,15 @@ export class AsaasGateway implements PaymentGateway {
     return response.json();
   }
 
-  async createSubscription(input: CreateCheckoutInput) {
-    const customer = input.customerId ? { id: input.customerId } :
-      await this.request('/customers', 'POST', {
-        name: input.name, email: input.email, cpfCnpj: input.cpfCnpj,
-        mobilePhone: input.phone, externalReference: input.userId,
-      });
-    const customerId = idSchema.parse(customer.id);
-    const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo',
-      year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
-    const subscription = await this.request('/subscriptions', 'POST', {
-      customer: customerId, billingType: input.billingType, value: input.amountCents / 100,
-      nextDueDate: today, cycle: 'MONTHLY', description: 'HM — Área exclusiva mensal',
-      externalReference: input.reference,
-    });
-    const subscriptionId = idSchema.parse(subscription.id);
-    // A assinatura não contém a invoiceUrl: consultar sua primeira cobrança.
-    const payments = await this.request(`/subscriptions/${encodeURIComponent(subscriptionId)}/payments?limit=100`);
-    const first = z.array(z.object({ dueDate: z.string(), invoiceUrl: z.string() })).parse(payments.data)
-      .sort((a, b) => a.dueDate.localeCompare(b.dueDate))[0];
-    if (!first) throw new Error('Primeira cobrança ainda não disponível. Requer reconciliação.');
-    return { providerCustomerId: customerId, providerSubscriptionId: subscriptionId,
-      paymentUrl: validInvoiceUrl(first.invoiceUrl) };
+  async createSubscription(input: CreateCheckoutInput): Promise<CheckoutResponse> {
+    billingTypeSchema.parse(input.billingType);
+    if (input.amountCents !== PRODUCT.priceCents)
+      throw new Error('A renovação deve ser de R$ 129,00 por período, sem multiplicação pela antecipação.');
+    // MONTHLY é mês de calendário, não 30 dias. Não enviar uma assinatura
+    // incompatível, mesmo se alguém habilitar as flags antes da homologação.
+    // Antecipação deverá usar cobrança única e reagendar pelo saldo confirmado,
+    // considerando também os períodos já comprados para encerrar o produto.
+    throw new Error(recurringSchedulePending);
   }
 
   async cancelSubscription(id: string) {

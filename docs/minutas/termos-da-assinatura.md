@@ -12,7 +12,7 @@ Cada período custa R$ 129,00 e dá direito a 30 dias de acesso, contados da con
 
 ## 3. Pagamento e liberação
 
-As opções disponíveis serão apresentadas antes da contratação: cartão, Pix ou escolha na fatura. A liberação depende da confirmação financeira; gerar uma fatura ou retornar à página não comprova pagamento. Não há carência depois de encerrado o saldo pago. No Pix convencional, cada cobrança precisa ser paga pela cliente.
+As opções disponíveis serão apresentadas antes da contratação: cartão de crédito ou Pix. No pagamento recorrente, cada cobrança é de R$ 129,00 por 30 dias. Na antecipação, o total dos períodos escolhidos é cobrado de uma só vez; novas cobranças de R$ 129,00 só começam após o fim do saldo pago, respeitando o limite do produto. A liberação depende da confirmação financeira; gerar uma fatura ou retornar à página não comprova pagamento. Não há carência depois de encerrado o saldo pago. No Pix convencional, cada cobrança precisa ser paga pela cliente.
 
 ## 4. Conta e uso dos conteúdos
 

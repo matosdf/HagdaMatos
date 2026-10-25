@@ -1,8 +1,9 @@
 'use client';
 import { useState } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
-import {PRODUCT,totalPrice} from '@/lib/product';
+import {PRODUCT} from '@/lib/product';
 import {publicSupabaseConfig} from '@/lib/supabase/public-config';
+import {checkoutTerms, type PaymentPlan} from '@/lib/payments/policy';
 async function post(url:string,payload:unknown) {
   const response=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
   const data=await response.json();
@@ -26,6 +27,10 @@ export function AuthForm({mode}:{mode:'login'|'cadastro'|'recuperar'|'senha'}) {
 export function CheckoutForm({enabled,termsUrl}:{enabled:boolean;termsUrl:string}) {
   const [message,setMessage]=useState(''),[busy,setBusy]=useState(false);
   const [periods,setPeriods]=useState(1);
+  const [paymentPlan,setPaymentPlan]=useState<PaymentPlan>('recorrente');
+  const [billingType,setBillingType]=useState('CREDIT_CARD');
+  const terms=checkoutTerms(periods,paymentPlan);
+  const money=(value:number)=>(value/100).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
   return <form className="member-form" onSubmit={async e=>{
     e.preventDefault();setBusy(true);setMessage('');const data=Object.fromEntries(new FormData(e.currentTarget));
     try {const result=await post('/api/checkout',{...data,cpfCnpj:String(data.cpfCnpj).replace(/\D/g,''),phone:String(data.phone).replace(/\D/g,''),acceptedTerms:data.acceptedTerms==='on'});
@@ -35,12 +40,24 @@ export function CheckoutForm({enabled,termsUrl}:{enabled:boolean;termsUrl:string
     <label>Nome completo<input name="name" autoComplete="name" required minLength={3} maxLength={150}/></label>
     <label>CPF ou CNPJ<input name="cpfCnpj" inputMode="numeric" required maxLength={18}/></label>
     <label>Celular com DDD<input name="phone" type="tel" autoComplete="tel" required maxLength={20}/></label>
-    <label>Períodos de acesso<select name="periods" value={periods} onChange={e=>setPeriods(Number(e.target.value))}>{Array.from({length:PRODUCT.maxPeriods},(_,i)=><option key={i+1} value={i+1}>{i+1} período(s) — {(i+1)*PRODUCT.daysPerPeriod} dias</option>)}</select></label>
-    <p>Total: {(totalPrice(periods)/100).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}. Cada pagamento confirmado acrescenta 30 dias, respeitando o limite total de seis períodos.</p>
-    <label>Forma de pagamento<select name="billingType"><option value="CREDIT_CARD">Cartão de crédito — recorrência mensal</option><option value="PIX">Pix — pagamento a cada cobrança</option><option value="UNDEFINED">Escolher na fatura do Asaas</option></select></label>
-    {termsUrl && <label className="check"><input name="acceptedTerms" type="checkbox" required/><span>Li e aceito os <a href={termsUrl} target="_blank" rel="noopener noreferrer">termos da assinatura</a> e conheço a <a href="/privacidade" target="_blank" rel="noopener noreferrer">política de privacidade</a>.</span></label>}
+    <label>Como você prefere pagar?<select name="paymentPlan" value={paymentPlan} onChange={e=>setPaymentPlan(e.target.value as PaymentPlan)}><option value="recorrente">Pagar R$ 129 a cada 30 dias</option><option value="antecipado">Antecipar períodos — pagar o total de uma vez</option></select></label>
+    <label>{paymentPlan==='recorrente'?'Por quanto tempo deseja contratar?':'Quantos dias deseja pagar antecipadamente?'}<select name="periods" value={periods} onChange={e=>setPeriods(Number(e.target.value))}>{Array.from({length:PRODUCT.maxPeriods},(_,i)=><option key={i+1} value={i+1}>{(i+1)*PRODUCT.daysPerPeriod} dias — {i+1} período(s)</option>)}</select></label>
+    <label>Forma de pagamento<select name="billingType" value={billingType} onChange={e=>setBillingType(e.target.value)}><option value="CREDIT_CARD">Cartão de crédito</option><option value="PIX">Pix</option></select></label>
+    <div className="member-message" aria-live="polite">
+      <h3>Confira sua escolha</h3>
+      {paymentPlan==='recorrente'?<>
+        <p><strong>{periods} cobrança(s) de {money(terms.renewalAmountCents)}</strong>, com intervalo de 30 dias. Total previsto: {money(terms.selectedTotalCents)} por {periods*PRODUCT.daysPerPeriod} dias, se todos os pagamentos forem confirmados.</p>
+        <p>Agora: {money(terms.initialAmountCents)}. {periods>1?`As outras ${periods-1} cobranças serão de R$ 129,00 cada, a partir de 30 dias após o primeiro pagamento. Ao completar os ${periods} períodos contratados, a recorrência termina.`:'Este contrato tem apenas um período; não há outra cobrança prevista.'}</p>
+        <p>Você não paga o total de uma vez. Cada pagamento confirmado libera mais 30 dias de acesso.</p>
+      </>:<>
+        <p><strong>{money(terms.initialAmountCents)} de uma só vez</strong> para liberar {terms.initialAccessDays} dias após a confirmação. Não é parcelamento nem uma cobrança desse total a cada 30 dias.</p>
+        <p>{terms.remainingRenewals>0?`Sem nova cobrança durante o saldo antecipado. Depois que ele terminar, as renovações serão de R$ 129,00 a cada 30 dias, por até mais ${terms.remainingRenewals} períodos, respeitando o máximo de seis no produto. Você pode cancelar as renovações mantendo o acesso já pago.`:'Você antecipou os seis períodos. Não haverá nova cobrança após esses 180 dias.'}</p>
+      </>}
+      <p>{billingType==='CREDIT_CARD'?'No cartão, as renovações previstas serão cobradas automaticamente.':'No Pix convencional, você precisa pagar cada cobrança. Não há débito automático.'}</p>
+    </div>
+    {termsUrl && <label className="check"><input name="acceptedTerms" type="checkbox" required/><span>Li e aceito os <a className="legal-link" href={termsUrl} target="_blank" rel="noopener noreferrer">termos da assinatura</a> e conheço a <a className="legal-link" href="/privacidade" target="_blank" rel="noopener noreferrer">política de privacidade</a>.</span></label>}
     <button className="button button-dark" disabled={!enabled || busy}>{busy?'Preparando sua assinatura…':enabled?'Continuar para pagamento':'Assinaturas em preparação'}</button>
-    <p className="member-muted">Os dados do cartão são preenchidos no ambiente do Asaas. O Pix gera cobranças mensais e exige pagamento; não equivale a débito automático no cartão.</p>
+    <p className="member-muted">Os dados do cartão são preenchidos no ambiente do Asaas. Você pode cancelar novas cobranças e manter o tempo já pago. A contratação está em preparação.</p>
     {message && <p className="member-message" role="status">{message}</p>}
   </form>;
 }

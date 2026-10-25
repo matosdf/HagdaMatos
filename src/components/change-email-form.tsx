@@ -13,8 +13,14 @@ export function ChangeEmailForm({ currentEmail, pendingEmail }: {
   return <div className="member-card narrow">
     <h2>Alterar meu e-mail</h2>
     <p>E-mail atual: <strong>{currentEmail}</strong></p>
-    {pendingEmail && <p role="status">Alteração pendente para <strong>{pendingEmail}</strong>. Confira as mensagens de confirmação.</p>}
-    <p>Informe um endereço ao qual você tenha acesso. Por segurança, a confirmação pode ser solicitada no e-mail atual e no novo.</p>
+    {pendingEmail && <p role="status">A troca para <strong>{pendingEmail}</strong> ainda está pendente. Clique no link de confirmação recebido em <strong>{currentEmail}</strong> e também no recebido em <strong>{pendingEmail}</strong>. Confirmar apenas um deles não conclui a troca.</p>}
+    <p>Você precisa ter acesso ao e-mail atual e ao novo. A troca só será concluída depois da confirmação nos dois endereços.</p>
+    <ol>
+      <li>Abra o e-mail enviado ao seu endereço atual e clique em “Confirmar alteração de e-mail”.</li>
+      <li>Abra a mensagem enviada ao novo endereço e clique no botão de confirmação também.</li>
+      <li>Depois das duas confirmações, use o novo e-mail para entrar. Sua senha permanece a mesma.</li>
+    </ol>
+    <p>Você pode confirmar em qualquer ordem. Abra os links neste mesmo navegador e confira o spam se não encontrar as mensagens.</p>
     <form className="member-form" onSubmit={async event => {
       event.preventDefault();
       const form = event.currentTarget;

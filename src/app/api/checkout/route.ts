@@ -4,12 +4,14 @@ import { adminClient } from '@/lib/supabase/admin';
 import { paymentGateway } from '@/lib/payments';
 import { failure, HttpError, json, readJson, requireOrigin } from '@/lib/http';
 import { PRODUCT } from '@/lib/product';
+import { billingTypeSchema, paymentPlanSchema, recurringSchedulePending, recurringScheduleReady } from '@/lib/payments/policy';
 export const runtime = 'nodejs';
 const inputSchema = z.object({
   name: z.string().trim().min(3).max(150), cpfCnpj: z.string().regex(/^(\d{11}|\d{14})$/),
-  phone: z.string().regex(/^\d{10,13}$/), billingType: z.enum(['PIX','CREDIT_CARD','UNDEFINED']),
+  phone: z.string().regex(/^\d{10,13}$/), billingType: billingTypeSchema,
   acceptedTerms: z.literal(true),
   periods: z.coerce.number().int().min(1).max(6).default(1),
+  paymentPlan: paymentPlanSchema,
 });
 export async function POST(request: Request) {
   try {
@@ -27,6 +29,9 @@ export async function POST(request: Request) {
     if(input.periods>Number(summary?.remainingPeriods ?? 0))throw new HttpError(409,'Esta compra ultrapassa os seis períodos do produto.');
     // Antecipação financeira só será habilitada quando houver homologação do Asaas.
     if(input.periods!==1)throw new HttpError(503,'A antecipação de períodos está em preparação.');
+    // Ainda sem agendador homologado para 30 dias: falhar antes de criar
+    // tentativa de checkout, cliente ou cobrança, mesmo com flags habilitadas.
+    if(!recurringScheduleReady())throw new HttpError(503,recurringSchedulePending);
     const admin = adminClient();
     const { data: current, error: currentError } = await admin.from('subscriptions').select('*')
       .eq('user_id',user.id).eq('provider_canceled',false).maybeSingle();
