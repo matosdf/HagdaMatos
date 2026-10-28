@@ -1,7 +1,6 @@
 import 'server-only';
 import { z } from 'zod';
-import { addCalendarMonth } from './domain';
-import { normalizePaymentState, validInvoiceUrl } from './asaas-data';
+import { asaasPaidAt, normalizePaymentState, validInvoiceUrl } from './asaas-data';
 import { billingTypeSchema, recurringSchedulePending } from './policy';
 import { PRODUCT } from '../product';
 import type { CheckoutResponse, CreateCheckoutInput, PaymentGateway, PaymentSnapshot } from './types';
@@ -9,7 +8,10 @@ import type { CheckoutResponse, CreateCheckoutInput, PaymentGateway, PaymentSnap
 const idSchema = z.string().min(1).max(150).regex(/^[a-zA-Z0-9_-]+$/);
 const paymentSchema = z.object({
   id: idSchema, subscription: idSchema, customer: idSchema, status: z.string(),
-  value: z.number().nonnegative(), dueDate: z.string(), deleted: z.boolean().optional(),
+  value: z.number().nonnegative().refine(value => Number.isSafeInteger(Math.round(value * 100)) &&
+    Math.abs(value * 100 - Math.round(value * 100)) < 0.000001),
+  billingType: billingTypeSchema, confirmedDate: z.string().nullish(), paymentDate: z.string().nullish(),
+  deleted: z.boolean().optional(),
   refunds: z.array(z.unknown()).nullish(),
 });
 
@@ -18,6 +20,15 @@ export class AsaasApiError extends Error {
 }
 
 export class AsaasGateway implements PaymentGateway {
+  async checkSandboxConnection(): Promise<void> {
+    if (process.env.VERCEL_ENV === 'production' ||
+      process.env.ASAAS_API_URL !== 'https://api-sandbox.asaas.com/v3')
+      throw new Error('O diagnóstico exige o ambiente Sandbox fora de produção.');
+    // Leitura mínima autenticada. Não devolver nem registrar cadastros.
+    const data = await this.request('/customers?limit=1');
+    z.object({ data: z.array(z.unknown()), totalCount: z.number().int().nonnegative() }).parse(data);
+  }
+
   private async request(path: string, method = 'GET', body?: unknown) {
     const base = process.env.ASAAS_API_URL || 'https://api-sandbox.asaas.com/v3';
     if (!['https://api-sandbox.asaas.com/v3', 'https://api.asaas.com/v3'].includes(base))
@@ -27,7 +38,7 @@ export class AsaasGateway implements PaymentGateway {
     const key = process.env.ASAAS_API_KEY;
     if (!key) throw new Error('Asaas não configurado.');
     const response = await fetch(`${base}${path}`, {
-      method, cache: 'no-store', signal: AbortSignal.timeout(12000),
+      method, cache: 'no-store', redirect: 'error', signal: AbortSignal.timeout(12000),
       headers: { access_token: key, 'Content-Type': 'application/json', 'User-Agent': 'HM-Membros/1.0' },
       ...(body ? { body: JSON.stringify(body) } : {}),
     });
@@ -67,13 +78,14 @@ export class AsaasGateway implements PaymentGateway {
   }
 
   async getPayment(id: string): Promise<PaymentSnapshot> {
-    const observedAt = new Date().toISOString();
-    const data = paymentSchema.parse(await this.request(`/payments/${encodeURIComponent(idSchema.parse(id))}`));
-    const periodEnd = addCalendarMonth(data.dueDate);
+    const requestedId = idSchema.parse(id);
+    const data = paymentSchema.parse(await this.request(`/payments/${encodeURIComponent(requestedId)}`));
+    if (data.id !== requestedId) throw new Error('Identificador da cobrança divergente.');
+    const state = normalizePaymentState(data.status, data.deleted, !!data.refunds?.length);
     return { subscriptionId: data.subscription, customerId: data.customer, paymentId: data.id,
-      state: normalizePaymentState(data.status, data.deleted, !!data.refunds?.length),
+      state,
       amountCents: Math.round(data.value * 100),
-      // Vigência ancorada no vencimento, sem estender acesso ao repetir notificações.
-      periodStart: `${data.dueDate}T03:00:00.000Z`, periodEnd: `${periodEnd}T03:00:00.000Z`, observedAt };
+      // O motor v3 calcula os créditos e preserva a primeira data confirmada.
+      paidAt: state === 'paid' ? asaasPaidAt(data) : null, observedAt: new Date().toISOString() };
   }
 }

@@ -6,6 +6,7 @@ A decisão vigente está em [decisoes-2026-10-24.md](decisoes-2026-10-24.md): R$
 
 - [Passo a passo do Supabase sem chaves no chat](supabase-passo-a-passo.md)
 - [Backlog detalhado no GitHub e local](backlog.md)
+- [Preparação do Asaas Sandbox e teste de conexão](asaas-sandbox-passo-a-passo.md)
 - [Minuta de termos, oito artigos](minutas/termos-da-assinatura.md)
 - [Minuta de privacidade, oito seções](minutas/politica-de-privacidade.md)
 
@@ -44,7 +45,7 @@ Nenhuma migração externa, criação de conta, cobrança, upload de vídeo real
 - Antes de habilitar: persistir modalidade, duração contratada, unidades de cada pagamento e consentimento de renovação; separar cobrança inicial única de assinatura; programar a próxima cobrança usando o saldo efetivamente confirmado pelo webhook; limitar quantidade restante no provedor e conciliar cancelamentos, antecipações posteriores, estornos e concorrência. Nunca reaproveitar `requested_units=N` para atribuir N créditos a uma cobrança recorrente de R$129.
 - Os testes verificam o contrato comercial e ausência de requisições no adaptador bloqueado. Isso não equivale à homologação do agendador real. A integração permanece para a próxima iteração Asaas.
 
-O adaptador legado fica preservado para evolução, mas ainda precisa de data real de pagamento (`paidAt`), compras antecipadas, prevenção de cobranças após o sexto período, vínculo do cartão e conciliação. Seu cálculo anterior por mês de calendário não pode alimentar o motor novo. Todos os endpoints financeiros devem continuar desativados até homologação.
+O adaptador normaliza `paidAt` para o motor v3, sem calcular vigência por vencimento ou mês de calendário. O mapeamento de datas ainda precisa de homologação no Sandbox (veja a atualização de 28/10 abaixo). Compras antecipadas, prevenção de cobranças após o sexto período, vínculo do cartão e conciliação continuam pendentes. Todos os endpoints financeiros devem continuar desativados até homologação.
 
 Manter:
 
@@ -82,3 +83,31 @@ A trava `checkout_attempts` evita criação concorrente. Uma resposta ambígua f
 - [Asaas: webhooks](https://docs.asaas.com/docs/receive-asaas-events-at-your-webhook-endpoint)
 - [CDC](https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm)
 - [LGPD](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm)
+
+## Ponto de retomada vigente — 28/10/2026
+
+Testes positivos de autenticação e bloqueio confirmados. Preparação do Asaas Sandbox retomada a pedido do usuário; nenhuma cobrança habilitada.
+
+- Cliente comum: conta acessível; biblioteca sem créditos e administração protegidas, observadas pelo agente no Preview.
+- Recuperação de senha, troca de e-mail e bloqueio: confirmados pessoalmente pelo usuário.
+- #4 e #5 permanecem abertas somente pelas verificações residuais descritas nas atualizações de 28/10; não repetir os fluxos positivos já confirmados.
+- Próximo: criar/acessar conta Asaas Sandbox separada (#8), preparar credenciais no ambiente protegido e concluir o adaptador financeiro de 30 dias; depois homologar #9.
+- #6 segue pendente: preparar Sandbox não equivale a aprovar termos nem habilitar contratação.
+- Biblioteca real (#7), retenção (#10), comunicação (#11) e lançamento (#12) continuam em suas trilhas.
+- Manter as quatro flags financeiras/jurídicas false. Sem migração, push, deploy ou cobrança nesta retomada.
+
+Os registros abaixo de 25/10 são históricos; este bloco e as atualizações de 28/10 nas issues definem o ponto de retomada atual.
+
+## Preparação técnica local — 28/10/2026
+
+O usuário confirmou conta Sandbox, `ASAAS_API_KEY` e `ASAAS_API_URL` configuradas exclusivamente no Preview, redeploy realizado e quatro flags mantidas em false. Não houve leitura da chave nem chamada autenticada ao Asaas pelo agente.
+
+- Teste de conexão implementado em `/api/admin/asaas`, com botão em `/admin`: exige proprietária não bloqueada e origem do site. Consulta somente `GET /customers?limit=1` no Sandbox, descarta cadastros e retorna mensagem fixa. Recusa ambiente Production mesmo com opt-in financeiro. Não exige service role do Supabase.
+- `PaymentSnapshot` agora envia `paidAt` ao motor da migração 003. Para cartão, exige `confirmedDate`; para Pix, `paymentDate`. Vencimento, data de entrega do webhook e liquidação posterior do cartão não substituem confirmação. Ausência ou data inválida impede crédito e exige conciliação.
+- Precisão disponível: os campos consultados são datas civis. Convenção local provisória: início do dia em UTC-03:00, explicitamente sem alegar que esse é o instante exato da transação. Homologar presença/semântica de `confirmedDate` na consulta real do cartão e validar essa convenção antes de liberar pagamentos; não usar `paymentDate` do cartão como fallback.
+- Webhook exige token próprio de 32 a 255 caracteres sem espaços, diferente da API key. Continua retornando 503 com a integração desabilitada.
+- Corrigida localmente a mensagem de login de `/planos` para aparecer apenas sem sessão.
+
+Nenhuma migração nova é necessária para esta etapa. O código ainda precisa ser publicado no Preview, com autorização específica para push. O agendador continua bloqueado; configuração/recebimento externo do webhook, cobrança única inicial e recorrência real são etapas seguintes.
+
+Fontes oficiais consultadas: [consulta de cobrança](https://docs.asaas.com/reference/recuperar-uma-unica-cobranca), [eventos de cobrança](https://docs.asaas.com/docs/webhook-para-cobrancas), [autenticação do webhook](https://docs.asaas.com/docs/receive-asaas-events-at-your-webhook-endpoint) e [listar clientes](https://docs.asaas.com/reference/listar-clientes).

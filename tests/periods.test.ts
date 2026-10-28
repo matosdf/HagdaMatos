@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {PGlite} from '@electric-sql/pglite';
 import {PRODUCT,totalPrice} from '../src/lib/product';
+import {AsaasGateway} from '../src/lib/payments/asaas.provider';
 const day=86400000;
 test('preço aprovado e máximo de seis períodos',()=>{
   assert.equal(PRODUCT.priceCents,12900);assert.equal(totalPrice(6),77400);
@@ -34,6 +35,33 @@ test('PostgreSQL v3: créditos de 30 dias, antecipação, cancelamento, estorno 
     await t.test('um pagamento começa na data efetiva e dura exatamente 720 horas',async()=>{
       const p=event();await apply(p);await apply(p);
       const s=await summary();assert.equal(s.usedPeriods,1);assert.equal(Date.parse(s.paidUntil),Date.parse(date(25)));assert.equal(s.hasAccess,true);
+    });
+    await t.test('snapshot Asaas alimenta v3 sem mês de calendário nem crédito duplicado',async()=>{
+      const original=global.fetch;
+      const saved={key:process.env.ASAAS_API_KEY,url:process.env.ASAAS_API_URL};
+      process.env.ASAAS_API_KEY='test-only';process.env.ASAAS_API_URL='https://api-sandbox.asaas.com/v3';
+      const payment={id:'p_adapter',subscription:'sub_v3',customer:'cus_v3',status:'CONFIRMED',value:129,
+        billingType:'CREDIT_CARD',dueDate:date(-20).slice(0,10),confirmedDate:date(-4).slice(0,10),paymentDate:null};
+      const before=Date.parse((await summary()).paidUntil);
+      try{
+        global.fetch=async()=>Response.json(payment);
+        const first=await new AsaasGateway().getPayment('p_adapter');
+        await apply(event({...first}));
+        assert.equal(Date.parse((await summary()).paidUntil),before+30*day);
+        global.fetch=async()=>Response.json({...payment,status:'RECEIVED',paymentDate:date(-1).slice(0,10)});
+        await apply(event({...await new AsaasGateway().getPayment('p_adapter')}));
+        assert.equal((await summary()).usedPeriods,2);
+        assert.equal(Date.parse((await summary()).paidUntil),before+30*day);
+        global.fetch=async()=>Response.json({...payment,status:'REFUNDED',confirmedDate:null});
+        await apply(event({...await new AsaasGateway().getPayment('p_adapter')}));
+        assert.equal((await summary()).usedPeriods,1);
+        assert.equal(Date.parse((await summary()).paidUntil),before);
+      }finally{
+        global.fetch=original;
+        for(const [key,value] of Object.entries({ASAAS_API_KEY:saved.key,ASAAS_API_URL:saved.url})){
+          if(value===undefined)delete process.env[key];else process.env[key]=value;
+        }
+      }
     });
     await t.test('pagamento antecipado soma mais 30 dias ao saldo, sem sobreposição',async()=>{
       await apply(event({paymentId:'p2',paidAt:date(-1)}));

@@ -22,3 +22,17 @@ Variáveis do Preview confirmadas. Próximo passo: redeploy na Vercel, conferir 
 ## Atualização de privacidade e cancelamento — 25/10/2026
 
 Links oficiais e cancelamento direto implementados; 38 testes, tipos e build passando. Próximo: conferir o Preview atualizado e concluir os testes reais de autenticação/permissões. As issues #6, #8, #9, #10 e #12 registram decisões recentes e homologações ainda pendentes.
+
+## Ponto de retomada vigente — 28/10/2026
+
+Testes positivos de autenticação e bloqueio confirmados. Preparação do Asaas Sandbox retomada a pedido do usuário; nenhuma cobrança habilitada.
+
+- Cliente comum: conta acessível; biblioteca sem créditos e administração protegidas, observadas pelo agente no Preview.
+- Recuperação de senha, troca de e-mail e bloqueio: confirmados pessoalmente pelo usuário.
+- #4 e #5 permanecem abertas somente pelas verificações residuais descritas nas atualizações de 28/10; não repetir os fluxos positivos já confirmados.
+- Próximo: criar/acessar conta Asaas Sandbox separada (#8), preparar credenciais no ambiente protegido e concluir o adaptador financeiro de 30 dias; depois homologar #9.
+- #6 segue pendente: preparar Sandbox não equivale a aprovar termos nem habilitar contratação.
+- Biblioteca real (#7), retenção (#10), comunicação (#11) e lançamento (#12) continuam em suas trilhas.
+- Manter as quatro flags financeiras/jurídicas false. Sem migração, push, deploy ou cobrança nesta retomada.
+
+Os registros abaixo de 25/10 são históricos; este bloco e as atualizações de 28/10 nas issues definem o ponto de retomada atual.

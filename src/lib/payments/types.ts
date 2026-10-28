@@ -9,7 +9,7 @@ export interface CheckoutResponse {
 }
 export interface PaymentSnapshot {
   subscriptionId: string; customerId: string; paymentId: string; state: PaymentState;
-  amountCents: number; periodStart: string; periodEnd: string; observedAt: string;
+  amountCents: number; paidAt: string | null; observedAt: string;
 }
 export interface PaymentGateway {
   createSubscription(input: CreateCheckoutInput): Promise<CheckoutResponse>;

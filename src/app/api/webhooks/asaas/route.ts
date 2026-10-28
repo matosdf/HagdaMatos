@@ -11,7 +11,9 @@ const payloadSchema = z.object({ id:z.string().min(1).max(200), event:z.string()
 export async function POST(request:Request) {
   try {
     if(process.env.ASAAS_INTEGRATION_READY!=='true')throw new HttpError(503,'Integração Asaas aguardando homologação das regras de 30 dias.');
-    if (!process.env.ASAAS_WEBHOOK_SECRET) throw new HttpError(503,'Webhook ainda não configurado.');
+    const secret = process.env.ASAAS_WEBHOOK_SECRET;
+    if (!secret || !/^\S{32,255}$/.test(secret) || secret === process.env.ASAAS_API_KEY)
+      throw new HttpError(503,'Webhook ainda não configurado com token próprio válido.');
     if (!secretMatches(request.headers.get('asaas-access-token'),process.env.ASAAS_WEBHOOK_SECRET))
       throw new HttpError(401,'Webhook não autorizado.');
     const payload=payloadSchema.parse(await readJson(request,131072));
@@ -30,8 +32,8 @@ export async function POST(request:Request) {
         if(!(error instanceof AsaasApiError)||error.status!==404||payload.event!=='PAYMENT_DELETED')throw error;
         if(!payload.payment.customer)throw new HttpError(400,'Cliente da cobrança ausente.');
         normalized={kind:'payment',subscriptionId:payload.payment.subscription,customerId:payload.payment.customer,
-          paymentId:payload.payment.id,state:'revoked',amountCents:0,periodStart:'1970-01-01T00:00:00Z',
-          periodEnd:'1970-01-01T00:00:00Z',observedAt:new Date().toISOString()};
+          paymentId:payload.payment.id,state:'revoked',amountCents:0,paidAt:null,
+          observedAt:new Date().toISOString()};
       }
     } else if (payload.event.startsWith('SUBSCRIPTION_') && payload.subscription) {
       // Um evento de exclusão autenticado é terminal; o recurso pode já retornar 404 na API.
